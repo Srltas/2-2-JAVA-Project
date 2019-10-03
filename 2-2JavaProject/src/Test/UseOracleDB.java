@@ -1,4 +1,4 @@
-package oracleDBpack;
+package Test;
 
 import java.beans.Statement;
 import java.sql.Connection;
