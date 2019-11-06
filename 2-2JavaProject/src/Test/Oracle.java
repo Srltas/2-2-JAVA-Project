@@ -16,9 +16,9 @@ public class Oracle {
 			DriverManager.getConnection(url, user, password);
 			System.out.println("oracle connect success");
 		} catch (ClassNotFoundException e) {
-			System.out.println("CNF ex");
+			System.out.println("ClassNotFount Exception");
 		} catch (SQLException ex) {
-			System.out.println("SQL ex");
+			System.out.println("SQL Exception");
 		}
 	}
 }
