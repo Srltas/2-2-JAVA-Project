@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane minHeight="300.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="day1110.day1110_1.LoginMainController">
+<AnchorPane minHeight="300.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LoginUI.LoginMainController">
    <children>
       <Label fx:id="lblStatus" layoutX="123.0" layoutY="47.0" text="Status" textFill="RED">
          <font>
