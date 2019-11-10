@@ -71,6 +71,7 @@ public class OracleTest {
 				System.out.println("삽입 성공");
 			}
 		} catch(ClassNotFoundException e){
+			e.printStackTrace();
 			System.out.println("jdbc driver 로딩 실패");
 		} catch(SQLException e) {
 			e.printStackTrace();
