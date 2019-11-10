@@ -95,9 +95,9 @@ public class AccountMapper {
 
 		// String sql = "UPDATE USERINFO SET USER_PW=(변경할 PW) WHERE=(변경할 ID)"
 		String sql = "UPDATE USERINFO SET USER_PW = '" + password + "' WHERE USER_ID = '" + id + "'";
-		
+
 		System.out.println(sql);
-		
+
 		// 데이터 베이스에 접속하여 resultSet.next(); id와 pw를 가져옴
 		try {
 			Class.forName(driver);
@@ -118,5 +118,33 @@ public class AccountMapper {
 		}
 
 		return account;
+	}
+
+	public boolean createAccount(String id, String password, String phoneNumber) {
+		Connection connection = null;
+		PreparedStatement pst = null;
+		
+		String sql = "INSERT INTO USERINFO VALUES('" + id + "','" + password + "','" + phoneNumber + "')";
+		
+		System.out.println(sql);
+		
+		try {
+			Class.forName(driver);
+			connection = DriverManager.getConnection(url,userName,this.password);
+			
+			pst = connection.prepareStatement(sql);
+			pst.executeQuery();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			try {
+				pst.close();
+				connection.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return true;
 	}
 }
