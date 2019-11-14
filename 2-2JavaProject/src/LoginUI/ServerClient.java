@@ -12,6 +12,15 @@ public class ServerClient {
 		receive();
 	}
 	
+	/*public void sqlControl() {
+		Thread thread = new Thread() {
+			@Override
+			public void run() {
+				
+			}
+		}
+	}*/
+	
 	//클라이언트로부터 메시지 전달 받는 메소드
 	public void receive() {
 		Runnable thread = new Runnable() {

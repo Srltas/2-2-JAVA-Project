@@ -37,8 +37,7 @@ public class Server {
 						 Socket socket = serverSocket.accept();
 						 clients.add(new ServerClient(socket));
 						 System.out.println();
-						 System.out.println("[클라이언트 접속]" + socket.getRemoteSocketAddress() + ":" 
-						 + Thread.currentThread().getName());
+						 System.out.println("[클라이언트 접속]" + socket.getRemoteSocketAddress() + ":" + Thread.currentThread().getName());
 					 } catch(Exception e) {
 						 if(!serverSocket.isClosed()) {
 							 stopServer();

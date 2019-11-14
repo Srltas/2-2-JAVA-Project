@@ -10,6 +10,9 @@ public class LoginMain extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+			LoginUIClient client = new LoginUIClient();
+			client.startClient();
+			
 			Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("LoginUI/Login.fxml"));
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
