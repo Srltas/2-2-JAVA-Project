@@ -17,41 +17,41 @@ public class OracleTest {
 		String password = "bluesky";
 		try {
 			Class.forName(driver);
-			System.out.println("jdbc drvier ·Îµù ¼º°ø");
+			System.out.println("jdbc drvier ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½");
 			conn = DriverManager.getConnection(url,user,password);
-			System.out.println("¿À¶óÅ¬ ¿¬°á ¼º°ø");
+			System.out.println("ï¿½ï¿½ï¿½ï¿½Å¬ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 			
-			int inEMPNO;//»ç¿ø¹øÈ£
-			String inEMPNAME;//»ç¿øÀÌ¸§
-			String inTITLE;//Á÷Ã¥
-			int inMANAGER;//»ó»ç
-			int inSALARY;//±Þ¿©
-			int inDNO;//ºÎ¼­
+			int inEMPNO;//ï¿½ï¿½ï¿½ï¿½ï¿½È£
+			String inEMPNAME;//ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½
+			String inTITLE;//ï¿½ï¿½Ã¥
+			int inMANAGER;//ï¿½ï¿½ï¿½
+			int inSALARY;//ï¿½Þ¿ï¿½
+			int inDNO;//ï¿½Î¼ï¿½
 			
 			Scanner scanner = new Scanner(System.in);
 			Scanner scanner2 = new Scanner(System.in);
 			
-			System.out.print("»ç¿øÀÌ¸§ >> ");
+			System.out.print("ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ >> ");
 			inEMPNAME = scanner.nextLine();
 			System.out.println(inEMPNAME);
 			
-			System.out.print("Á÷Ã¥ >> ");
+			System.out.print("ï¿½ï¿½Ã¥ >> ");
 			inTITLE = scanner2.nextLine();
 			System.out.println(inTITLE);
 			
-			System.out.print("»ç¿ø¹øÈ£ >> ");
+			System.out.print("ï¿½ï¿½ï¿½ï¿½ï¿½È£ >> ");
 			inEMPNO = scanner.nextInt();
 			System.out.println(inEMPNO);
 			
-			System.out.print("¸Å´ÏÀú >> ");
+			System.out.print("ï¿½Å´ï¿½ï¿½ï¿½ >> ");
 			inMANAGER = scanner.nextInt();
 			System.out.println(inMANAGER);
 			
-			System.out.print("±Þ¿© >> ");
+			System.out.print("ï¿½Þ¿ï¿½ >> ");
 			inSALARY = scanner.nextInt();
 			System.out.println(inSALARY);
 			
-			System.out.print("ºÎ¼­ >> ");
+			System.out.print("ï¿½Î¼ï¿½ >> ");
 			inDNO = scanner.nextInt();
 			System.out.println(inDNO);
 			
@@ -66,20 +66,20 @@ public class OracleTest {
 			
 			int count = pstmt.executeUpdate();
 			if(count == 0) {
-				System.out.println("»ðÀÔ ½ÇÆÐ");
+				System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 			}else {
-				System.out.println("»ðÀÔ ¼º°ø");
+				System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 			}
 		} catch(ClassNotFoundException e){
 			e.printStackTrace();
-			System.out.println("jdbc driver ·Îµù ½ÇÆÐ");
+			System.out.println("jdbc driver ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½");
 		} catch(SQLException e) {
 			e.printStackTrace();
 		} finally {
 			if(pstmt != null) {
 				try {
 					pstmt.close();
-					System.out.println("¿À¶óÅ¬ ¿¬°á Á¾·á");
+					System.out.println("ï¿½ï¿½ï¿½ï¿½Å¬ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 				} catch(Exception e) {
 					e.printStackTrace();
 				}
@@ -88,7 +88,7 @@ public class OracleTest {
 			if(conn != null) {
 				try {
 					pstmt.close();
-					System.out.println("¿À¶óÅ¬ ¿¬°á Á¾·á");
+					System.out.println("ï¿½ï¿½ï¿½ï¿½Å¬ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 				} catch(Exception e) {
 					e.printStackTrace();
 				}
