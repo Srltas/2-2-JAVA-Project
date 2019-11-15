@@ -7,7 +7,7 @@ import java.io.OutputStream;
 import java.net.Socket;
 
 public class LoginUIClient {
-	public static LoginUIClient client; // �������� client
+	public static LoginUIClient client; 
 	Socket mySocket = null;
 	MessageListener msgListener = null;
 	OutputStream outStream = null;
