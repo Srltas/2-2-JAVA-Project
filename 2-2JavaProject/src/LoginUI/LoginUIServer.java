@@ -68,7 +68,7 @@ class ConnectedClient extends Thread
 			while(true)
 			{
 				String msg = dataInStream.readUTF();	//문자 받기
-				
+				System.out.println("Server> " + this.socket.toString() + ": " + msg);
 				String number = msg.substring(0,1);
 				System.out.println(number);
 				String messageBody = msg.substring(1);
@@ -77,6 +77,9 @@ class ConnectedClient extends Thread
 					System.out.println("로그인 정보입니다.");
 					String id = messageBody.substring(0,msg.lastIndexOf(",")-1);
 					String pw = messageBody.substring(msg.lastIndexOf(","));
+					if(id.equals("user") && pw.equals("pass")) {
+						dataOutStream.writeUTF("true");
+					}
 					System.out.println(id);
 					System.out.println(pw);
 				}else if(number.equals("1")) {
@@ -89,8 +92,6 @@ class ConnectedClient extends Thread
 				/*for(ConnectedClient client : LoginUIServer.clients) {
 					client.dataOutStream.writeUTF(msg);
 				}*/
-				
-				System.out.println("Server> " + this.socket.toString() + ": " + msg);
 			}
 		}
 		catch(IOException e) {}
