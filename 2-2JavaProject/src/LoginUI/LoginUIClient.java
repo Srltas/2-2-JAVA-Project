@@ -7,7 +7,7 @@ import java.io.OutputStream;
 import java.net.Socket;
 
 public class LoginUIClient {
-	public static LoginUIClient client; // Àü¿ªº¯¼ö client
+	public static LoginUIClient client; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ client
 	Socket mySocket = null;
 	MessageListener msgListener = null;
 	OutputStream outStream = null;
@@ -18,7 +18,7 @@ public class LoginUIClient {
 		this.client = client;
 		try {
 			client.mySocket = new Socket("127.0.0.1", 9876);
-			System.out.println("Client> ¼­·Î ¿¬°áµÇ¾ú½À´Ï´Ù.");
+			System.out.println("Client> ì„œë¡œ ì—°ê²°ë˜ì—ˆìŠµë‹ˆë‹¤.");
 			msgListener = new MessageListener(client.mySocket);
 			msgListener.start();
 
