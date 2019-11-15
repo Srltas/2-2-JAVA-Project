@@ -44,7 +44,7 @@ public class LoginUIClient {
 				try {
 					System.out.println("sendLogin in Login UI client : " + msg);
 
-					out.write(msg);
+					out.println(msg);
 					out.flush();
 					//
 					/*
