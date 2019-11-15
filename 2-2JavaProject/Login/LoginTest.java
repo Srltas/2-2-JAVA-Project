@@ -12,4 +12,4 @@ public class LoginTest {
 		System.out.println(changePassword.changePassword("account1", "1000"));
 		System.out.println(createAccount.createAccount("newAccount","newAccountpwe","10101"));
 	}
-}
+}//

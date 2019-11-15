@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-//
+// db mapper
 public class AccountMapper {
 	// public ���� ������ȸ (String id)
 	String driver = "oracle.jdbc.driver.OracleDriver";

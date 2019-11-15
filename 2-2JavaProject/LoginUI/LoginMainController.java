@@ -23,7 +23,7 @@ public class LoginMainController {
 
 	@FXML
 	private TextField txtUserName;
-
+//
 	@FXML
 	private TextField txtPassword;
 	

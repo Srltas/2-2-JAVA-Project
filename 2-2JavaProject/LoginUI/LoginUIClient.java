@@ -1,9 +1,11 @@
 package LoginUI;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -15,15 +17,15 @@ public class LoginUIClient {
 	MessageListener msgListener = null;
 	OutputStream outStream = null;
 	DataOutputStream dataOutStream = null;
+	PrintWriter out = null;
 	
-	
-
 	public void startClient() {
 		LoginUIClient client = new LoginUIClient();
-		this.client = client;
+		LoginUIClient.client = client;
 		try {
 			client.mySocket = new Socket("127.0.0.1", 9876);
-			//PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(mySocket.getOutputStream())));
+			out =  new PrintWriter(new BufferedWriter(new OutputStreamWriter(mySocket.getOutputStream())));
+			
 			System.out.println("Client> 서로 연결되었습니다.");
 			msgListener = new MessageListener(client.mySocket);
 			msgListener.start();
@@ -38,10 +40,16 @@ public class LoginUIClient {
 			@Override
 			public void run() {
 				try {
-					System.out.println(msg);
+					System.out.println("sendLogin in Login UI client : "+msg);
+					
+					out.println(msg);
+					out.flush();
+					//
+					/*
 					outStream = client.mySocket.getOutputStream();
 					dataOutStream = new DataOutputStream(outStream);
 					dataOutStream.writeUTF(msg);
+					*/
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -56,17 +64,22 @@ class MessageListener extends Thread {
 	InputStream inStream;
 	DataInputStream dataInStream;
 	static String msg;
-
+	BufferedReader br = null;
 	MessageListener(Socket _s) {
 		socket = _s;
 	}
 
 	public void run() {
 		try {
+			
+			br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			/*
 			inStream = this.socket.getInputStream();
 			dataInStream = new DataInputStream(inStream);
+			*/
 			while (true) {
-				msg = dataInStream.readUTF();
+				msg = br.readLine();
+				//msg = dataInStream.readUTF();
 				System.out.println("Client> Server sent: " + msg);
 			}
 		} catch (Exception e) {	}

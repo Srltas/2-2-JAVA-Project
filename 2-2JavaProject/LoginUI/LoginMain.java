@@ -9,7 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class LoginMain extends Application {
-	
+	//
 	@FXML
 	static private AnchorPane mainView;
 	
