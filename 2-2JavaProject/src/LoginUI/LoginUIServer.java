@@ -58,7 +58,7 @@ class ConnectedClient extends Thread
 	{
 		try
 		{
-			System.out.println("Server> " + this.socket.toString() + "¿¡¼­ÀÇ Á¢¼ÓÀÌ ¿¬°áµÇ¾ú½À´Ï´Ù.");
+			System.out.println("Server> " + this.socket.toString() + "ì—ì„œ ì ‘ì†ì´ ì—°ê²°ë˜ì—ˆìŠµë‹ˆë‹¤.");
 			outStream = this.socket.getOutputStream();
 			dataOutStream = new DataOutputStream(outStream);
 			inStream = this.socket.getInputStream();
@@ -67,14 +67,14 @@ class ConnectedClient extends Thread
 			dataOutStream.writeUTF("Welcome to this Server.");
 			while(true)
 			{
-				String msg = dataInStream.readUTF();	//¹®ÀÚ ¹Ş±â
+				String msg = dataInStream.readUTF();
 				System.out.println("Server> " + this.socket.toString() + ": " + msg);
 				String number = msg.substring(0,1);
 				System.out.println(number);
 				String messageBody = msg.substring(1);
 				System.out.println(messageBody);
 				if(number.equals("0")) {
-					System.out.println("·Î±×ÀÎ Á¤º¸ÀÔ´Ï´Ù.");
+					System.out.println("ë¡œê·¸ì¸ ì •ë³´ì…ë‹ˆë‹¤.");
 					String id = messageBody.substring(0,msg.lastIndexOf(",")-1);
 					String pw = messageBody.substring(msg.lastIndexOf(","));
 					if(id.equals("user") && pw.equals("pass")) {
@@ -83,12 +83,11 @@ class ConnectedClient extends Thread
 					System.out.println(id);
 					System.out.println(pw);
 				}else if(number.equals("1")) {
-					System.out.println("´Ü¾î Á¤º¸ÀÔ´Ï´Ù.");
+					System.out.println("ë‹¨ì–´ ì •ë³´ì…ë‹ˆë‹¤.");
 				}else if(number.equals("2")) {
-					System.out.println("Ã¤ÆÃ Á¤º¸ÀÔ´Ï´Ù.");
+					System.out.println("ì±„íŒ… ì •ë³´ì…ë‹ˆë‹¤.");
 				}
 				
-				//¸ğµç Å¬¶óÀÌ¾ğÆ®¿¡°Ô ¹®ÀÚ Àü¼ÛÇÏ±â
 				/*for(ConnectedClient client : LoginUIServer.clients) {
 					client.dataOutStream.writeUTF(msg);
 				}*/

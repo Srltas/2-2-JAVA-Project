@@ -19,7 +19,7 @@ public class LoginMain extends Application {
 			LoginUIClient client = new LoginUIClient();
 			client.startClient();
 			
-			primaryStage.setTitle("³¡¸»ÀÕ±â °ÔÀÓ");
+			primaryStage.setTitle("ëë§ì‡ê¸° ê²Œì„");
 			Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("LoginUI/Login.fxml"));
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);

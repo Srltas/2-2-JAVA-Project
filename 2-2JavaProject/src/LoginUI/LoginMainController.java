@@ -32,13 +32,11 @@ public class LoginMainController {
 	
 	public void Login(ActionEvent event) throws Exception {
 		
-		// 0 + 서버로 아이디 + 비밀번호 주기
 		text = "0" + txtUserName.getText() + "," + txtPassword.getText();
 		LoginUIClient.client.sendLogin(text);
 		Thread.sleep(100);
 		
 		if(MessageListener.msg.equals("true")){
-			System.out.println("들어오냐?");
 			Parent menuView = FXMLLoader.load(getClass().getClassLoader().getResource("LoginUI/Main.fxml"));
 			Scene scene = new Scene(menuView);
 			Stage primaryStage = (Stage)btnLogin.getScene().getWindow();
