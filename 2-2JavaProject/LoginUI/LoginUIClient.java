@@ -18,7 +18,7 @@ public class LoginUIClient {
 	OutputStream outStream = null;
 	DataOutputStream dataOutStream = null;
 
-	PrintWriter out = null;
+	static PrintWriter out = null;
 
 	public void startClient() {
 		LoginUIClient client = new LoginUIClient();
@@ -44,7 +44,7 @@ public class LoginUIClient {
 				try {
 					System.out.println("sendLogin in Login UI client : " + msg);
 
-					out.println(msg);
+					out.write(msg);
 					out.flush();
 					//
 					/*
