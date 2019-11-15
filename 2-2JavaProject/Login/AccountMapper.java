@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 //
 public class AccountMapper {
-	// public °èÁ¤ °èÁ¤Á¶È¸ (String id)
+	// public ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¸ (String id)
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:xe";
 	String userName = "LEE";
@@ -89,16 +89,16 @@ public class AccountMapper {
 	}
 
 	public void changePasswordById(String id, String password) {
-		// µ¥ÀÌÅÍ º£ÀÌ½º Á¢¼Ó¿¡ ÇÊ¿äÇÑ Connection, PreparedStatement, ResultSet ¼±¾ð
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì½ï¿½ ï¿½ï¿½ï¿½Ó¿ï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½ Connection, PreparedStatement, ResultSet ï¿½ï¿½ï¿½ï¿½
 		Connection connection = null;
 		PreparedStatement pst = null;
 
-		// String sql = "UPDATE USERINFO SET USER_PW=(º¯°æÇÒ PW) WHERE=(º¯°æÇÒ ID)"
+		// String sql = "UPDATE USERINFO SET USER_PW=(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ PW) WHERE=(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ID)"
 		String sql = "UPDATE USERINFO SET USER_PW = '" + password + "' WHERE USER_ID = '" + id + "'";
 
 		System.out.println(sql);
 
-		// µ¥ÀÌÅÍ º£ÀÌ½º¿¡ Á¢¼ÓÇÏ¿© resultSet.next(); id¿Í pw¸¦ °¡Á®¿È
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ resultSet.next(); idï¿½ï¿½ pwï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		try {
 			Class.forName(driver);
 			connection = DriverManager.getConnection(url, userName, this.password);
