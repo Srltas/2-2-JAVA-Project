@@ -44,13 +44,9 @@ public class LoginUIClient {
 				try {
 					System.out.println("sendLogin in Login UI client : " + msg);
 
-					out.println(msg);
-					out.flush();
-					//
-					/*
-					 * outStream = client.mySocket.getOutputStream(); dataOutStream = new
-					 * DataOutputStream(outStream); dataOutStream.writeUTF(msg);
-					 */
+					 outStream = client.mySocket.getOutputStream(); dataOutStream = new
+					 DataOutputStream(outStream); dataOutStream.writeUTF(msg);
+					 
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -74,14 +70,11 @@ class MessageListener extends Thread {
 	public void run() {
 		try {
 
-			br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-			/*
-			 * inStream = this.socket.getInputStream(); dataInStream = new
-			 * DataInputStream(inStream);
-			 */
+			 inStream = this.socket.getInputStream(); dataInStream = new
+			 DataInputStream(inStream);
+			 
 			while (true) {
-				msg = br.readLine();
-				// msg = dataInStream.readUTF();
+				msg = dataInStream.readUTF();
 				System.out.println("Client> Server sent: " + msg);
 			}
 		} catch (Exception e) {

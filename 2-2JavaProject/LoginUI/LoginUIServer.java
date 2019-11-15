@@ -53,23 +53,17 @@ class ConnectedClient extends Thread {
 
 	public void run() {
 		try {
-
-			BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-			PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())));
-
 			System.out.println("Server> " + this.socket.toString() + "에서 접속이 연결되었습니다.");
-			/*
-			 * outStream = this.socket.getOutputStream(); dataOutStream = new
-			 * DataOutputStream(outStream); inStream = this.socket.getInputStream();
-			 * dataInStream = new DataInputStream(inStream);
-			 */
-			out.println("Welcome to the Jungle");
-			out.flush();
-			// dataOutStream.writeUTF("Welcome to this Server.");
+
+			outStream = this.socket.getOutputStream();
+			dataOutStream = new DataOutputStream(outStream);
+			inStream = this.socket.getInputStream();
+			dataInStream = new DataInputStream(inStream);
+
+			dataOutStream.writeUTF("Welcome to this Server.");
 			while (true) {
 
-				String msg = br.readLine();
-				// String msg = dataInStream.readUTF();
+				String msg = dataInStream.readUTF();
 				System.out.println("Server> " + this.socket.toString() + ": " + msg);
 				String number = msg.substring(0, 1);
 				System.out.println(number);
