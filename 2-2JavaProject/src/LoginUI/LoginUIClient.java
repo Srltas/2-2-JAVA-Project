@@ -49,6 +49,7 @@ class MessageListener extends Thread {
 	Socket socket;
 	InputStream inStream;
 	DataInputStream dataInStream;
+	static String msg;
 
 	MessageListener(Socket _s) {
 		socket = _s;
@@ -59,7 +60,7 @@ class MessageListener extends Thread {
 			inStream = this.socket.getInputStream();
 			dataInStream = new DataInputStream(inStream);
 			while (true) {
-				String msg = dataInStream.readUTF();
+				msg = dataInStream.readUTF();
 				System.out.println("Client> Server sent: " + msg);
 			}
 		} catch (Exception e) {	}
