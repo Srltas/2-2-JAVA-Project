@@ -1,9 +1,12 @@
 package LoginUI;
 
+import java.io.BufferedWriter;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.net.Socket;
 
 public class LoginUIClient {
@@ -12,12 +15,15 @@ public class LoginUIClient {
 	MessageListener msgListener = null;
 	OutputStream outStream = null;
 	DataOutputStream dataOutStream = null;
+	
+	
 
 	public void startClient() {
 		LoginUIClient client = new LoginUIClient();
 		this.client = client;
 		try {
 			client.mySocket = new Socket("127.0.0.1", 9876);
+			//PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(mySocket.getOutputStream())));
 			System.out.println("Client> 서로 연결되었습니다.");
 			msgListener = new MessageListener(client.mySocket);
 			msgListener.start();

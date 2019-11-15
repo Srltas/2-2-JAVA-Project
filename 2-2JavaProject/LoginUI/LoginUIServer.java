@@ -9,51 +9,43 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
 import java.util.ArrayList;
+import Login.*;
 
 public class LoginUIServer {
-	public static void main(String[] args) 
-	{
+	public static void main(String[] args) {
 		LoginUIServer server = new LoginUIServer();
-		try
-		{
+		try {
 			server.ss = new ServerSocket(9876);
 			System.out.println("Server > Server Socket is created!");
-			
-			while(true)
-			{
+
+			while (true) {
 				Socket socket = server.ss.accept();
 				ConnectedClient c = new ConnectedClient(socket);
 				server.clients.add(c);
 				c.start();
 			}
-		}
-		catch(SocketException e)
-		{
-			
-		}
-		catch(Exception e)
-		{
-			
+		} catch (SocketException e) {
+
+		} catch (Exception e) {
+
 		}
 	}
-	
+
 	ServerSocket ss = null;
 	static ArrayList<ConnectedClient> clients = new ArrayList<ConnectedClient>();
 }
 
-class ConnectedClient extends Thread
-{
+class ConnectedClient extends Thread {
 	Socket socket;
 	OutputStream outStream;
 	DataOutputStream dataOutStream;
 	InputStream inStream;
 	DataInputStream dataInStream;
-	
-	ConnectedClient(Socket _s)
-	{
+
+	ConnectedClient(Socket _s) {
 		socket = _s;
 	}
-	
+
 	public void run()
 	{
 		try
@@ -74,14 +66,19 @@ class ConnectedClient extends Thread
 				String messageBody = msg.substring(1);
 				System.out.println(messageBody);
 				if(number.equals("0")) {
-					System.out.println("로그인 정보입니다.");
+				
+					//여기
 					String id = messageBody.substring(0,msg.lastIndexOf(",")-1);
-					String pw = messageBody.substring(msg.lastIndexOf(","));
-					if(id.equals("user") && pw.equals("pass")) {
-						dataOutStream.writeUTF("true");
+					String password = messageBody.substring(msg.lastIndexOf(","));
+					
+					LoginService login = new LoginService();
+					
+					if (login.login(id, password)) {
+						System.out.println("login success");
+					} else {
+						System.out.println("fail");
 					}
-					System.out.println(id);
-					System.out.println(pw);
+					
 				}else if(number.equals("1")) {
 					System.out.println("단어 정보입니다.");
 				}else if(number.equals("2")) {
@@ -92,7 +89,9 @@ class ConnectedClient extends Thread
 					client.dataOutStream.writeUTF(msg);
 				}*/
 			}
-		}
-		catch(IOException e) {}
+		}catch(
+
+	IOException e)
+	{
 	}
-}
+}}
