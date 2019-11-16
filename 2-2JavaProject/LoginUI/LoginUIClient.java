@@ -69,7 +69,6 @@ class MessageListener extends Thread {
 
 	public void run() {
 		try {
-
 			 inStream = this.socket.getInputStream(); dataInStream = new
 			 DataInputStream(inStream);
 			 
