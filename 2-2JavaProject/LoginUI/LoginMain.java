@@ -1,29 +1,26 @@
 package LoginUI;
 
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class LoginMain extends Application {
-	//
-	@FXML
-	static private AnchorPane mainView;
-	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+			//클라이언트 실행
 			LoginUIClient client = new LoginUIClient();
 			client.startClient();
 			
 			primaryStage.setTitle("끝말잇기 게임");
-			Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("LoginUI/Login.fxml"));
+			Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/StartView.fxml"));
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
+			primaryStage.setOnCloseRequest(event -> client.stopClient());
 			primaryStage.show();
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

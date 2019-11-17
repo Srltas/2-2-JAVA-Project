@@ -1,42 +1,43 @@
 package LoginUI;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 import java.net.Socket;
 
 public class LoginUIClient {
 	public static LoginUIClient client;
-	Socket mySocket = null;
-	MessageListener msgListener = null;
-	OutputStream outStream = null;
-	DataOutputStream dataOutStream = null;
+	Socket mySocket;
+	MessageListener msgListener;
+	OutputStream outStream;
+	DataOutputStream dataOutStream;
 
-	static PrintWriter out = null;
-
+	// 클라이언트 프로그램 실행 메소드
 	public void startClient() {
 		LoginUIClient client = new LoginUIClient();
 		LoginUIClient.client = client;
 		try {
 			client.mySocket = new Socket("127.0.0.1", 9876);
-
-			out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(mySocket.getOutputStream())));
-
 			System.out.println("Client> 서로 연결되었습니다.");
 			msgListener = new MessageListener(client.mySocket);
 			msgListener.start();
-
 		} catch (Exception e) {
 
 		}
 	}
 
+	// 클라이언트 프로그램을 종료 메소드
+	public void stopClient() {
+		try {
+			if (mySocket != null && !mySocket.isClosed()) {
+				System.out.println("클라이언트를 종료합니다.");
+				mySocket.close();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	// 로그인 정보를 보내는 메소드
 	public void sendLogin(String msg) {
 		Thread thread = new Thread() {
 			@Override
@@ -44,42 +45,14 @@ public class LoginUIClient {
 				try {
 					System.out.println("sendLogin in Login UI client : " + msg);
 
-					 outStream = client.mySocket.getOutputStream(); dataOutStream = new
-					 DataOutputStream(outStream); dataOutStream.writeUTF(msg);
-					 
+					outStream = client.mySocket.getOutputStream();
+					dataOutStream = new DataOutputStream(outStream);
+					dataOutStream.writeUTF(msg);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		};
 		thread.start();
-	}
-}
-
-class MessageListener extends Thread {
-	Socket socket;
-	InputStream inStream;
-	DataInputStream dataInStream;
-	static String msg;
-	BufferedReader br = null;
-
-	MessageListener(Socket _s) {
-		socket = _s;
-	}
-
-	public void run() {
-		try {
-
-			
-			
-			 inStream = this.socket.getInputStream(); dataInStream = new
-			 DataInputStream(inStream);
-			 
-			while (true) {
-				msg = dataInStream.readUTF();
-				System.out.println("Client> Server sent: " + msg);
-			}
-		} catch (Exception e) {
-		}
 	}
 }

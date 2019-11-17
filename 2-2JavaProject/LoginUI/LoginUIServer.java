@@ -67,19 +67,17 @@ class ConnectedClient extends Thread {
 				System.out.println(messageBody);
 
 				if (number.equals("0")) {
-
 					// 여기
 					String id = messageBody.substring(0, msg.lastIndexOf(",") - 1);
 					String password = messageBody.substring(msg.lastIndexOf(","));
 
 					LoginService login = new LoginService();
-
-					if (login.login(id, password)) {
-						System.out.println("login success");
-					} else {
-						System.out.println("fail");
-
-					}
+					
+					//확인용
+					if(id.equals("user") && password.equals("pass"))
+						dataOutStream.writeUTF("true");
+					/*if (login.login(id, password))
+						dataOutStream.writeUTF("true");*/
 
 					System.out.println(id);
 					System.out.println(password);
@@ -88,7 +86,7 @@ class ConnectedClient extends Thread {
 				} else if (number.equals("2")) {
 					System.out.println("채팅 정보입니다.");
 				}
-				//
+
 				/*
 				 * for(ConnectedClient client : LoginUIServer.clients) {
 				 * client.dataOutStream.writeUTF(msg); }
