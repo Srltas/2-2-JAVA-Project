@@ -3,8 +3,8 @@ package fxml;
 import java.io.DataOutputStream;
 import java.io.OutputStream;
 
-import LoginUI.LoginUIClient;
-import LoginUI.MessageListener;
+import Socket.Client;
+import Socket.MessageListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -54,7 +54,7 @@ public class StartViewController {
 			lblIdStatus.setText("");
 		}else {
 			text = "0" + id + "," + pw;
-			LoginUIClient.client.sendLogin(text);
+			Client.client.sendLogin(text);
 			Thread.sleep(100);
 
 			if (MessageListener.msg.equals("true")) {

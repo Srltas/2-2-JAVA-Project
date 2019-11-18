@@ -1,11 +1,11 @@
-package LoginUI;
+package Socket;
 
 import java.io.DataOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
-public class LoginUIClient {
-	public static LoginUIClient client;
+public class Client {
+	public static Client client;
 	Socket mySocket;
 	MessageListener msgListener;
 	OutputStream outStream;
@@ -13,8 +13,8 @@ public class LoginUIClient {
 
 	// 클라이언트 프로그램 실행 메소드
 	public void startClient() {
-		LoginUIClient client = new LoginUIClient();
-		LoginUIClient.client = client;
+		Client client = new Client();
+		Client.client = client;
 		try {
 			client.mySocket = new Socket("127.0.0.1", 9876);
 			System.out.println("Client> 서로 연결되었습니다.");

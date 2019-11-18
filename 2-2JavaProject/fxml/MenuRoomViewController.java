@@ -1,10 +1,24 @@
 package fxml;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
-public class MenuRoomViewController {
+public class MenuRoomViewController implements Initializable{
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		printRating();
+	}
+	
 	@FXML
 	private Text txtRating;
 	@FXML
@@ -12,11 +26,14 @@ public class MenuRoomViewController {
 	@FXML
 	private Button btnExit;
 	
-	public void play() {
-		System.out.println("방에 입장합니다.");
-		txtRating.setText("90");
+	public void play(ActionEvent event)throws Exception {
+		Parent WaitRoomtView = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/WaitRoomView.fxml"));
+		Scene scene = new Scene(WaitRoomtView);
+		Stage primaryStage = (Stage) btnPlay.getScene().getWindow();
+		primaryStage.setScene(scene);
 	}
 	public void printRating() {
+		//유저 랭킹 불러오는 메소드
 		txtRating.setText("90");
 	}
 	public void exit() {

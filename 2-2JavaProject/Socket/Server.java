@@ -1,4 +1,4 @@
-package LoginUI;
+package Socket;
 
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
@@ -6,14 +6,14 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class LoginUIServer {
+public class Server {
 	ServerSocket serverSocket = null;
 	static ArrayList<ConnectedClient> clients = new ArrayList<ConnectedClient>();
 	String ip = "127.0.0.1";
 	int port = 9876;
 	
 	public static void main(String[] args) {
-		LoginUIServer server = new LoginUIServer();
+		Server server = new Server();
 		server.startServer(server.ip,server.port);
 	}
 	

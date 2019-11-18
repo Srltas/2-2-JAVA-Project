@@ -1,4 +1,4 @@
-package LoginUI;
+package Socket;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -6,12 +6,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class LoginMain extends Application {
+public class StartMain extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
 			//클라이언트 실행
-			LoginUIClient client = new LoginUIClient();
+			Client client = new Client();
 			client.startClient();
 			
 			primaryStage.setTitle("끝말잇기 게임");

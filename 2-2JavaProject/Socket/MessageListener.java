@@ -1,4 +1,4 @@
-package LoginUI;
+package Socket;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
