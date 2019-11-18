@@ -25,18 +25,6 @@ public class LoginUIClient {
 		}
 	}
 
-	// 클라이언트 프로그램을 종료 메소드
-	public void stopClient() {
-		try {
-			if (mySocket != null && !mySocket.isClosed()) {
-				System.out.println("클라이언트를 종료합니다.");
-				mySocket.close();
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 	// 로그인 정보를 보내는 메소드
 	public void sendLogin(String msg) {
 		Thread thread = new Thread() {

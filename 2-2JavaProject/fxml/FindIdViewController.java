@@ -9,26 +9,18 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class SignUpViewController {
-	@FXML
-	private TextField txtUserID;
-	@FXML
-	private TextField txtPassword;
+public class FindIdViewController {
 	@FXML
 	private TextField txtUserName;
 	@FXML
-	private TextField txtUserPhonNumber;
+	private TextField txtPhonNumber;
 	@FXML
-	private Button btnsignUp;
+	private Button btnFindID;
 	@FXML
 	private Button btnBack;
 	
-	public void signUp(ActionEvent event)throws Exception {
-		System.out.println("회원가입이 되었습니다.");
-		Parent StartView = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/StartView.fxml"));
-		Scene scene = new Scene(StartView);
-		Stage primaryStage = (Stage) btnBack.getScene().getWindow();
-		primaryStage.setScene(scene);
+	public void findID(ActionEvent event) throws Exception {
+		System.out.println("아이디찾기");
 	}
 	
 	public void back(ActionEvent event) throws Exception {

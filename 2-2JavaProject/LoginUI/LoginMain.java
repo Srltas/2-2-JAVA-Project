@@ -18,7 +18,7 @@ public class LoginMain extends Application {
 			Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/StartView.fxml"));
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
-			primaryStage.setOnCloseRequest(event -> client.stopClient());
+			primaryStage.setOnCloseRequest(evene -> System.exit(0));
 			primaryStage.show();
 			
 		}catch(Exception e) {

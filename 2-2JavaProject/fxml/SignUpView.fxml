@@ -25,12 +25,12 @@
             <Image url="@이름.png" />
          </image>
       </ImageView>
-      <TextField layoutX="375.0" layoutY="259.0" prefHeight="63.0" prefWidth="447.0" promptText="ID">
+      <TextField fx:id="txtUserID" layoutX="375.0" layoutY="259.0" prefHeight="63.0" prefWidth="447.0" promptText="ID">
          <font>
             <Font name="System Bold" size="32.0" />
          </font>
       </TextField>
-      <PasswordField layoutX="375.0" layoutY="334.0" prefHeight="63.0" prefWidth="447.0" promptText="PW">
+      <PasswordField fx:id="txtPassword" layoutX="375.0" layoutY="334.0" prefHeight="63.0" prefWidth="447.0" promptText="PW">
          <font>
             <Font size="32.0" />
          </font>
@@ -45,12 +45,12 @@
             <Font name="Microsoft JhengHei UI Bold" size="27.0" />
          </font>
       </Button>
-      <TextField layoutX="375.0" layoutY="409.0" prefHeight="63.0" prefWidth="447.0" promptText="이름">
+      <TextField fx:id="txtUserName" layoutX="375.0" layoutY="409.0" prefHeight="63.0" prefWidth="447.0" promptText="이름">
          <font>
             <Font name="System Bold" size="32.0" />
          </font>
       </TextField>
-      <TextField layoutX="375.0" layoutY="483.0" prefHeight="63.0" prefWidth="447.0" promptText="전화번호">
+      <TextField fx:id="txtUserPhonNumber" layoutX="375.0" layoutY="483.0" prefHeight="63.0" prefWidth="447.0" promptText="전화번호">
          <font>
             <Font name="System Bold" size="32.0" />
          </font>
