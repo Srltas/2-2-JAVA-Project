@@ -16,7 +16,7 @@ public class Client {
 		Client client = new Client();
 		Client.client = client;
 		try {
-			client.mySocket = new Socket("127.0.0.1", 9876);
+			client.mySocket = new Socket("192.168.0.64", 9876);
 			System.out.println("Client> 서로 연결되었습니다.");
 			msgListener = new MessageListener(client.mySocket);
 			msgListener.start();
