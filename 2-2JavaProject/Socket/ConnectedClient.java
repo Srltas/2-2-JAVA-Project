@@ -7,6 +7,7 @@ import java.io.OutputStream;
 import java.net.Socket;
 
 import Login.LoginService;
+import Login.CreateAccountService;
 
 class ConnectedClient extends Thread {
 	Socket socket;
@@ -17,6 +18,23 @@ class ConnectedClient extends Thread {
 
 	ConnectedClient(Socket _s) {
 		socket = _s;
+	}
+
+	public static String toString(String[] stringArray) {
+		if (stringArray == null) {
+			return "null";
+		}
+
+		if (stringArray.length == 0) {
+			return "";
+		}
+
+		StringBuilder stringb = new StringBuilder();
+		for (int i = 0; i <= stringArray.length; i++) {
+			stringb.append(String.valueOf(stringArray[i]));
+		}
+
+		return stringb.toString();
 	}
 
 	public void run() {
@@ -45,18 +63,39 @@ class ConnectedClient extends Thread {
 					String password = messageBody.substring(msg.lastIndexOf(","));
 
 					LoginService login = new LoginService();
-					
-					//확인용
-					if(id.equals("user") && password.equals("pass"))
+
+					// 확인용
+					/*
+					 * if (id.equals("user") && password.equals("pass"))
+					 * dataOutStream.writeUTF("true");
+					 */
+
+					if (login.login(id, password))
 						dataOutStream.writeUTF("true");
-					/*if (login.login(id, password))
-						dataOutStream.writeUTF("true");*/
 
 					System.out.println(id);
 					System.out.println(password);
-				} else if(number.equals("1")){
-					//회원가입
-					//여기다가 회원가입 메소드 넣으면 될 듯?
+				} else if (number.equals("1")) {
+					// 회원가입
+					System.out.println("catch by create");
+					String[] accountData = messageBody.split(",");
+
+					String id = accountData[0];
+					String password = accountData[1];
+					String userName = accountData[2];
+					String phoneNumber = accountData[3];
+
+					/*
+					 * String id = messageBody.substring(0, msg.lastIndexOf(",") - 1); String
+					 * password = messageBody.substring(msg.lastIndexOf(","));
+					 */
+
+					CreateAccountService createAccount = new CreateAccountService();
+					if (createAccount.createAccount(id, password, userName, phoneNumber)) {
+
+					}
+
+					// 여기다가 회원가입 메소드 넣으면 될 듯?
 				} else if (number.equals("2")) {
 					System.out.println("단어 정보입니다.");
 				} else if (number.equals("4")) {
