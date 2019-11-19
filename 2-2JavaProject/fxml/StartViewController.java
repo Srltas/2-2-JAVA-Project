@@ -54,8 +54,8 @@ public class StartViewController {
 			lblIdStatus.setText("");
 		}else {
 			text = "0" + id + "," + pw;
-			Client.client.sendLogin(text);
-			Thread.sleep(100);
+			Client.client.send(text);
+			//Thread.sleep(100);
 
 			if (MessageListener.msg.equals("true")) {
 				Parent menuView = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/MenuRoomView.fxml"));

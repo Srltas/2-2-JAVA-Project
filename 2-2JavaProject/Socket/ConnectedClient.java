@@ -54,9 +54,12 @@ class ConnectedClient extends Thread {
 
 					System.out.println(id);
 					System.out.println(password);
-				} else if (number.equals("1")) {
-					System.out.println("단어 정보입니다.");
+				} else if(number.equals("1")){
+					//회원가입
+					//여기다가 회원가입 메소드 넣으면 될 듯?
 				} else if (number.equals("2")) {
+					System.out.println("단어 정보입니다.");
+				} else if (number.equals("4")) {
 					System.out.println("채팅 정보입니다.");
 				}
 

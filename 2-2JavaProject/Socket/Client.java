@@ -26,12 +26,13 @@ public class Client {
 	}
 
 	// 로그인 정보를 보내는 메소드
-	public void sendLogin(String msg) {
+	public void send(String msg) {
 		Thread thread = new Thread() {
 			@Override
 			public void run() {
 				try {
-					System.out.println("sendLogin in Login UI client : " + msg);
+					//클라이언트가 보내는 메세지 확인용
+					//System.out.println("sendLogin in Login UI client : " + msg);
 
 					outStream = client.mySocket.getOutputStream();
 					dataOutStream = new DataOutputStream(outStream);
