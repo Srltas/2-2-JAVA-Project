@@ -5,9 +5,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-// db mapper
+
 public class AccountMapper {
-	// public ���� ������ȸ (String id)
+
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:xe";
 	String userName = "LEE";
@@ -89,16 +89,13 @@ public class AccountMapper {
 	}
 
 	public void changePasswordById(String id, String password) {
-		// ������ ���̽� ���ӿ� �ʿ��� Connection, PreparedStatement, ResultSet ����
 		Connection connection = null;
 		PreparedStatement pst = null;
 
-		// String sql = "UPDATE USERINFO SET USER_PW=(������ PW) WHERE=(������ ID)"
 		String sql = "UPDATE USERINFO SET USER_PW = '" + password + "' WHERE USER_ID = '" + id + "'";
 
 		System.out.println(sql);
 
-		// ������ ���̽��� �����Ͽ� resultSet.next(); id�� pw�� ������
 		try {
 			Class.forName(driver);
 			connection = DriverManager.getConnection(url, userName, this.password);
@@ -118,18 +115,19 @@ public class AccountMapper {
 		}
 	}
 
-	public boolean createAccount(String id, String password, String phoneNumber) {
+	public boolean createAccount(String id, String password, String nickName, String phoneNumber) {
 		Connection connection = null;
 		PreparedStatement pst = null;
-		
-		String sql = "INSERT INTO USERINFO VALUES('" + id + "','" + password + "','" + phoneNumber + "','0')";
-		
+
+		String sql = "INSERT INTO USERINFO VALUES('" + id + "','" + password + "','" + phoneNumber + "','0','"
+				+ nickName + "')";
+
 		System.out.println(sql);
-		
+
 		try {
 			Class.forName(driver);
-			connection = DriverManager.getConnection(url,userName,this.password);
-			
+			connection = DriverManager.getConnection(url, userName, this.password);
+
 			pst = connection.prepareStatement(sql);
 			pst.executeQuery();
 		} catch (Exception e) {
