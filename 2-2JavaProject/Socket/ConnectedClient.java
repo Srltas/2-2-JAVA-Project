@@ -62,16 +62,13 @@ class ConnectedClient extends Thread {
 					String id = messageBody.substring(0, msg.lastIndexOf(",") - 1);
 					String password = messageBody.substring(msg.lastIndexOf(","));
 
-					LoginService login = new LoginService();
-
-					// 확인용
-					/*
-					 * if (id.equals("user") && password.equals("pass"))
-					 * dataOutStream.writeUTF("true");
-					 */
-
-					if (login.login(id, password))
-						dataOutStream.writeUTF("true");
+					//LoginService login = new LoginService();
+					
+					 if (id.equals("user") && password.equals("pass"))
+						 dataOutStream.writeUTF("true");
+					 
+					/*if (login.login(id, password))
+						dataOutStream.writeUTF("true");*/
 
 					System.out.println(id);
 					System.out.println(password);
@@ -94,8 +91,6 @@ class ConnectedClient extends Thread {
 					if (createAccount.createAccount(id, password, userName, phoneNumber)) {
 
 					}
-
-					// 여기다가 회원가입 메소드 넣으면 될 듯?
 				} else if (number.equals("2")) {
 					//waitRoom에 입장하는 클라이언트 순서 판단
 					Server.waitRoomCount++;
