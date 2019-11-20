@@ -64,14 +64,14 @@ class ConnectedClient extends Thread {
 
 					LoginService login = new LoginService();
 
+
+					if (login.login(id, password))
+						dataOutStream.writeUTF("true");
 					// 확인용
 					/*
 					 * if (id.equals("user") && password.equals("pass"))
 					 * dataOutStream.writeUTF("true");
 					 */
-
-					if (login.login(id, password))
-						dataOutStream.writeUTF("true");
 
 					System.out.println(id);
 					System.out.println(password);
