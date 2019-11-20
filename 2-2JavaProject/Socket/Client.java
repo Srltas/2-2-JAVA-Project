@@ -10,6 +10,7 @@ public class Client {
 	MessageListener msgListener;
 	OutputStream outStream;
 	DataOutputStream dataOutStream;
+	public static int waitingRoomCount;
 
 	// 클라이언트 프로그램 실행 메소드
 	public void startClient() {
@@ -20,9 +21,7 @@ public class Client {
 			System.out.println("Client> 서로 연결되었습니다.");
 			msgListener = new MessageListener(client.mySocket);
 			msgListener.start();
-		} catch (Exception e) {
-
-		}
+		} catch (Exception e) {	}
 	}
 
 	// 로그인 정보를 보내는 메소드

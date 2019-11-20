@@ -57,6 +57,7 @@ public class SignUpViewController {
 		}else {
 			text = "1" + id + "," + pw + "," + userName + "," + userPhonNumber;
 			Client.client.send(text);
+			Thread.sleep(100);
 			
 			if(MessageListener.msg.equals("true")) {
 				Parent StartView = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/StartView.fxml"));

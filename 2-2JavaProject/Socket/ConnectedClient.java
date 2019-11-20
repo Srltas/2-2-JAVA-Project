@@ -58,17 +58,21 @@ class ConnectedClient extends Thread {
 					//회원가입
 					//여기다가 회원가입 메소드 넣으면 될 듯?
 				} else if (number.equals("2")) {
-					System.out.println("단어 정보입니다.");
+					//waitRoom에 입장하는 클라이언트 순서 판단
+					Server.waitRoomCount++;
+					for(ConnectedClient client : Server.clients) {
+						client.dataOutStream.writeUTF("2"+Integer.toString(Server.waitRoomCount));
+					}
 				} else if (number.equals("4")) {
 					System.out.println("채팅 정보입니다.");
 				}
 
 				/*
 				 * for(ConnectedClient client : LoginUIServer.clients) {
+				 * if(this.equals(client)) continue;
 				 * client.dataOutStream.writeUTF(msg); }
 				 */
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

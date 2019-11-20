@@ -19,32 +19,32 @@
             <Image url="@WaitRoomBackGround.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imgUser1" fitHeight="276.0" fitWidth="296.0" layoutX="23.0" layoutY="179.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgUser1" fitHeight="276.0" fitWidth="296.0" layoutX="23.0" layoutY="179.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@WaitRoomPaka.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imgUser3" fitHeight="276.0" fitWidth="296.0" layoutX="605.0" layoutY="179.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgUser3" fitHeight="276.0" fitWidth="296.0" layoutX="605.0" layoutY="179.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@WaitRoomPaka.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imgUser4" fitHeight="276.0" fitWidth="296.0" layoutX="893.0" layoutY="179.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgUser4" fitHeight="276.0" fitWidth="296.0" layoutX="893.0" layoutY="179.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@WaitRoomPaka.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imgUser2" fitHeight="276.0" fitWidth="296.0" layoutX="314.0" layoutY="179.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgUser2" fitHeight="276.0" fitWidth="296.0" layoutX="314.0" layoutY="179.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@WaitRoomPaka.png" />
          </image>
       </ImageView>
-      <Text fx:id="txtUser1Name" layoutX="125.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+      <Text fx:id="txtUser1Name" layoutX="125.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0">
          <font>
             <Font size="33.0" />
          </font>
       </Text>
-      <Text fx:id="txtUser1Rating" layoutX="125.0" layoutY="445.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+      <Text fx:id="txtUser1Rating" layoutX="125.0" layoutY="445.0" strokeType="OUTSIDE" strokeWidth="0.0">
          <font>
             <Font size="33.0" />
          </font>
@@ -53,32 +53,32 @@
          <font>
             <Font size="35.0" />
          </font></Button>
-      <Text fx:id="txtUser2Name" layoutX="409.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+      <Text fx:id="txtUser2Name" layoutX="409.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0">
          <font>
             <Font size="33.0" />
          </font>
       </Text>
-      <Text fx:id="txtUser2Rating" layoutX="416.0" layoutY="445.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+      <Text fx:id="txtUser2Rating" layoutX="416.0" layoutY="445.0" strokeType="OUTSIDE" strokeWidth="0.0">
          <font>
             <Font size="33.0" />
          </font>
       </Text>
-      <Text fx:id="txtUser3Name" layoutX="707.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+      <Text fx:id="txtUser3Name" layoutX="707.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0">
          <font>
             <Font size="33.0" />
          </font>
       </Text>
-      <Text fx:id="txtUser4Name" layoutX="995.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+      <Text fx:id="txtUser4Name" layoutX="995.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0">
          <font>
             <Font size="33.0" />
          </font>
       </Text>
-      <Text fx:id="txtUser3Rating" layoutX="707.0" layoutY="444.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+      <Text fx:id="txtUser3Rating" layoutX="707.0" layoutY="444.0" strokeType="OUTSIDE" strokeWidth="0.0">
          <font>
             <Font size="33.0" />
          </font>
       </Text>
-      <Text fx:id="txtUser4Rating" layoutX="995.0" layoutY="443.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+      <Text fx:id="txtUser4Rating" layoutX="995.0" layoutY="443.0" strokeType="OUTSIDE" strokeWidth="0.0">
          <font>
             <Font size="33.0" />
          </font>

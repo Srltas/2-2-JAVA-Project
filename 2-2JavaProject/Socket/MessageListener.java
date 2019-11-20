@@ -18,9 +18,8 @@ public class MessageListener extends Thread {
 
 	public void run() {
 		try {
-			 inStream = this.socket.getInputStream(); dataInStream = new
-			 DataInputStream(inStream);
-			 
+			inStream = this.socket.getInputStream();
+			dataInStream = new DataInputStream(inStream);
 			while (true) {
 				msg = dataInStream.readUTF();
 				System.out.println("Client> Server sent: " + msg);

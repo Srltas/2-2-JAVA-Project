@@ -11,6 +11,7 @@ public class Server {
 	static ArrayList<ConnectedClient> clients = new ArrayList<ConnectedClient>();
 	String ip = "127.0.0.1";
 	int port = 9876;
+	static int waitRoomCount = 0;
 	
 	public static void main(String[] args) {
 		Server server = new Server();

@@ -55,7 +55,7 @@ public class StartViewController {
 		}else {
 			text = "0" + id + "," + pw;
 			Client.client.send(text);
-			//Thread.sleep(100);
+			Thread.sleep(100);
 
 			if (MessageListener.msg.equals("true")) {
 				Parent menuView = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/MenuRoomView.fxml"));
