@@ -82,8 +82,9 @@ class ConnectedClient extends Thread {
 
 					String id = accountData[0];
 					String password = accountData[1];
-					String userName = accountData[2];
-					String phoneNumber = accountData[3];
+					String password1 = accountData[2];
+					String userName = accountData[3];
+					String phoneNumber = accountData[4];
 
 					/*
 					 * String id = messageBody.substring(0, msg.lastIndexOf(",") - 1); String
@@ -91,7 +92,7 @@ class ConnectedClient extends Thread {
 					 */
 
 					CreateAccountService createAccount = new CreateAccountService();
-					if (createAccount.createAccount(id, password, userName, phoneNumber)) {
+					if (createAccount.createAccount(id, password, password1, userName, phoneNumber)) {
 
 					}
 
