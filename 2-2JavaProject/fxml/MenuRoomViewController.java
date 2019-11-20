@@ -3,6 +3,7 @@ package fxml;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import Socket.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,11 +15,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class MenuRoomViewController implements Initializable{
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		printRating();
-	}
-	
 	@FXML
 	private Text txtRating;
 	@FXML
@@ -26,7 +22,15 @@ public class MenuRoomViewController implements Initializable{
 	@FXML
 	private Button btnExit;
 	
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		printRating();
+	}
+	
 	public void play(ActionEvent event)throws Exception {
+		Client.client.send("2" + Client.client.toString());
+		Thread.sleep(100);
+
 		Parent WaitRoomtView = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/WaitRoomView.fxml"));
 		Scene scene = new Scene(WaitRoomtView);
 		Stage primaryStage = (Stage) btnPlay.getScene().getWindow();
