@@ -59,7 +59,7 @@ public class SignUpViewController {
 			Client.client.send(text);
 			Thread.sleep(100);
 			
-			if(MessageListener.msg.equals("true")) {
+			if(MessageListener.msg.equals("account create success")) {
 				Parent StartView = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/StartView.fxml"));
 				Scene scene = new Scene(StartView);
 				Stage primaryStage = (Stage) btnBack.getScene().getWindow();

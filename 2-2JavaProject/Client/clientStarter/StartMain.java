@@ -14,7 +14,7 @@ public class StartMain extends Application {
 			//클라이언트 실행
 			
 			
-			Client client = new Client("127.0.0.1");
+			Client client = new Client("127.0.0.1", 9876);
 			client.startClient();
 			
 			primaryStage.setTitle("끝말잇기 게임");

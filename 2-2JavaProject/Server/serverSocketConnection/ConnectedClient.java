@@ -20,23 +20,17 @@ class ConnectedClient extends Thread {
 		socket = _s;
 	}
 
-	public static String toString(String[] stringArray) {
-		if (stringArray == null) {
-			return "null";
-		}
-
-		if (stringArray.length == 0) {
-			return "";
-		}
-
-		StringBuilder stringb = new StringBuilder();
-		for (int i = 0; i <= stringArray.length; i++) {
-			stringb.append(String.valueOf(stringArray[i]));
-		}
-
-		return stringb.toString();
-	}
-
+	/*
+	 * public static String toString(String[] stringArray) { if (stringArray ==
+	 * null) { return "null"; }
+	 * 
+	 * if (stringArray.length == 0) { return ""; }
+	 * 
+	 * StringBuilder stringb = new StringBuilder(); for (int i = 0; i <=
+	 * stringArray.length; i++) { stringb.append(String.valueOf(stringArray[i])); }
+	 * 
+	 * return stringb.toString(); }
+	 */
 	public void run() {
 		try {
 
@@ -98,6 +92,8 @@ class ConnectedClient extends Thread {
 					if (createAccount.createAccount(accountData[0], accountData[1], accountData[2], accountData[3],
 							accountData[4])) {
 						dataOutStream.writeUTF("account create success");
+					} else {
+						dataOutStream.writeUTF("account create failed");
 					}
 
 					// 여기다가 회원가입 메소드 넣으면 될 듯?

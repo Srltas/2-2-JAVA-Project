@@ -6,8 +6,9 @@ import java.net.Socket;
 
 public class Client {
 	
-	public Client(String ip) {
+	public Client(String ip, int port) {
 		this.ip = ip;
+		this.port = port;
 	}
 	
 	public Client() {
@@ -15,7 +16,7 @@ public class Client {
 	}
 	
 	public static Client client;
-	
+	int port;
 	String ip;
 	Socket mySocket;
 	MessageListener msgListener;
@@ -26,7 +27,7 @@ public class Client {
 	// 클라이언트 프로그램 실행 메소드
 	public void startClient() {
 		try {
-			mySocket = new Socket(ip, 9876);
+			mySocket = new Socket(ip, port);
 			System.out.println("Client> 서로 연결되었습니다.");
 			msgListener = new MessageListener(mySocket);
 			msgListener.start();
