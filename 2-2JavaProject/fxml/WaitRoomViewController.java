@@ -46,6 +46,11 @@ public class WaitRoomViewController implements Initializable{
 	String msg;
 	String number;
 	String messageBody;
+	boolean ready = false;
+	
+	public void setReady() {
+		
+	}
 	
 	public void setWaitRoom() {
 		Thread thread = new Thread() {
@@ -73,7 +78,7 @@ public class WaitRoomViewController implements Initializable{
 	}
 	public void setOpacityPlayer1() {
 		imgUser1.setOpacity(1);
-
+		btnReady.setText("Start");
 	}
 	public void setOpacityPlayer2() {
 		imgUser1.setOpacity(1);
