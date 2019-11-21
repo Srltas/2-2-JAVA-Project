@@ -1,4 +1,4 @@
-package Login;
+package serverLogin;
 
 public class ChangePasswordService {
 	public boolean changePassword(String id, String password, String password1) {

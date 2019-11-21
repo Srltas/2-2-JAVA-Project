@@ -1,4 +1,4 @@
-package Socket;
+package clientSocketConnection;
 
 import java.io.DataOutputStream;
 import java.io.OutputStream;
@@ -26,11 +26,7 @@ public class Client {
 	// 클라이언트 프로그램 실행 메소드
 	public void startClient() {
 		try {
-<<<<<<< HEAD
-			client.mySocket = new Socket("127.0.0.1", 9876);
-=======
 			mySocket = new Socket(ip, 9876);
->>>>>>> refs/remotes/origin/K's_work_branch
 			System.out.println("Client> 서로 연결되었습니다.");
 			msgListener = new MessageListener(mySocket);
 			msgListener.start();
