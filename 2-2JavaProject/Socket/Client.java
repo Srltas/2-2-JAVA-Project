@@ -15,7 +15,7 @@ public class Client {
 	// 클라이언트 프로그램 실행 메소드
 	public void startClient() {
 		Client client = new Client();
-		Client.client = client;
+		this.client = client;
 		try {
 			client.mySocket = new Socket("127.0.0.1", 9876);
 			System.out.println("Client> 서로 연결되었습니다.");
@@ -24,7 +24,7 @@ public class Client {
 		} catch (Exception e) {	}
 	}
 
-	// 로그인 정보를 보내는 메소드
+	//정보를 보내는 메소드
 	public void send(String msg) {
 		Thread thread = new Thread() {
 			@Override

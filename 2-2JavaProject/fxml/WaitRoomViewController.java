@@ -17,7 +17,7 @@ public class WaitRoomViewController implements Initializable{
 	}
 	
 	@FXML
-	private Button btnReady;
+	private Button btnStart;
 	@FXML
 	private Text txtUser1Name;
 	@FXML
@@ -46,9 +46,9 @@ public class WaitRoomViewController implements Initializable{
 	String msg;
 	String number;
 	String messageBody;
-	boolean ready = false;
+	boolean loop = true;
 	
-	public void setReady() {
+	public void startGame() {
 		
 	}
 	
@@ -56,7 +56,7 @@ public class WaitRoomViewController implements Initializable{
 		Thread thread = new Thread() {
 			@Override
 			public void run() {
-				while(true) {
+				while(loop) {
 					msg = MessageListener.msg;
 					number = msg.substring(0, 1);
 					messageBody = msg.substring(1);
@@ -78,7 +78,7 @@ public class WaitRoomViewController implements Initializable{
 	}
 	public void setOpacityPlayer1() {
 		imgUser1.setOpacity(1);
-		btnReady.setText("Start");
+		btnStart.setOpacity(1);
 	}
 	public void setOpacityPlayer2() {
 		imgUser1.setOpacity(1);

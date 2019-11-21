@@ -49,7 +49,7 @@
             <Font size="33.0" />
          </font>
       </Text>
-      <Button fx:id="btnReady" layoutX="445.0" layoutY="490.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="306.0" text="Ready">
+      <Button fx:id="btnStart" layoutX="445.0" layoutY="490.0" mnemonicParsing="false" opacity="0.0" prefHeight="65.0" prefWidth="306.0" text="Start">
          <font>
             <Font size="35.0" />
          </font></Button>
@@ -88,5 +88,6 @@
             <Image url="@이름.png" />
          </image>
       </ImageView>
+      <Button layoutX="34.0" layoutY="660.0" mnemonicParsing="false" text="Back" />
    </children>
 </AnchorPane>
