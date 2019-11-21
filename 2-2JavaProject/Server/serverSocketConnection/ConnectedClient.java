@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
+import clientLoginData.Account;
 import serverLogin.LoginService;
 import serverLogin.CreateAccountService;
 
@@ -65,7 +66,8 @@ class ConnectedClient extends Thread {
 					LoginService login = new LoginService();
 
 					if (login.login(accountData[0], accountData[1])) {
-						dataOutStream.writeUTF("Login success");
+						System.out.println("login success");
+						dataOutStream.writeUTF("Login success,"+new Account().getRankPoint());
 					}
 					// 확인용
 					/*

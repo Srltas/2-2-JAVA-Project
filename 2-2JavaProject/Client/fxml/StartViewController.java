@@ -45,22 +45,29 @@ public class StartViewController {
 
 	public void login(ActionEvent event) throws Exception {
 		Account account = new Account();
-		
 		account.setId(txtUserId.getText());
 		account.setPassword(txtPassword.getText());
 		
-		if(id.equals("")) {
+		if(account.getId().equals("")) {
 			lblIdStatus.setText("아이디를 입력하세요.");
 			lblPwStatus.setText("");
-		}else if(pw.equals("")) {
+		}else if(account.getPassword().equals("")) {
 			lblPwStatus.setText("비밀번호를 입력하세요.");
 			lblIdStatus.setText("");
 		}else {
-			text = "0" + id + "," + pw;
+			
+			try {
+			text = "0" + account.getId() + "," + account.getPassword();
+			
+			System.out.println(text);
 			Client.client.send(text);
 			Thread.sleep(100);
-
-			if (MessageListener.msg.equals("Login success")) {
+			} catch (NullPointerException e) {
+				e.printStackTrace();
+			}
+			String[] logindata = MessageListener.msg.split(",");
+			if (logindata[0].equals("Login success")) {
+				new Account().setRankPoint(Integer.parseInt(logindata[1]));
 				Parent menuView = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/MenuRoomView.fxml"));
 				Scene scene = new Scene(menuView);
 				Stage primaryStage = (Stage) btnLogin.getScene().getWindow();
