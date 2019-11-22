@@ -23,7 +23,7 @@ public class Server {
 		try {
 			serverSocket = new ServerSocket();
 			serverSocket.bind(new InetSocketAddress(ip, port));
-			System.out.println("Server > Server Socket is created!");
+			System.out.println("[서버소켓이 실행되었습니다!]");
 			
 			while(true) {
 				try {
@@ -33,12 +33,14 @@ public class Server {
 					connectedClient.start();
 				} catch(Exception e) {
 					if(!serverSocket.isClosed()) {
+						System.out.println("[서버와 클라이언트 연결에 실패했습니다.]");
 						stopServer();
 					}
 					break;
 				}
 			}
 		} catch (Exception e) {
+			System.out.println("[서버 실행에 실패했습니다.]");
 			e.printStackTrace();
 			if (!serverSocket.isClosed()) {
 				stopServer();
@@ -61,7 +63,7 @@ public class Server {
 			if(serverSocket != null && !serverSocket.isClosed())
 				serverSocket.close();
 		} catch(Exception e) {
-			e.printStackTrace();
+			System.out.println("[서버 종료실패]");
 		}
 	}
 }
