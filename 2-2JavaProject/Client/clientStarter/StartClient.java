@@ -13,8 +13,6 @@ public class StartClient extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			//클라이언트 실행
-			
-			
 			Client client = new Client("127.0.0.1", 9876);
 			client.startClient();
 			

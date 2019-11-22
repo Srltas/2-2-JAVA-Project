@@ -44,10 +44,10 @@ public class StartViewController {
 	private Button btnFindId;
 
 	public void login(ActionEvent event) throws Exception {
-		Account account = new Account();
+		/*Account account = new Account();
 		
 		account.setId(txtUserId.getText());
-		account.setPassword(txtPassword.getText());
+		account.setPassword(txtPassword.getText());*/
 		
 		if(id.equals("")) {
 			lblIdStatus.setText("아이디를 입력하세요.");
@@ -68,8 +68,8 @@ public class StartViewController {
 			}else {
 				lblPwStatus.setText("가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.");
 				lblIdStatus.setText("");
-				account.setId(null);
-				account.setPassword(null);
+				/*account.setId(null);
+				account.setPassword(null);*/
 			}
 		}
 	}

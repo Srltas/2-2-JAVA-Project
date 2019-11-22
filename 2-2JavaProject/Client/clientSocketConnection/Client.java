@@ -42,7 +42,6 @@ public class Client {
 				try {
 					//클라이언트가 보내는 메세지 확인용
 					//System.out.println("sendLogin in Login UI client : " + msg);
-
 					outStream = mySocket.getOutputStream();
 					dataOutStream = new DataOutputStream(outStream);
 					dataOutStream.writeUTF(msg);

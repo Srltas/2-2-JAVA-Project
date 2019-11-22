@@ -20,17 +20,23 @@ class ConnectedClient extends Thread {
 		socket = _s;
 	}
 
-	/*
-	 * public static String toString(String[] stringArray) { if (stringArray ==
-	 * null) { return "null"; }
-	 * 
-	 * if (stringArray.length == 0) { return ""; }
-	 * 
-	 * StringBuilder stringb = new StringBuilder(); for (int i = 0; i <=
-	 * stringArray.length; i++) { stringb.append(String.valueOf(stringArray[i])); }
-	 * 
-	 * return stringb.toString(); }
-	 */
+	public static String toString(String[] stringArray) {
+		if (stringArray == null) {
+			return "null";
+		}
+
+		if (stringArray.length == 0) {
+			return "";
+		}
+
+		StringBuilder stringb = new StringBuilder();
+		for (int i = 0; i <= stringArray.length; i++) {
+			stringb.append(String.valueOf(stringArray[i]));
+		}
+
+		return stringb.toString();
+	}
+
 	public void run() {
 		try {
 
@@ -53,11 +59,11 @@ class ConnectedClient extends Thread {
 
 				if (number.equals("0")) {
 					// 여기
-					/*
-					 * String id = messageBody.substring(0, msg.lastIndexOf(",") - 1); String
-					 * password = messageBody.substring(msg.lastIndexOf(","));
-					 */
-					String[] accountData = messageBody.split(",");
+					
+					String id = messageBody.substring(0, msg.lastIndexOf(",") - 1); 
+					String password = messageBody.substring(msg.lastIndexOf(","));
+					 
+					/*String[] accountData = messageBody.split(",");
 
 					String id = accountData[0];
 					String password = accountData[1];
@@ -66,12 +72,12 @@ class ConnectedClient extends Thread {
 
 					if (login.login(accountData[0], accountData[1])) {
 						dataOutStream.writeUTF("Login success");
-					}
+					}*/
 					// 확인용
-					/*
-					 * if (id.equals("user") && password.equals("pass"))
-					 * dataOutStream.writeUTF("true");
-					 */
+					
+					  if (id.equals("user") && password.equals("pass"))
+					  dataOutStream.writeUTF("true");
+					 
 
 					System.out.println(id);
 					System.out.println(password);
@@ -92,8 +98,6 @@ class ConnectedClient extends Thread {
 					if (createAccount.createAccount(accountData[0], accountData[1], accountData[2], accountData[3],
 							accountData[4])) {
 						dataOutStream.writeUTF("account create success");
-					} else {
-						dataOutStream.writeUTF("account create failed");
 					}
 
 					// 여기다가 회원가입 메소드 넣으면 될 듯?
