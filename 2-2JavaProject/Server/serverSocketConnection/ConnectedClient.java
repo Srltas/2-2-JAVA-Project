@@ -38,7 +38,8 @@ class ConnectedClient extends Thread {
 				System.out.println("[" + this.socket.toString() + ": " + msg + "]");
 				String number = msg.substring(0, 1);
 				String messageBody = msg.substring(1);
-				System.out.println("[number : " + number + " messageBody : " + messageBody + "]");
+				System.out.println("[number : " + number + "]");
+				System.out.println("[messageBody : " + messageBody + "]");
 
 				if (number.equals("0")) {
 					String[] accountData = messageBody.split(",");
@@ -50,9 +51,9 @@ class ConnectedClient extends Thread {
 
 					if (login.login(accountData[0], accountData[1])) {
 						System.out.println("login success");
-						dataOutStream.writeUTF("Login success,"+new Account().getRankPoint());
+						dataOutStream.writeUTF("Login success," + new Account().getRankPoint());
 					}
-					
+
 					System.out.println(id);
 					System.out.println(password);
 				} else if (number.equals("1")) {
@@ -61,18 +62,26 @@ class ConnectedClient extends Thread {
 					String[] accountData = messageBody.split(",");
 
 					CreateAccountService createAccount = new CreateAccountService();
-					if (createAccount.createAccount(accountData[0], accountData[1], /*accountData[2],*/ accountData[2],
-							accountData[3])) {
+					if (createAccount.createAccount(accountData[0], accountData[1],
+							/* accountData[2], */ accountData[2], accountData[3])) {
 						dataOutStream.writeUTF("account create success");
 					} else {
 						dataOutStream.writeUTF("account create failed");
 					}
 				} else if (number.equals("2")) {
 					// waitRoom에 입장하는 클라이언트 순서 판단
-					Server.waitRoomCount++;
-					System.out.println("[waitRoomUserNumber : " + Server.waitRoomCount + "]");
-					for (ConnectedClient client : Server.clients) {
-						client.dataOutStream.writeUTF("2" + Integer.toString(Server.waitRoomCount));
+					if (Server.waitRoomCount < 4) {
+						Server.waitRoomCount++;
+						System.out.println("[방 인원 수 : " + Server.waitRoomCount + "]");
+						for (ConnectedClient client : Server.clients) {
+							client.dataOutStream.writeUTF("2" + Integer.toString(Server.waitRoomCount));
+						}
+					} else {
+						Server.waitRoomCount = 1;
+						System.out.println("[방 인원 수 : " + Server.waitRoomCount + "]");
+						for (ConnectedClient client : Server.clients) {
+							client.dataOutStream.writeUTF("2" + Integer.toString(Server.waitRoomCount));
+						}
 					}
 				} else if (number.equals("4")) {
 					System.out.println("채팅 정보입니다.");
