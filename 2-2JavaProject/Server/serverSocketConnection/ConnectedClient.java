@@ -91,8 +91,8 @@ class ConnectedClient extends Thread {
 					 */
 
 					CreateAccountService createAccount = new CreateAccountService();
-					if (createAccount.createAccount(accountData[0], accountData[1], accountData[2], accountData[3],
-							accountData[4])) {
+					if (createAccount.createAccount(accountData[0], accountData[1], /*accountData[2],*/ accountData[2],
+							accountData[3])) {
 						dataOutStream.writeUTF("account create success");
 					} else {
 						dataOutStream.writeUTF("account create failed");
