@@ -62,7 +62,8 @@ public class StartViewController {
 
 				System.out.println(text);
 				Client.client.send(text);
-				Thread.sleep(100);
+				Thread.sleep(500);
+				
 			} catch (NullPointerException e) {
 				e.printStackTrace();
 			}
@@ -76,9 +77,10 @@ public class StartViewController {
 			} else {
 				lblPwStatus.setText("가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.");
 				lblIdStatus.setText("");
-				/*
-				 * account.setId(null); account.setPassword(null);
-				 */
+
+				account.setId(null);
+				account.setPassword(null);
+
 			}
 		}
 	}

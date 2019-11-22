@@ -2,6 +2,7 @@ package fxml;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import clientSocketConnection.MessageListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,9 +15,8 @@ public class WaitRoomViewController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		setWaitRoom();
 	}
-	
 	@FXML
-	private Button btnReady;
+	private Button btnStart;
 	@FXML
 	private Text txtUser1Name;
 	@FXML
@@ -45,12 +45,13 @@ public class WaitRoomViewController implements Initializable{
 	String msg;
 	String number;
 	String messageBody;
+	boolean loop = true ;
 	
 	public void setWaitRoom() {
 		Thread thread = new Thread() {
 			@Override
 			public void run() {
-				while(true) {
+				while(loop) {
 					msg = MessageListener.msg;
 					number = msg.substring(0, 1);
 					messageBody = msg.substring(1);
@@ -62,8 +63,10 @@ public class WaitRoomViewController implements Initializable{
 							setOpacityPlayer2();
 						else if(messageBody.equals("3"))
 							setOpacityPlayer3();
-						else if(messageBody.equals("4"))
+						else if(messageBody.equals("4")) {
 							setOpacityPlayer4();
+							loop = false;
+						}							
 					}
 				}
 			}
@@ -72,7 +75,7 @@ public class WaitRoomViewController implements Initializable{
 	}
 	public void setOpacityPlayer1() {
 		imgUser1.setOpacity(1);
-
+		btnStart.setDisable(false);
 	}
 	public void setOpacityPlayer2() {
 		imgUser1.setOpacity(1);
