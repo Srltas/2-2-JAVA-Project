@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
+import clientLoginData.Account;
 import serverLogin.LoginService;
 import serverLogin.CreateAccountService;
 
@@ -57,13 +58,8 @@ class ConnectedClient extends Thread {
 				String messageBody = msg.substring(1);
 				System.out.println(messageBody);
 
-				if (number.equals("0")) {
-					// 여기
-					
-					String id = messageBody.substring(0, msg.lastIndexOf(",") - 1); 
-					String password = messageBody.substring(msg.lastIndexOf(","));
-					 
-					/*String[] accountData = messageBody.split(",");
+				if (number.equals("0")) { 
+					String[] accountData = messageBody.split(",");
 
 					String id = accountData[0];
 					String password = accountData[1];
@@ -72,52 +68,51 @@ class ConnectedClient extends Thread {
 
 					if (login.login(accountData[0], accountData[1])) {
 						dataOutStream.writeUTF("Login success");
-					}*/
-					// 확인용
-					
-					  if (id.equals("user") && password.equals("pass"))
-					  dataOutStream.writeUTF("true");
-					 
-
-					System.out.println(id);
-					System.out.println(password);
-				} else if (number.equals("1")) {
-					// 회원가입
-					System.out.println("catch by create");
-					String[] accountData = messageBody.split(",");
-					/*
-					 * String id = accountData[0]; String password = accountData[1]; String
-					 * password1 = accountData[2]; String userName = accountData[3]; String
-					 * phoneNumber = accountData[4];
-					 * 
-					 * String id = messageBody.substring(0, msg.lastIndexOf(",") - 1); String
-					 * password = messageBody.substring(msg.lastIndexOf(","));
-					 */
-
-					CreateAccountService createAccount = new CreateAccountService();
-					if (createAccount.createAccount(accountData[0], accountData[1], accountData[2], accountData[3],
-							accountData[4])) {
-						dataOutStream.writeUTF("account create success");
 					}
 
-					// 여기다가 회원가입 메소드 넣으면 될 듯?
-				} else if (number.equals("2")) {
-					// waitRoom에 입장하는 클라이언트 순서 판단
-					Server.waitRoomCount++;
-					for (ConnectedClient client : Server.clients) {
-						client.dataOutStream.writeUTF("2" + Integer.toString(Server.waitRoomCount));
-					}
-				} else if (number.equals("4")) {
-					System.out.println("채팅 정보입니다.");
-				}
+						System.out.println("login success");
+						dataOutStream.writeUTF("Login success,"+new Account().getRankPoint());
+						System.out.println(id);
+						System.out.println(password);
+					}else if (number.equals("1")) {
+						// 회원가입
+						System.out.println("catch by create");
+						String[] accountData = messageBody.split(",");
+						/*
+						 * String id = accountData[0]; String password = accountData[1]; String
+						 * password1 = accountData[2]; String userName = accountData[3]; String
+						 * phoneNumber = accountData[4];
+						 * 
+						 * String id = messageBody.substring(0, msg.lastIndexOf(",") - 1); String
+						 * password = messageBody.substring(msg.lastIndexOf(","));
+						 */
 
-				/*
+						CreateAccountService createAccount = new CreateAccountService();
+						if (createAccount.createAccount(accountData[0], accountData[1], accountData[2], accountData[3],
+								accountData[4])) {
+							dataOutStream.writeUTF("account create success");
+						}
+
+						// 여기다가 회원가입 메소드 넣으면 될 듯?
+					} else if (number.equals("2")) {
+						// waitRoom에 입장하는 클라이언트 순서 판단
+						Server.waitRoomCount++;
+						for (ConnectedClient client : Server.clients) {
+							client.dataOutStream.writeUTF("2" + Integer.toString(Server.waitRoomCount));
+						}
+					} else if (number.equals("4")) {
+						System.out.println("채팅 정보입니다.");
+					}
+
+				/* 멀티채팅용
 				 * for(ConnectedClient client : LoginUIServer.clients) { if(this.equals(client))
 				 * continue; client.dataOutStream.writeUTF(msg); }
 				 */
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		}catch(
+
+	Exception e)
+	{
+		e.printStackTrace();
 	}
-}
+}}

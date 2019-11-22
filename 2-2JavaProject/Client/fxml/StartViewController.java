@@ -24,10 +24,10 @@ public class StartViewController {
 
 	@FXML
 	private Label lblIdStatus;
-	
+
 	@FXML
 	private Label lblPwStatus;
-	
+
 	@FXML
 	private TextField txtUserId;
 
@@ -44,32 +44,41 @@ public class StartViewController {
 	private Button btnFindId;
 
 	public void login(ActionEvent event) throws Exception {
-		/*Account account = new Account();
-		
+
+		Account account = new Account();
 		account.setId(txtUserId.getText());
-		account.setPassword(txtPassword.getText());*/
-		
-		if(id.equals("")) {
+		account.setPassword(txtPassword.getText());
+
+		if (account.getId().equals("")) {
 			lblIdStatus.setText("아이디를 입력하세요.");
 			lblPwStatus.setText("");
-		}else if(pw.equals("")) {
+		} else if (account.getPassword().equals("")) {
 			lblPwStatus.setText("비밀번호를 입력하세요.");
 			lblIdStatus.setText("");
-		}else {
-			text = "0" + id + "," + pw;
-			Client.client.send(text);
-			Thread.sleep(100);
+		} else {
 
-			if (MessageListener.msg.equals("Login success")) {
+			try {
+				text = "0" + account.getId() + "," + account.getPassword();
+
+				System.out.println(text);
+				Client.client.send(text);
+				Thread.sleep(100);
+			} catch (NullPointerException e) {
+				e.printStackTrace();
+			}
+			String[] logindata = MessageListener.msg.split(",");
+			if (logindata[0].equals("Login success")) {
+				new Account().setRankPoint(Integer.parseInt(logindata[1]));
 				Parent menuView = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/MenuRoomView.fxml"));
 				Scene scene = new Scene(menuView);
 				Stage primaryStage = (Stage) btnLogin.getScene().getWindow();
 				primaryStage.setScene(scene);
-			}else {
+			} else {
 				lblPwStatus.setText("가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.");
 				lblIdStatus.setText("");
-				/*account.setId(null);
-				account.setPassword(null);*/
+				/*
+				 * account.setId(null); account.setPassword(null);
+				 */
 			}
 		}
 	}
@@ -80,7 +89,7 @@ public class StartViewController {
 		Stage primaryStage = (Stage) btnSignUp.getScene().getWindow();
 		primaryStage.setScene(scene);
 	}
-	
+
 	public void enterFindIdView(ActionEvent event) throws Exception {
 		Parent findIdView = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/FindIDView.fxml"));
 		Scene scene = new Scene(findIdView);
