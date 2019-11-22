@@ -10,8 +10,8 @@ public class AccountMapper {
 
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:xe";
-	String userName = "LEE";
-	String password = "redsun";
+	String userName = "LOGINMANAGER";
+	String password = "q1w2e3r4";
 
 	public Account getAccountById(String id) {
 		Connection connection = null;
@@ -119,17 +119,20 @@ public class AccountMapper {
 		Connection connection = null;
 		PreparedStatement pst = null;
 
-		String sql = "INSERT INTO USERINFO VALUES('" + id + "','" + password + "','" + phoneNumber + "','0','"
-				+ nickName + "')";
+		String sql = "INSERT INTO USERINFO VALUES('" + id + "','" + password + "','" + phoneNumber + "','"+ nickName +"', '0')";
 
 		System.out.println(sql);
 
 		try {
+			System.out.println("try");
 			Class.forName(driver);
+			System.out.println("driver");
 			connection = DriverManager.getConnection(url, userName, this.password);
-
+			System.out.println("connection");
 			pst = connection.prepareStatement(sql);
-			pst.executeQuery();
+			System.out.println("sql");
+			pst.execute();
+			System.out.println("executed");
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
