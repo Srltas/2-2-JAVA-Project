@@ -62,7 +62,7 @@ public class StartViewController {
 
 				System.out.println(text);
 				Client.client.send(text);
-				Thread.sleep(500);
+				Thread.sleep(1000);
 				
 			} catch (NullPointerException e) {
 				e.printStackTrace();
