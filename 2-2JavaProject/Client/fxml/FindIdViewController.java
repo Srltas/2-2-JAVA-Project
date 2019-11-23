@@ -22,7 +22,6 @@ public class FindIdViewController {
 	public void findID(ActionEvent event) throws Exception {
 		System.out.println("아이디찾기");
 	}
-	
 	public void back(ActionEvent event) throws Exception {
 		Parent StartView = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/StartView.fxml"));
 		Scene scene = new Scene(StartView);

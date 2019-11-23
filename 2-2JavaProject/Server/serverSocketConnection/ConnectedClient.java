@@ -42,6 +42,7 @@ class ConnectedClient extends Thread {
 				System.out.println("[messageBody : " + messageBody + "]");
 
 				if (number.equals("0")) {
+					// 로그인
 					String[] accountData = messageBody.split(",");
 
 					String id = accountData[0];
@@ -69,22 +70,31 @@ class ConnectedClient extends Thread {
 						dataOutStream.writeUTF("account create failed");
 					}
 				} else if (number.equals("2")) {
-					// waitRoom에 입장하는 클라이언트 순서 판단
+					// 아이디 찾기
+				} else if (number.equals("3")) {
+					// 비밀번호 변경
+				} else if (number.equals("4")) {
+					// waitRoom에 입장하는 클라이언트
 					if (Server.waitRoomCount < 4) {
 						Server.waitRoomCount++;
 						System.out.println("[방 인원 수 : " + Server.waitRoomCount + "]");
 						for (ConnectedClient client : Server.clients) {
-							client.dataOutStream.writeUTF("2" + Integer.toString(Server.waitRoomCount));
+							client.dataOutStream.writeUTF("4" + Integer.toString(Server.waitRoomCount));
 						}
 					} else {
 						Server.waitRoomCount = 1;
 						System.out.println("[방 인원 수 : " + Server.waitRoomCount + "]");
 						for (ConnectedClient client : Server.clients) {
-							client.dataOutStream.writeUTF("2" + Integer.toString(Server.waitRoomCount));
+							client.dataOutStream.writeUTF("4" + Integer.toString(Server.waitRoomCount));
 						}
 					}
-				} else if (number.equals("4")) {
-					System.out.println("채팅 정보입니다.");
+				} else if (number.equals("5")) {
+					// waitRoom에서 퇴장하는 클라이언트
+					Server.waitRoomCount--;
+					System.out.println("[방 인원 수 : " + Server.waitRoomCount + "]");
+					for (ConnectedClient client : Server.clients) {
+						client.dataOutStream.writeUTF("4" + Integer.toString(Server.waitRoomCount));
+					}
 				}
 
 				/*

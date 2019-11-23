@@ -16,12 +16,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class StartViewController {
-	String text;
-	String id;
-	String pw;
-	OutputStream out = null;
-	DataOutputStream dout = null;
-
 	@FXML
 	private Label lblIdStatus;
 
@@ -42,6 +36,12 @@ public class StartViewController {
 
 	@FXML
 	private Button btnFindId;
+	
+	String text;
+	String id;
+	String pw;
+	OutputStream out = null;
+	DataOutputStream dout = null;
 
 	public void login(ActionEvent event) throws Exception {
 

@@ -13,12 +13,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class SignUpViewController {
-	String text;
-	String id;
-	String pw;
-	String userName;
-	String userPhonNumber;
-	
 	@FXML
 	private TextField txtUserID;
 	@FXML
@@ -39,6 +33,12 @@ public class SignUpViewController {
 	private Label lblNameStatus;
 	@FXML
 	private Label lblPhonNumberStatus;
+	
+	String text;
+	String id;
+	String pw;
+	String userName;
+	String userPhonNumber;
 	
 	public void signUp(ActionEvent event)throws Exception {
 		id = txtUserID.getText();
