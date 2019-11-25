@@ -39,7 +39,7 @@ public class Client {
 			public void run() {
 				try {
 
-					System.out.println("sendLogin in Login UI client : " + msg);
+					//System.out.println("sendLogin in Login UI client : " + msg);
 					outStream = mySocket.getOutputStream();
 					dataOutStream = new DataOutputStream(outStream);
 

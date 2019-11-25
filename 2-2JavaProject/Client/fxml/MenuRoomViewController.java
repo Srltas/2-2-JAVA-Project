@@ -13,7 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
+import clientLoginData.Account;
 public class MenuRoomViewController implements Initializable{
 	@FXML
 	private Text txtRating;
@@ -21,6 +21,8 @@ public class MenuRoomViewController implements Initializable{
 	private Button btnPlay;
 	@FXML
 	private Button btnExit;
+	
+	Account account = new Account();
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -38,7 +40,9 @@ public class MenuRoomViewController implements Initializable{
 	}
 	public void printRating() {
 		//유저 랭킹 불러오는 메소드
-		txtRating.setText("90");
+		//txtRating.setText("90");
+		txtRating.setText(Integer.toString(account.getRankPoint()));
+		
 	}
 	public void exit() {
 		System.exit(0);
