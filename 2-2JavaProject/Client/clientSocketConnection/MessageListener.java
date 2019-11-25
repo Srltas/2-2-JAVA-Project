@@ -25,6 +25,7 @@ public class MessageListener extends Thread {
 				System.out.println("Client> Server sent: " + msg);
 			}
 		} catch (Exception e) {
+			Client.client.stopClient();
 		}
 	}
 }

@@ -1,69 +1,50 @@
 package serverSocketConnection;
 
-import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.Iterator;
 
 public class Server {
-	ServerSocket serverSocket = null;
-	static ArrayList<ConnectedClient> clients = new ArrayList<ConnectedClient>();
-	String ip = "210.119.33.40";
-	int port = 9876;
-	static int waitRoomCount = 0;
-	
+	private static final int SERVER_PORT = 9876;
+	private ConnectedClient manager = new ConnectedClient();
+
 	public static void main(String[] args) {
-		Server server = new Server();
-		server.startServer(server.ip,server.port);
+		new Server().startServer();
 	}
-	
-	//서버 프로그램 실행 메소드
-	public void startServer(String ip, int port) {
+
+	// 서버 프로그램 실행 메소드)
+	public void startServer() {
+		ServerSocket serverSocket = null;
+
 		try {
-			serverSocket = new ServerSocket();
-			serverSocket.bind(new InetSocketAddress(ip, port));
-			System.out.println("[서버소켓이 실행되었습니다!]");
+			serverSocket = new ServerSocket(SERVER_PORT);
+			ConnectedClient.print("Start Server!");
 			
-			while(true) {
-				try {
-					Socket socket = serverSocket.accept();
-					ConnectedClient connectedClient = new ConnectedClient(socket);
-					clients.add(connectedClient);
-					connectedClient.start();
-				} catch(Exception e) {
-					if(!serverSocket.isClosed()) {
-						System.out.println("[서버와 클라이언트 연결에 실패했습니다.]");
-						stopServer();
-					}
-					break;
-				}
+
+			while (true) {
+
+				Socket socket = serverSocket.accept();
+				
+				this.manager.register(socket);
 			}
 		} catch (Exception e) {
-			System.out.println("[서버 실행에 실패했습니다.]");
 			e.printStackTrace();
-			if (!serverSocket.isClosed()) {
-				stopServer();
+		} finally {
+			try {
+				stopServer(serverSocket);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			return;
+			ConnectedClient.print("Close Server");
 		}
 	}
-	
-	//서버 프로그램 종료 메소드
-	public void stopServer() {
-		try {
-			//현재 작동 중인 모든 소켓 닫기
-			Iterator<ConnectedClient> interator = clients.iterator();
-			while(interator.hasNext()) {
-				ConnectedClient client = interator.next();
-				client.socket.close();
-				interator.remove();
-			}
-			//서버 소켓 객체 닫기
-			if(serverSocket != null && !serverSocket.isClosed())
-				serverSocket.close();
-		} catch(Exception e) {
-			System.out.println("[서버 종료실패]");
+
+	private void stopServer(ServerSocket server) throws Exception {
+		if (manager != null) {
+			manager.leaveAll();
+		}
+
+		if (server != null) {
+			server.close();
 		}
 	}
 }

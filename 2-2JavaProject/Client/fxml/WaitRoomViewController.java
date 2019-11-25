@@ -55,22 +55,15 @@ public class WaitRoomViewController implements Initializable {
 	String messageBody;
 	boolean loop = true;
 
-	public void startGame() throws Exception {
-		// setWaitRoom 종료
-		loop = false;
-
-		// InGameView화면 출력
-		Parent InGameView = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/InGameView.fxml"));
-		Scene scene = new Scene(InGameView);
-		Stage primaryStage = (Stage) btnStart.getScene().getWindow();
-		primaryStage.setScene(scene);
+	public void startGame() {
+		Client.client.send("6" + Client.client.toString());
 	}
 
 	public void goBack() throws Exception {
+		loop = false;
+		
 		//서버에게 퇴장알리기
 		Client.client.send("5" + Client.client.toString());
-		//setWaitRoom 종료
-		loop = false;
 		
 		// MenuRoomView화면 출력
 		Parent MenuRoomView = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/MenuRoomView.fxml"));
@@ -82,7 +75,7 @@ public class WaitRoomViewController implements Initializable {
 	public void setWaitRoom() {
 		Thread thread = new Thread() {
 			@Override
-			public void run() {
+			public void run(){
 				while (loop) {
 					msg = MessageListener.msg;
 					number = msg.substring(0, 1);
@@ -98,6 +91,18 @@ public class WaitRoomViewController implements Initializable {
 						else if (messageBody.equals("4")) {
 							setOpacityPlayer4();
 						}
+					}else if(number.equals("6")) {
+						loop = false;
+						
+						try {
+							// MenuRoomView화면 출력
+							Parent InGameView = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/InGameView.fxml"));
+							Scene scene = new Scene(InGameView);
+							Stage primaryStage = (Stage) btnBack.getScene().getWindow();
+							primaryStage.setScene(scene);
+						}catch(Exception e) {
+							e.printStackTrace();
+						}
 					}
 				}
 			}
@@ -107,18 +112,24 @@ public class WaitRoomViewController implements Initializable {
 
 	public void setOpacityPlayer1() {
 		imgUser1.setOpacity(1);
+		imgUser2.setOpacity(0);
+		imgUser3.setOpacity(0);
+		imgUser4.setOpacity(0);
 		btnStart.setDisable(false);
 	}
 
 	public void setOpacityPlayer2() {
 		imgUser1.setOpacity(1);
 		imgUser2.setOpacity(1);
+		imgUser3.setOpacity(0);
+		imgUser4.setOpacity(0);
 	}
 
 	public void setOpacityPlayer3() {
 		imgUser1.setOpacity(1);
 		imgUser2.setOpacity(1);
 		imgUser3.setOpacity(1);
+		imgUser4.setOpacity(0);
 	}
 
 	public void setOpacityPlayer4() {

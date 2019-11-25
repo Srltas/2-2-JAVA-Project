@@ -41,6 +41,7 @@ public class MenuRoomViewController implements Initializable{
 		txtRating.setText("90");
 	}
 	public void exit() {
+		Client.client.stopClient();
 		System.exit(0);
 	}
 }
