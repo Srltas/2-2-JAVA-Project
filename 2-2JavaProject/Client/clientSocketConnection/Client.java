@@ -32,13 +32,14 @@ public class Client {
 		} catch (Exception e) {	}
 	}
 
-	// 로그인 정보를 보내는 메소드
+	//정보를 보내는 메소드
 	public void send(String msg) {
 		Thread thread = new Thread() {
 			@Override
 			public void run() {
 				try {
-					System.out.println("sendLogin in Login UI client : " + msg);
+
+					//System.out.println("sendLogin in Login UI client : " + msg);
 					outStream = mySocket.getOutputStream();
 					dataOutStream = new DataOutputStream(outStream);
 
