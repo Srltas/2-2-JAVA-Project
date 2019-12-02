@@ -21,43 +21,28 @@ class ConnectedClient extends Thread {
 		socket = _s;
 	}
 
-	/*
-	 * public static String toString(String[] stringArray) { if (stringArray ==
-	 * null) { return "null"; }
-	 * 
-	 * if (stringArray.length == 0) { return ""; }
-	 * 
-	 * StringBuilder stringb = new StringBuilder(); for (int i = 0; i <=
-	 * stringArray.length; i++) { stringb.append(String.valueOf(stringArray[i])); }
-	 * 
-	 * return stringb.toString(); }
-	 */
 	public void run() {
 		try {
 
-			System.out.println("Server> " + this.socket.toString() + "에서 접속이 연결되었습니다.");
+			System.out.println("[" + this.socket.toString() + "에서 접속이 연결되었습니다.]");
 
 			outStream = this.socket.getOutputStream();
 			dataOutStream = new DataOutputStream(outStream);
 			inStream = this.socket.getInputStream();
 			dataInStream = new DataInputStream(inStream);
 
-			dataOutStream.writeUTF("Welcome to this Server.");
+			dataOutStream.writeUTF("[Welcome to this Server]");
 			while (true) {
 
 				String msg = dataInStream.readUTF();
-				System.out.println("Server> " + this.socket.toString() + ": " + msg);
+				System.out.println("[" + this.socket.toString() + ": " + msg + "]");
 				String number = msg.substring(0, 1);
-				System.out.println(number);
 				String messageBody = msg.substring(1);
-				System.out.println(messageBody);
+				System.out.println("[number : " + number + "]");
+				System.out.println("[messageBody : " + messageBody + "]");
 
 				if (number.equals("0")) {
-					// 여기
-					/*
-					 * String id = messageBody.substring(0, msg.lastIndexOf(",") - 1); String
-					 * password = messageBody.substring(msg.lastIndexOf(","));
-					 */
+					// 로그인
 					String[] accountData = messageBody.split(",");
 
 					String id = accountData[0];
@@ -67,46 +52,49 @@ class ConnectedClient extends Thread {
 
 					if (login.login(accountData[0], accountData[1])) {
 						System.out.println("login success");
-						dataOutStream.writeUTF("Login success,"+new Account().getRankPoint());
+						dataOutStream.writeUTF("Login success," + new Account().getRankPoint());
 					}
-					// 확인용
-					/*
-					 * if (id.equals("user") && password.equals("pass"))
-					 * dataOutStream.writeUTF("true");
-					 */
 
 					System.out.println(id);
 					System.out.println(password);
 				} else if (number.equals("1")) {
 					// 회원가입
-					System.out.println("catch by create");
+					System.out.println("[catch by create]");
 					String[] accountData = messageBody.split(",");
-					/*
-					 * String id = accountData[0]; String password = accountData[1]; String
-					 * password1 = accountData[2]; String userName = accountData[3]; String
-					 * phoneNumber = accountData[4];
-					 * 
-					 * String id = messageBody.substring(0, msg.lastIndexOf(",") - 1); String
-					 * password = messageBody.substring(msg.lastIndexOf(","));
-					 */
 
 					CreateAccountService createAccount = new CreateAccountService();
-					if (createAccount.createAccount(accountData[0], accountData[1], accountData[2], accountData[3],
-							accountData[4])) {
+					if (createAccount.createAccount(accountData[0], accountData[1],
+							/* accountData[2], */ accountData[2], accountData[3])) {
 						dataOutStream.writeUTF("account create success");
 					} else {
 						dataOutStream.writeUTF("account create failed");
 					}
-
-					// 여기다가 회원가입 메소드 넣으면 될 듯?
 				} else if (number.equals("2")) {
-					// waitRoom에 입장하는 클라이언트 순서 판단
-					Server.waitRoomCount++;
-					for (ConnectedClient client : Server.clients) {
-						client.dataOutStream.writeUTF("2" + Integer.toString(Server.waitRoomCount));
-					}
+					// 아이디 찾기
+				} else if (number.equals("3")) {
+					// 비밀번호 변경
 				} else if (number.equals("4")) {
-					System.out.println("채팅 정보입니다.");
+					// waitRoom에 입장하는 클라이언트
+					if (Server.waitRoomCount < 4) {
+						Server.waitRoomCount++;
+						System.out.println("[방 인원 수 : " + Server.waitRoomCount + "]");
+						for (ConnectedClient client : Server.clients) {
+							client.dataOutStream.writeUTF("4" + Integer.toString(Server.waitRoomCount));
+						}
+					} else {
+						Server.waitRoomCount = 1;
+						System.out.println("[방 인원 수 : " + Server.waitRoomCount + "]");
+						for (ConnectedClient client : Server.clients) {
+							client.dataOutStream.writeUTF("4" + Integer.toString(Server.waitRoomCount));
+						}
+					}
+				} else if (number.equals("5")) {
+					// waitRoom에서 퇴장하는 클라이언트
+					Server.waitRoomCount--;
+					System.out.println("[방 인원 수 : " + Server.waitRoomCount + "]");
+					for (ConnectedClient client : Server.clients) {
+						client.dataOutStream.writeUTF("4" + Integer.toString(Server.waitRoomCount));
+					}
 				}
 
 				/*
@@ -115,7 +103,7 @@ class ConnectedClient extends Thread {
 				 */
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("[" + this.socket.toString() + "가 연결을 종료했습니다.]");
 		}
 	}
 }

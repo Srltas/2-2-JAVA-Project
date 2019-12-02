@@ -13,12 +13,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class SignUpViewController {
-	String text;
-	String id;
-	String pw;
-	String userName;
-	String userPhonNumber;
-	
 	@FXML
 	private TextField txtUserID;
 	@FXML
@@ -40,6 +34,12 @@ public class SignUpViewController {
 	@FXML
 	private Label lblPhonNumberStatus;
 	
+	String text;
+	String id;
+	String pw;
+	String userName;
+	String userPhonNumber;
+	
 	public void signUp(ActionEvent event)throws Exception {
 		id = txtUserID.getText();
 		pw = txtPassword.getText();
@@ -48,16 +48,30 @@ public class SignUpViewController {
 		
 		if(id.equals("") == true) {
 			lblIdStatus.setText("필수 정보입니다.");
-		}else if(pw.equals("") == true) {
+		}else {
+			lblIdStatus.setText("");
+		}
+		if(pw.equals("") == true) {
 			lblPwStatus.setText("필수 정보입니다.");
-		}else if(userName.equals("") == true) {
+		}else {
+			lblPwStatus.setText("");
+		}
+		if(userName.equals("") == true) {
 			lblNameStatus.setText("필수 정보입니다.");
-		}else if(userPhonNumber.equals("") == true) {
+		}else {
+			lblNameStatus.setText("");
+		}
+		if(userPhonNumber.equals("") == true) {
 			lblPhonNumberStatus.setText("필수 정보입니다.");
 		}else {
+			lblPhonNumberStatus.setText("");
+		}
+		//회워가입
+		if(id.equals("") != true && pw.equals("") != true && userName.equals("") != true && userPhonNumber.equals("") != true) {
 			text = "1" + id + "," + pw + "," + userName + "," + userPhonNumber;
 			Client.client.send(text);
-			Thread.sleep(100);
+			System.out.println(MessageListener.msg);
+			Thread.sleep(1000);
 			
 			if(MessageListener.msg.equals("account create success")) {
 				Parent StartView = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/StartView.fxml"));
@@ -65,6 +79,7 @@ public class SignUpViewController {
 				Stage primaryStage = (Stage) btnBack.getScene().getWindow();
 				primaryStage.setScene(scene);
 			}else {
+				System.out.println("2"+MessageListener.msg);
 				lblPhonNumberStatus.setText("회원가입에 실패했습니다.");
 			}
 		}

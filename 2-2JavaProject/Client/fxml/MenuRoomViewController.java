@@ -30,7 +30,7 @@ public class MenuRoomViewController implements Initializable{
 	}
 	
 	public void play(ActionEvent event)throws Exception {
-		Client.client.send("2" + Client.client.toString());
+		Client.client.send("4" + Client.client.toString());
 		Thread.sleep(100);
 
 		Parent WaitRoomtView = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/WaitRoomView.fxml"));
