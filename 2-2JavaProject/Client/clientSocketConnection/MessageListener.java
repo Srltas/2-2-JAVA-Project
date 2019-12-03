@@ -22,7 +22,7 @@ public class MessageListener extends Thread {
 			dataInStream = new DataInputStream(inStream);
 			while (true) {
 				msg = dataInStream.readUTF();
-				System.out.println("Client> Server sent: " + msg);
+				System.out.println("["+ msg +"]");
 			}
 		} catch (Exception e) {
 			Client.client.stopClient();

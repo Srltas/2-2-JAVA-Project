@@ -1,13 +1,13 @@
 package fxml;
 
+import clientStarter.StartClient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
+import javafx.scene.layout.AnchorPane;
 
 public class FindIdViewController {
 	@FXML
@@ -24,8 +24,7 @@ public class FindIdViewController {
 	}
 	public void back(ActionEvent event) throws Exception {
 		Parent StartView = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/StartView.fxml"));
-		Scene scene = new Scene(StartView);
-		Stage primaryStage = (Stage) btnBack.getScene().getWindow();
-		primaryStage.setScene(scene);
+		AnchorPane root = (AnchorPane) StartClient.stage.getScene().getRoot();
+		root.getChildren().add(StartView);
 	}
 }
