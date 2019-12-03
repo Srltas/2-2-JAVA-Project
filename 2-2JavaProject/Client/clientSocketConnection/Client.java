@@ -5,16 +5,16 @@ import java.io.OutputStream;
 import java.net.Socket;
 
 public class Client {
-	
+
 	public static Client client = new Client();
 	int port = 9876;
 	String ip = "210.119.33.40";
 	MessageListener msgListener;
-	
+
 	Socket mySocket = null;
 	OutputStream outStream = null;
 	DataOutputStream dataOutStream;
-	
+
 	public static int waitingRoomCount;
 
 	// 클라이언트 프로그램 실행 메소드
@@ -28,18 +28,31 @@ public class Client {
 			} else {
 				System.out.println("Server has problem");
 			}
-			
-		} catch (Exception e) {	}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
-	//정보를 보내는 메소드
+	public void stopClient() {
+		try {
+			if (mySocket != null) {
+				send("ClientClose");
+				mySocket.close();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	// 정보를 보내는 메소드
 	public void send(String msg) {
 		Thread thread = new Thread() {
 			@Override
 			public void run() {
 				try {
+					System.out.println("sendLogin in Login UI client : " + msg);
 
-					//System.out.println("sendLogin in Login UI client : " + msg);
 					outStream = mySocket.getOutputStream();
 					dataOutStream = new DataOutputStream(outStream);
 

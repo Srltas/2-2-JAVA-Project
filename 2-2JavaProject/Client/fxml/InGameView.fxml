@@ -25,73 +25,73 @@
             <Image url="@inGameBackGround.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="276.0" fitWidth="296.0" layoutX="25.0" layoutY="469.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgUser1" fitHeight="276.0" fitWidth="296.0" layoutX="25.0" layoutY="469.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@lama.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="276.0" fitWidth="296.0" layoutX="606.0" layoutY="469.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgUser3" fitHeight="276.0" fitWidth="296.0" layoutX="606.0" layoutY="469.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@lama.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="276.0" fitWidth="296.0" layoutX="895.0" layoutY="469.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgUser4" fitHeight="276.0" fitWidth="296.0" layoutX="895.0" layoutY="469.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@lama.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="276.0" fitWidth="296.0" layoutX="316.0" layoutY="469.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgUser2" fitHeight="276.0" fitWidth="296.0" layoutX="316.0" layoutY="469.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@lama.png" />
          </image>
       </ImageView>
-      <Text fx:id="txtUser1Name" layoutX="127.0" layoutY="500.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+      <Text fx:id="txtUser1Name" layoutX="127.0" layoutY="500.0" strokeType="OUTSIDE" strokeWidth="0.0">
          <font>
             <Font size="33.0" />
          </font>
       </Text>
-      <Text fx:id="txtUser2Name" layoutX="411.0" layoutY="500.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+      <Text fx:id="txtUser2Name" layoutX="411.0" layoutY="500.0" strokeType="OUTSIDE" strokeWidth="0.0">
          <font>
             <Font size="33.0" />
          </font>
       </Text>
-      <Text fx:id="txtUser3Name" layoutX="709.0" layoutY="500.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+      <Text fx:id="txtUser3Name" layoutX="709.0" layoutY="500.0" strokeType="OUTSIDE" strokeWidth="0.0">
          <font>
             <Font size="33.0" />
          </font>
       </Text>
-      <Text fx:id="txtUser4Name" layoutX="997.0" layoutY="500.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+      <Text fx:id="txtUser4Name" layoutX="997.0" layoutY="500.0" strokeType="OUTSIDE" strokeWidth="0.0">
          <font>
             <Font size="33.0" />
          </font>
       </Text>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0e7245" height="244.0" layoutX="316.0" layoutY="129.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="562.0" />
-      <TextField fx:id="txtFielWord" layoutX="317.0" layoutY="339.0" prefHeight="62.0" prefWidth="562.0" promptText="다음단어">
+      <TextField fx:id="txtFielWord" disable="true" layoutX="317.0" layoutY="339.0" prefHeight="62.0" prefWidth="562.0" promptText="다음단어">
          <font>
             <Font size="31.0" />
          </font>
       </TextField>
-      <ImageView fx:id="imgOut1" fitHeight="150.0" fitWidth="200.0" layoutX="63.0" layoutY="568.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgOut1" fitHeight="150.0" fitWidth="200.0" layoutX="63.0" layoutY="568.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@out.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imgOut2" fitHeight="150.0" fitWidth="200.0" layoutX="354.0" layoutY="568.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgOut2" fitHeight="150.0" fitWidth="200.0" layoutX="354.0" layoutY="568.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@out.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imgOut3" fitHeight="150.0" fitWidth="200.0" layoutX="645.0" layoutY="568.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgOut3" fitHeight="150.0" fitWidth="200.0" layoutX="645.0" layoutY="568.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@out.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imgOut4" fitHeight="150.0" fitWidth="200.0" layoutX="933.0" layoutY="568.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgOut4" fitHeight="150.0" fitWidth="200.0" layoutX="933.0" layoutY="568.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@out.png" />
          </image>
       </ImageView>
-      <Button fx:id="btnWord" layoutX="317.0" layoutY="401.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="562.0" text="단어입력">
+      <Button fx:id="btnWord" disable="true" layoutX="317.0" layoutY="401.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="562.0" text="단어입력">
          <font>
             <Font size="18.0" />
          </font>
@@ -114,8 +114,8 @@
          </font>
       </Text>
       <TextArea fx:id="txtAreaChat" layoutX="24.0" layoutY="121.0" prefHeight="285.0" prefWidth="277.0" />
-      <TextField fx:id="txtFieldChat" layoutX="24.0" layoutY="407.0" prefHeight="38.0" prefWidth="218.0" />
-      <Button fx:id="btnChat" layoutX="241.0" layoutY="407.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="60.0" text="입력" />
+      <TextField fx:id="txtFieldChat" layoutX="24.0" layoutY="407.0" onAction="#sendMessage" prefHeight="38.0" prefWidth="218.0" />
+      <Button fx:id="btnChat" layoutX="241.0" layoutY="407.0" mnemonicParsing="false" onAction="#sendMessage" prefHeight="38.0" prefWidth="60.0" text="입력" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#09511f" height="55.0" layoutX="24.0" layoutY="121.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="277.0" />
       <Text fill="WHITE" layoutX="31.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="대화">
          <font>
@@ -127,22 +127,22 @@
             <Font size="31.0" />
          </font>
       </Text>
-      <Text fx:id="txtUser1Heart" fill="WHITE" layoutX="908.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+      <Text fx:id="txtUser1Heart" fill="WHITE" layoutX="908.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0">
          <font>
             <Font size="23.0" />
          </font>
       </Text>
-      <Text fx:id="txtUser2Heart" fill="WHITE" layoutX="908.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+      <Text fx:id="txtUser2Heart" fill="WHITE" layoutX="908.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0">
          <font>
             <Font size="23.0" />
          </font>
       </Text>
-      <Text fx:id="txtUser3Heart" fill="WHITE" layoutX="908.0" layoutY="340.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+      <Text fx:id="txtUser3Heart" fill="WHITE" layoutX="908.0" layoutY="340.0" strokeType="OUTSIDE" strokeWidth="0.0">
          <font>
             <Font size="23.0" />
          </font>
       </Text>
-      <Text fx:id="txtUser4Heart" fill="WHITE" layoutX="908.0" layoutY="409.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+      <Text fx:id="txtUser4Heart" fill="WHITE" layoutX="908.0" layoutY="409.0" strokeType="OUTSIDE" strokeWidth="0.0">
          <font>
             <Font size="23.0" />
          </font>

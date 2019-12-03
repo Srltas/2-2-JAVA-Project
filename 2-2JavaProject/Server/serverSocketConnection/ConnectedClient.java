@@ -36,64 +36,63 @@ class ConnectedClient extends Thread {
 
 				String msg = dataInStream.readUTF();
 				System.out.println("[" + this.socket.toString() + ": " + msg + "]");
-				String number = msg.substring(0, 1);
-				String messageBody = msg.substring(1);
-				System.out.println("[number : " + number + "]");
-				System.out.println("[messageBody : " + messageBody + "]");
+				String[] message = msg.split(",");
 
-				if (number.equals("0")) {
+				if (message[0].equals("Login")) {
 					// 로그인
-					String[] accountData = messageBody.split(",");
-
-					String id = accountData[0];
-					String password = accountData[1];
+					String id = message[1];
+					String password = message[2];
 
 					LoginService login = new LoginService();
 
-					if (login.login(accountData[0], accountData[1])) {
+					if (login.login(message[1], message[2])) {
 						System.out.println("login success");
 						dataOutStream.writeUTF("Login success," + new Account().getRankPoint());
 					}
 
 					System.out.println(id);
 					System.out.println(password);
-				} else if (number.equals("1")) {
+				} else if (message[0].equals("signUp")) {
 					// 회원가입
 					System.out.println("[catch by create]");
-					String[] accountData = messageBody.split(",");
 
 					CreateAccountService createAccount = new CreateAccountService();
-					if (createAccount.createAccount(accountData[0], accountData[1],
-							/* accountData[2], */ accountData[2], accountData[3])) {
+					if (createAccount.createAccount(message[1], message[2], /* accountData[2], */ message[3],
+							message[4])) {
 						dataOutStream.writeUTF("account create success");
 					} else {
 						dataOutStream.writeUTF("account create failed");
 					}
-				} else if (number.equals("2")) {
+				} else if (message[0].equals("findID")) {
 					// 아이디 찾기
-				} else if (number.equals("3")) {
+				} else if (message[0].equals("findPW")) {
 					// 비밀번호 변경
-				} else if (number.equals("4")) {
-					// waitRoom에 입장하는 클라이언트
-					if (Server.waitRoomCount < 4) {
-						Server.waitRoomCount++;
-						System.out.println("[방 인원 수 : " + Server.waitRoomCount + "]");
+				} else if (message[0].equals("enterGameRoom")) {
+					// GameRoom에 입장하는 클라이언트
+					if (Server.gameRoomCount < 4) {
+						Server.gameRoomCount++;
+						System.out.println("[방 인원 수 : " + Server.gameRoomCount + "]");
 						for (ConnectedClient client : Server.clients) {
-							client.dataOutStream.writeUTF("4" + Integer.toString(Server.waitRoomCount));
+							client.dataOutStream.writeUTF("enterGameRoom," + Integer.toString(Server.gameRoomCount));
 						}
 					} else {
-						Server.waitRoomCount = 1;
-						System.out.println("[방 인원 수 : " + Server.waitRoomCount + "]");
+						Server.gameRoomCount = 1;
+						System.out.println("[방 인원 수 : " + Server.gameRoomCount + "]");
 						for (ConnectedClient client : Server.clients) {
-							client.dataOutStream.writeUTF("4" + Integer.toString(Server.waitRoomCount));
+							client.dataOutStream.writeUTF("enterGameRoom," + Integer.toString(Server.gameRoomCount));
 						}
 					}
-				} else if (number.equals("5")) {
+				} else if (message[0].equals("exitWaitRoom")) {
 					// waitRoom에서 퇴장하는 클라이언트
-					Server.waitRoomCount--;
-					System.out.println("[방 인원 수 : " + Server.waitRoomCount + "]");
+					Server.gameRoomCount--;
+					System.out.println("[방 인원 수 : " + Server.gameRoomCount + "]");
 					for (ConnectedClient client : Server.clients) {
-						client.dataOutStream.writeUTF("4" + Integer.toString(Server.waitRoomCount));
+						client.dataOutStream.writeUTF("enterGameRoom," + Integer.toString(Server.gameRoomCount));
+					}
+				} else if(message[0].equals("chat")) {
+					System.out.println(message[1]);
+					for (ConnectedClient client : Server.clients) {
+						client.dataOutStream.writeUTF("chat," + message[1]);
 					}
 				}
 
@@ -103,6 +102,11 @@ class ConnectedClient extends Thread {
 				 */
 			}
 		} catch (Exception e) {
+			Server.clients.remove(this);
+			if(Server.gameRoomCount > 0) {
+				Server.gameRoomCount--;
+				System.out.println("[방 인원 수 : " + Server.gameRoomCount + "]"); 
+			}
 			System.out.println("[" + this.socket.toString() + "가 연결을 종료했습니다.]");
 		}
 	}
