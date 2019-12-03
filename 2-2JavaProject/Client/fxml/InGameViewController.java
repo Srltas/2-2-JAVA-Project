@@ -92,10 +92,13 @@ public class InGameViewController implements Initializable{
 						}
 					} else if(message[0].equals("chat")) {
 						System.out.println("Hi~");
-						MessageListener.msg = "";
+						System.out.println(message[1]);
+						String text = message[1];
+						//MessageListener.msg = "";
 						Platform.runLater(() -> {
-							txtAreaChat.appendText(message[1]);
+							txtAreaChat.appendText(text);
 						});
+						MessageListener.msg = "";
 					}
 				}
 			}
