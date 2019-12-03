@@ -40,7 +40,7 @@
             <Font size="29.0" />
          </font>
       </Button>
-      <Button fx:id="btnBack" layoutX="605.0" layoutY="607.0" mnemonicParsing="false" onAction="#signUp" prefHeight="53.0" prefWidth="283.0" text="뒤로" textAlignment="CENTER">
+      <Button fx:id="btnBack" layoutX="605.0" layoutY="607.0" mnemonicParsing="false" onAction="#back" prefHeight="53.0" prefWidth="283.0" text="뒤로" textAlignment="CENTER">
          <font>
             <Font name="Microsoft JhengHei UI Bold" size="27.0" />
          </font>
