@@ -67,40 +67,33 @@ class ConnectedClient extends Thread {
 					// 아이디 찾기
 				} else if (message[0].equals("findPW")) {
 					// 비밀번호 변경
-				} else if (message[0].equals("enterWaitRoom")) {
-					// waitRoom에 입장하는 클라이언트
-					if (Server.waitRoomCount < 4) {
-						Server.waitRoomCount++;
-						System.out.println("[방 인원 수 : " + Server.waitRoomCount + "]");
+				} else if (message[0].equals("enterGameRoom")) {
+					// GameRoom에 입장하는 클라이언트
+					if (Server.gameRoomCount < 4) {
+						Server.gameRoomCount++;
+						System.out.println("[방 인원 수 : " + Server.gameRoomCount + "]");
 						for (ConnectedClient client : Server.clients) {
-							client.dataOutStream.writeUTF("enterWaitRoom," + Integer.toString(Server.waitRoomCount));
+							client.dataOutStream.writeUTF("enterGameRoom," + Integer.toString(Server.gameRoomCount));
 						}
 					} else {
-						Server.waitRoomCount = 1;
-						System.out.println("[방 인원 수 : " + Server.waitRoomCount + "]");
+						Server.gameRoomCount = 1;
+						System.out.println("[방 인원 수 : " + Server.gameRoomCount + "]");
 						for (ConnectedClient client : Server.clients) {
-							client.dataOutStream.writeUTF("enterWaitRoom," + Integer.toString(Server.waitRoomCount));
+							client.dataOutStream.writeUTF("enterGameRoom," + Integer.toString(Server.gameRoomCount));
 						}
 					}
 				} else if (message[0].equals("exitWaitRoom")) {
 					// waitRoom에서 퇴장하는 클라이언트
-					Server.waitRoomCount--;
-					System.out.println("[방 인원 수 : " + Server.waitRoomCount + "]");
+					Server.gameRoomCount--;
+					System.out.println("[방 인원 수 : " + Server.gameRoomCount + "]");
 					for (ConnectedClient client : Server.clients) {
-						client.dataOutStream.writeUTF("enterWaitRoom," + Integer.toString(Server.waitRoomCount));
+						client.dataOutStream.writeUTF("enterGameRoom," + Integer.toString(Server.gameRoomCount));
 					}
-				} else if(message[0].equals("startGame")) {
-					if(Server.readyPlayerCount != 0 && Server.readyPlayerCount == Server.waitRoomCount) {
-						for (ConnectedClient client : Server.clients) {
-							client.dataOutStream.writeUTF("startGame," + Integer.toString(Server.waitRoomCount));
-						}	
+				} else if(message[0].equals("chat")) {
+					System.out.println(message[1]);
+					for (ConnectedClient client : Server.clients) {
+						client.dataOutStream.writeUTF("chat," + message[1]);
 					}
-				} else if(message[0].equals("readyPlayer")) {
-					Server.readyPlayerCount++;
-					System.out.println("[준비된 플레이어 수 : " + Server.readyPlayerCount + "]");
-				} else if(message[0].equals("unReadyPlayer")) {
-					Server.readyPlayerCount--;
-					System.out.println("[준비된 플레이어 수 : " + Server.readyPlayerCount + "]");
 				}
 
 				/*
@@ -110,6 +103,10 @@ class ConnectedClient extends Thread {
 			}
 		} catch (Exception e) {
 			Server.clients.remove(this);
+			if(Server.gameRoomCount > 0) {
+				Server.gameRoomCount--;
+				System.out.println("[방 인원 수 : " + Server.gameRoomCount + "]"); 
+			}
 			System.out.println("[" + this.socket.toString() + "가 연결을 종료했습니다.]");
 		}
 	}
