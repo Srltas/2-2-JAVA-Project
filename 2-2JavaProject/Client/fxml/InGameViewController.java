@@ -1,5 +1,7 @@
 package fxml;
 
+import java.io.DataInputStream;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -63,6 +65,9 @@ public class InGameViewController implements Initializable{
 	@FXML
 	private ProgressBar pgbTime;
 	
+	InputStream inStream;
+	DataInputStream dataInStream;
+	
 	boolean loop = true;
 	String msg;
 	String[] message;
@@ -91,11 +96,14 @@ public class InGameViewController implements Initializable{
 							setOpacityPlayer4();
 						}
 					} else if(message[0].equals("chat")) {
-						System.out.println("Hi~");
 						MessageListener.msg = "";
+						String chatMessage = message[1] + "\n";
 						Platform.runLater(() -> {
-							txtAreaChat.appendText(message[1]);
+							txtAreaChat.appendText(chatMessage);
 						});
+						MessageListener.msg = " ,";
+					} else if(message[0].equals(" ")) {
+						
 					}
 				}
 			}
@@ -105,10 +113,6 @@ public class InGameViewController implements Initializable{
 	public void sendMessage() {
 		Client.client.send("chat," + txtFieldChat.getText());
 		txtFieldChat.setText("");
-	}
-	
-	public void receiveMessage() {
-		
 	}
 	
 	public void setOpacityPlayer1() {

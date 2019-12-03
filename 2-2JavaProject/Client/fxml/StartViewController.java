@@ -19,24 +19,22 @@ import javafx.scene.layout.AnchorPane;
 public class StartViewController {
 	@FXML
 	private Label lblIdStatus;
-
 	@FXML
 	private Label lblPwStatus;
-
 	@FXML
 	private TextField txtUserId;
-
 	@FXML
 	private TextField txtPassword;
-
 	@FXML
 	private Button btnLogin;
-
 	@FXML
 	private Button btnSignUp;
-
 	@FXML
 	private Button btnFindId;
+	@FXML
+	private Button btnFindPW;
+	@FXML
+	private Button btnEixt;
 
 	String text;
 	String id;
@@ -91,5 +89,15 @@ public class StartViewController {
 		Parent findIdView = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/FindIDView.fxml"));
 		AnchorPane root = (AnchorPane) StartClient.stage.getScene().getRoot();
 		root.getChildren().add(findIdView);
+	}
+	
+	public void enterFindPWView(ActionEvent event) throws Exception {
+		Parent findIdView = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/FindPWView.fxml"));
+		AnchorPane root = (AnchorPane) StartClient.stage.getScene().getRoot();
+		root.getChildren().add(findIdView);
+	}
+	
+	public void Eixt() {
+		System.exit(0);
 	}
 }

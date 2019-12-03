@@ -18,6 +18,8 @@ public class SignUpViewController {
 	@FXML
 	private TextField txtPassword;
 	@FXML
+	private TextField txtPasswordCheck;
+	@FXML
 	private TextField txtUserName;
 	@FXML
 	private TextField txtUserPhonNumber;

@@ -25,32 +25,40 @@
             <Image url="@이름.png" />
          </image>
       </ImageView>
-      <TextField fx:id="txtUserId" layoutX="375.0" layoutY="258.0" onAction="#login" prefHeight="63.0" prefWidth="447.0" promptText="ID">
+      <TextField fx:id="txtUserId" layoutX="342.0" layoutY="281.0" onAction="#login" prefHeight="63.0" prefWidth="366.0" promptText="ID">
          <font>
             <Font name="System Bold" size="32.0" />
          </font>
       </TextField>
-      <PasswordField fx:id="txtPassword" layoutX="375.0" layoutY="342.0" onAction="#login" prefHeight="63.0" prefWidth="447.0" promptText="PW">
+      <PasswordField fx:id="txtPassword" layoutX="342.0" layoutY="373.0" onAction="#login" prefHeight="63.0" prefWidth="366.0" promptText="PW">
          <font>
             <Font size="32.0" />
          </font>
       </PasswordField>
-      <Button fx:id="btnLogin" layoutX="375.0" layoutY="435.0" mnemonicParsing="false" onAction="#login" prefHeight="117.0" prefWidth="153.0" text="시작!" textAlignment="CENTER">
+      <Button fx:id="btnLogin" layoutX="721.0" layoutY="280.0" mnemonicParsing="false" onAction="#login" prefHeight="155.0" prefWidth="134.0" text="시작" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="40.0" />
          </font>
       </Button>
-      <Button fx:id="btnSignUp" layoutX="538.0" layoutY="435.0" mnemonicParsing="false" onAction="#enterSignUpView" prefHeight="53.0" prefWidth="283.0" text="회원가입">
+      <Button fx:id="btnSignUp" layoutX="342.0" layoutY="468.0" mnemonicParsing="false" onAction="#enterSignUpView" prefHeight="55.0" prefWidth="125.0" text="회원가입">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnFindId" layoutX="477.0" layoutY="468.0" mnemonicParsing="false" onAction="#enterFindIdView" prefHeight="55.0" prefWidth="105.0" text="ID찾기" textAlignment="CENTER">
+         <font>
+            <Font name="Microsoft JhengHei UI Bold" size="21.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnEixt" layoutX="721.0" layoutY="468.0" mnemonicParsing="false" onAction="#Eixt" prefHeight="55.0" prefWidth="134.0" text="종료">
          <font>
             <Font size="29.0" />
          </font>
       </Button>
-      <Button fx:id="btnFindId" layoutX="538.0" layoutY="499.0" mnemonicParsing="false" onAction="#enterFindIdView" prefHeight="53.0" prefWidth="283.0" text="ID/PW 찾기" textAlignment="CENTER">
+      <Button fx:id="btnFindPW" layoutX="592.0" layoutY="468.0" mnemonicParsing="false" onAction="#enterFindPWView" prefHeight="55.0" prefWidth="116.0" text="PW찾기" textAlignment="CENTER">
          <font>
-            <Font name="Microsoft JhengHei UI Bold" size="27.0" />
+            <Font name="Microsoft JhengHei UI Bold" size="21.0" />
          </font>
       </Button>
-      <Label fx:id="lblIdStatus" layoutX="398.0" layoutY="321.0" textFill="RED" />
-      <Label fx:id="lblPwStatus" layoutX="398.0" layoutY="405.0" textFill="RED" />
    </children>
 </AnchorPane>
