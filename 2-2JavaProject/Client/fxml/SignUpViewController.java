@@ -32,6 +32,8 @@ public class SignUpViewController {
 	@FXML
 	private Label lblPwStatus;
 	@FXML
+	private Label lblPwCheck;
+	@FXML
 	private Label lblNameStatus;
 	@FXML
 	private Label lblPhonNumberStatus;
@@ -39,12 +41,14 @@ public class SignUpViewController {
 	String text;
 	String id;
 	String pw;
+	String pwCheck;
 	String userName;
 	String userPhonNumber;
 	
 	public void signUp(ActionEvent event)throws Exception {
 		id = txtUserID.getText();
 		pw = txtPassword.getText();
+		pwCheck = txtPasswordCheck.getText();
 		userName = txtUserName.getText();
 		userPhonNumber = txtUserPhonNumber.getText();
 		
@@ -55,6 +59,11 @@ public class SignUpViewController {
 		}
 		if(pw.equals("") == true) {
 			lblPwStatus.setText("필수 정보입니다.");
+		}else {
+			lblPwStatus.setText("");
+		}
+		if(pwCheck.equals("") == true) {
+			lblPwStatus.setText("비밀번호를 입력하세요");
 		}else {
 			lblPwStatus.setText("");
 		}
