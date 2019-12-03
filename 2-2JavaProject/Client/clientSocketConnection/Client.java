@@ -8,7 +8,7 @@ public class Client {
 
 	public static Client client = new Client();
 	int port = 9876;
-	String ip = "210.119.33.40";
+	String ip = "127.0.0.1";
 	MessageListener msgListener;
 
 	Socket mySocket = null;

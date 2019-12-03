@@ -15,14 +15,13 @@ class ConnectedClient extends Thread {
 	DataOutputStream dataOutStream;
 	InputStream inStream;
 	DataInputStream dataInStream;
-	
+
 	LoginService login = new LoginService();
-	
+
 	ConnectedClient(Socket _s) {
 		socket = _s;
 	}
 
-	
 	public void run() {
 		try {
 
@@ -34,24 +33,30 @@ class ConnectedClient extends Thread {
 			dataInStream = new DataInputStream(inStream);
 
 			dataOutStream.writeUTF("[Welcome to this Server]");
+
+			String[] onlineUserId = new String[10];
 			while (true) {
 
 				String msg = dataInStream.readUTF();
 				System.out.println("[" + this.socket.toString() + ": " + msg + "]");
 				String[] message = msg.split(",");
-				
 
 				if (message[0].equals("Login")) {
 					// 로그인
 					String id = message[1];
 					String password = message[2];
-					
-					if (login.login(message[1], message[2])) {
+
+					for (int i = 0; i < onlineUserId.length; i++) {
+						if (id.equals(onlineUserId[i])) {
+							id = null;
+							System.out.println("already log-on");
+						}
+					}
+
+					if (id != null && login.login(message[1], message[2])) {
 						System.out.println("login success");
 						dataOutStream.writeUTF("Login success," + new Account().getRankPoint());
 					}
-
-
 
 					System.out.println(id);
 					System.out.println(password);
@@ -92,7 +97,7 @@ class ConnectedClient extends Thread {
 					for (ConnectedClient client : Server.clients) {
 						client.dataOutStream.writeUTF("enterGameRoom," + Integer.toString(Server.gameRoomCount));
 					}
-				} else if(message[0].equals("chat")) {
+				} else if (message[0].equals("chat")) {
 					System.out.println(message[1]);
 					for (ConnectedClient client : Server.clients) {
 						client.dataOutStream.writeUTF("chat," + message[1]);
@@ -106,9 +111,9 @@ class ConnectedClient extends Thread {
 			}
 		} catch (Exception e) {
 			Server.clients.remove(this);
-			if(Server.gameRoomCount > 0) {
+			if (Server.gameRoomCount > 0) {
 				Server.gameRoomCount--;
-				System.out.println("[방 인원 수 : " + Server.gameRoomCount + "]"); 
+				System.out.println("[방 인원 수 : " + Server.gameRoomCount + "]");
 			}
 			System.out.println("[" + this.socket.toString() + "가 연결을 종료했습니다.]");
 		}

@@ -10,8 +10,8 @@ public class AccountMapper {
 
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:xe";
-	String userName = "LOGINMANAGER";
-	String password = "q1w2e3r4";
+	String userName = "LEE";
+	String password = "redsun";
 
 	public Account getAccountById(String id) {
 		Connection connection = null;
