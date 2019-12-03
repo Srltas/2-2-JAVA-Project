@@ -6,12 +6,13 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+
 public class Server {
 	ServerSocket serverSocket = null;
 	static ArrayList<ConnectedClient> clients = new ArrayList<ConnectedClient>();
 	String ip = "210.119.33.40";
 	int port = 9876;
-	static int waitRoomCount = 0;
+	static int gameRoomCount = 0;
 	
 	public static void main(String[] args) {
 		Server server = new Server();
