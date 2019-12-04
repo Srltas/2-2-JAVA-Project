@@ -13,7 +13,6 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import clientLoginData.Account;
 public class MenuRoomViewController implements Initializable{
 	@FXML
 	private Text txtRating;
@@ -22,15 +21,13 @@ public class MenuRoomViewController implements Initializable{
 	@FXML
 	private Button btnExit;
 	
-	Account account = new Account();
-	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		printRating();
 	}
 	
 	public void play(ActionEvent event)throws Exception {
-		Client.client.send("enterGameRoom," + account.getId());
+		Client.client.send("enterGameRoom," + StartViewController.account.getId());
 		//Thread.sleep(100);
 
 		Parent GameRoomView = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/InGameView.fxml"));
@@ -38,7 +35,7 @@ public class MenuRoomViewController implements Initializable{
 		root.getChildren().add(GameRoomView);
 	}
 	public void printRating() {
-		txtRating.setText(Integer.toString(account.getRankPoint()));
+		txtRating.setText(Integer.toString(StartViewController.account.getRankPoint()));
 		
 	}
 	public void exit() {
