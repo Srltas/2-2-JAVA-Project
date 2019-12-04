@@ -11,6 +11,11 @@ import javafx.stage.Stage;
 
 public class StartClient extends Application {
 
+<<<<<<< Upstream, based on branch 'master' of https://github.com/Srltas/2-2-JAVA-Project.git
+=======
+	public static Stage stage = null;
+
+>>>>>>> 66baa6c 12.04
 	@Override
 	public void start(Stage primaryStage) {
 		try {
