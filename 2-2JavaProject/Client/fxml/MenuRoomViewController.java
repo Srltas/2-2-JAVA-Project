@@ -31,7 +31,7 @@ public class MenuRoomViewController implements Initializable{
 	
 	public void play(ActionEvent event)throws Exception {
 		Client.client.send("enterGameRoom," + account.getId());
-		Thread.sleep(100);
+		//Thread.sleep(100);
 
 		Parent GameRoomView = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/InGameView.fxml"));
 		AnchorPane root = (AnchorPane) StartClient.stage.getScene().getRoot();

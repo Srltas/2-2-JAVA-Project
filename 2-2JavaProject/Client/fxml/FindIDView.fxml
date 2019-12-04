@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="746.0" prefWidth="1196.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.GameMainController">
+   <children>
+      <ImageView pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Desktop/알파카파카%20끝말잇기%20게임%20자료/메인화면/main.PNG" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="188.0" fitWidth="572.0" layoutX="363.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Desktop/게임자료/500ppi/pakapaka.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="373.0" layoutY="433.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="215.0" text="찾기">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Button>
+      <TextField layoutX="373.0" layoutY="317.0" prefHeight="63.0" prefWidth="447.0" promptText="전화번호">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </TextField>
+      <Button layoutX="605.0" layoutY="433.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="215.0" text="뒤로">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

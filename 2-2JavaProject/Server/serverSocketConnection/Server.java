@@ -10,9 +10,10 @@ import java.util.Iterator;
 public class Server {
 	ServerSocket serverSocket = null;
 	static ArrayList<ConnectedClient> clients = new ArrayList<ConnectedClient>();
-	String ip = "127.0.0.1";
+	String ip = "210.119.33.40";
 	int port = 9876;
 	static int gameRoomCount = 0;
+	static String[] playerList = {"","","",""};
 	
 	public static void main(String[] args) {
 		Server server = new Server();

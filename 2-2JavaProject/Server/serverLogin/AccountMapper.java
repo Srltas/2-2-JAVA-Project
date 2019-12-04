@@ -19,7 +19,7 @@ public class AccountMapper {
 		ResultSet resultSet = null;
 
 		Account account = new Account();
-		String sql = "SELECT USER_ID, USER_PW, RANKPOINT FROM USERINFO WHERE USER_ID = '" + id + "'";
+		String sql = "SELECT USER_ID, USER_PW, USER_NAME, RANKPOINT FROM USERINFO WHERE USER_ID = '" + id + "'";
 		System.out.println(sql);
 		try {
 			Class.forName(driver);
@@ -32,6 +32,7 @@ public class AccountMapper {
 			if (resultSet.next()) {
 				account.setId(resultSet.getString("USER_ID"));
 				account.setPassword(resultSet.getString("USER_PW"));
+				account.setUserName(resultSet.getString("USER_NAME"));
 				account.setRankPoint(resultSet.getInt("RANKPOINT"));
 			}
 		} catch (Exception e) {

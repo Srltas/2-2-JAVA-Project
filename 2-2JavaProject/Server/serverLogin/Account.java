@@ -5,6 +5,7 @@ public class Account {
 	private String password;
 	private String phoneNumber;
 	private int rankPoint;
+	private String userName;
 	
 	public String getId() {
 		return id;
@@ -26,6 +27,14 @@ public class Account {
 		this.id = id;
 	}
 	
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
@@ -37,4 +46,5 @@ public class Account {
 	public void setRankPoint(int rankPoint) {
 		this.rankPoint = rankPoint;
 	}
+	
 }

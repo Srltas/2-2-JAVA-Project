@@ -20,17 +20,17 @@
             <Image url="@배경.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="188.0" fitWidth="572.0" layoutX="363.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="132.0" fitWidth="412.0" layoutX="433.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@이름.png" />
          </image>
       </ImageView>
-      <TextField fx:id="txtUserID" layoutX="375.0" layoutY="252.0" prefHeight="63.0" prefWidth="447.0" promptText="ID">
+      <TextField fx:id="txtUserID" layoutX="375.0" layoutY="185.0" onAction="#signUp" prefHeight="63.0" prefWidth="447.0" promptText="아이디">
          <font>
             <Font name="System Bold" size="32.0" />
          </font>
       </TextField>
-      <PasswordField fx:id="txtPassword" layoutX="375.0" layoutY="334.0" prefHeight="63.0" prefWidth="447.0" promptText="PW">
+      <PasswordField fx:id="txtPasswordCheck" layoutX="375.0" layoutY="352.0" onAction="#signUp" prefHeight="63.0" prefWidth="447.0" promptText="비밀번호 확인">
          <font>
             <Font size="32.0" />
          </font>
@@ -45,19 +45,25 @@
             <Font name="Microsoft JhengHei UI Bold" size="27.0" />
          </font>
       </Button>
-      <TextField fx:id="txtUserName" layoutX="375.0" layoutY="415.0" prefHeight="63.0" prefWidth="447.0" promptText="이름">
+      <TextField fx:id="txtUserName" layoutX="375.0" layoutY="434.0" onAction="#signUp" prefHeight="63.0" prefWidth="447.0" promptText="닉네임">
          <font>
             <Font name="System Bold" size="32.0" />
          </font>
       </TextField>
-      <TextField fx:id="txtUserPhonNumber" layoutX="375.0" layoutY="497.0" prefHeight="63.0" prefWidth="447.0" promptText="전화번호">
+      <TextField fx:id="txtUserPhonNumber" layoutX="374.0" layoutY="517.0" onAction="#signUp" prefHeight="63.0" prefWidth="447.0" promptText="전화번호">
          <font>
             <Font name="System Bold" size="32.0" />
          </font>
       </TextField>
-      <Label fx:id="lblIdStatus" layoutX="387.0" layoutY="315.0" textFill="RED" />
-      <Label fx:id="lblPwStatus" layoutX="387.0" layoutY="397.0" textFill="RED" />
-      <Label fx:id="lblNameStatus" layoutX="387.0" layoutY="478.0" textFill="RED" />
-      <Label fx:id="lblPhonNumberStatus" layoutX="387.0" layoutY="560.0" textFill="RED" />
+      <TextField fx:id="txtPassword" layoutX="375.0" layoutY="267.0" onAction="#signUp" prefHeight="63.0" prefWidth="447.0" promptText="비밀번호">
+         <font>
+            <Font name="System Bold" size="32.0" />
+         </font>
+      </TextField>
+      <Label fx:id="lblIdStatus" layoutX="386.0" layoutY="248.0" textFill="RED" />
+      <Label fx:id="lblPwStatus" layoutX="386.0" layoutY="330.0" textFill="RED" />
+      <Label fx:id="lblNameStatus" layoutX="386.0" layoutY="497.0" prefHeight="19.0" prefWidth="11.0" textFill="RED" />
+      <Label fx:id="lblPhonNumberStatus" layoutX="386.0" layoutY="580.0" textFill="RED" />
+      <Label fx:id="lblPwCheck" layoutX="392.0" layoutY="415.0" textFill="RED" />
    </children>
 </AnchorPane>
