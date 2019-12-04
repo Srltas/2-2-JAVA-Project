@@ -42,10 +42,10 @@ public class StartViewController {
 	OutputStream out = null;
 	DataOutputStream dout = null;
 	String[] logindata;
-	
-	public static Account account = new Account();
 
 	public void login(ActionEvent event) throws Exception {
+
+		Account account = new Account();
 		account.setId(txtUserId.getText());
 		account.setPassword(txtPassword.getText());
 
