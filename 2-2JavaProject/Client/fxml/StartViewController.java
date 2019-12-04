@@ -60,7 +60,7 @@ public class StartViewController {
 
 			System.out.println(text);
 			Client.client.send(text);
-			Thread.sleep(1000);
+			//Thread.sleep();
 
 			logindata = MessageListener.msg.split(",");
 			if (logindata[0].equals("Login success")) {
