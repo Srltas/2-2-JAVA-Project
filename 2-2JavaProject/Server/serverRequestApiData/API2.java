@@ -36,9 +36,9 @@ public class API2 {
 				// tag
 				NodeList nList = doc.getElementsByTagName("item");
 				if (nList.getLength() == 0) {
-					return 1; //1 = 단어 검색 성공
+					return 0; //0 = 단어 검색 실패
 				} else {
-					return 2; //2 = 단어 검색 실패
+					return 1; //1 = 단어 검색 성공
 				}
 
 				/*
@@ -55,7 +55,7 @@ public class API2 {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			return 3; // 3 = 에러발생
+			return 2; // 2 = 에러발생
 		} // try~catch end
 	}
 }
