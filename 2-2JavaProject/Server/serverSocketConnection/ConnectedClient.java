@@ -97,7 +97,7 @@ class ConnectedClient extends Thread {
 							for(int i = 0; i<Server.playerList.length; i++) {
 								if(Server.playerList[i].equals(""))
 									continue;
-								Thread.sleep(500);
+								//Thread.sleep(100);
 								client.dataOutStream.writeUTF("enterGameRoom," + Integer.toString(i+1) + "," + Server.playerList[i]);
 							}
 						}
