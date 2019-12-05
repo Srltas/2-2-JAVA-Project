@@ -42,9 +42,8 @@ public class StartViewController {
 	OutputStream out = null;
 	DataOutputStream dout = null;
 	String[] logindata;
-	
 	public static Account account = new Account();
-
+	
 	public void login(ActionEvent event) throws Exception {
 		account.setId(txtUserId.getText());
 		account.setPassword(txtPassword.getText());
@@ -66,6 +65,7 @@ public class StartViewController {
 			logindata = MessageListener.msg.split(",");
 			if (logindata[0].equals("Login success")) {
 				new Account().setRankPoint(Integer.parseInt(logindata[1]));
+				account.setUserName(logindata[2]);
 				Parent menuView = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/MenuRoomView.fxml"));
 				AnchorPane root = (AnchorPane) StartClient.stage.getScene().getRoot();
 				root.getChildren().add(menuView);

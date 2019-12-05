@@ -16,6 +16,7 @@ public class Server {
 	static int gameTurn = 0;
 	static int gameTurnOff = 0;
 	static String[] playerList = {"","","",""};
+
 	
 	public static void main(String[] args) {
 		Server server = new Server();
