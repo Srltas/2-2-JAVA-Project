@@ -10,7 +10,7 @@ import java.util.Iterator;
 public class Server {
 	ServerSocket serverSocket = null;
 	static ArrayList<ConnectedClient> clients = new ArrayList<ConnectedClient>();
-	String ip = "210.119.33.40";
+	String ip = "localhost";
 	int port = 9876;
 	static int gameRoomCount = 0;
 	static int gameTurn = 0;
