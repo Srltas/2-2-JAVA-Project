@@ -2,21 +2,23 @@ package fxml;
 
 import clientSocketConnection.Client;
 import clientSocketConnection.MessageListener;
+import clientStarter.StartClient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
+import javafx.scene.layout.AnchorPane;
 
 public class SignUpViewController {
 	@FXML
 	private TextField txtUserID;
 	@FXML
 	private TextField txtPassword;
+	@FXML
+	private TextField txtPasswordCheck;
 	@FXML
 	private TextField txtUserName;
 	@FXML
@@ -30,6 +32,8 @@ public class SignUpViewController {
 	@FXML
 	private Label lblPwStatus;
 	@FXML
+	private Label lblPwCheck;
+	@FXML
 	private Label lblNameStatus;
 	@FXML
 	private Label lblPhonNumberStatus;
@@ -37,12 +41,14 @@ public class SignUpViewController {
 	String text;
 	String id;
 	String pw;
+	String pwCheck;
 	String userName;
 	String userPhonNumber;
 	
 	public void signUp(ActionEvent event)throws Exception {
 		id = txtUserID.getText();
 		pw = txtPassword.getText();
+		pwCheck = txtPasswordCheck.getText();
 		userName = txtUserName.getText();
 		userPhonNumber = txtUserPhonNumber.getText();
 		
@@ -53,6 +59,11 @@ public class SignUpViewController {
 		}
 		if(pw.equals("") == true) {
 			lblPwStatus.setText("필수 정보입니다.");
+		}else {
+			lblPwStatus.setText("");
+		}
+		if(pwCheck.equals("") == true) {
+			lblPwStatus.setText("비밀번호를 입력하세요");
 		}else {
 			lblPwStatus.setText("");
 		}
@@ -68,18 +79,15 @@ public class SignUpViewController {
 		}
 		//회워가입
 		if(id.equals("") != true && pw.equals("") != true && userName.equals("") != true && userPhonNumber.equals("") != true) {
-			text = "1" + id + "," + pw + "," + userName + "," + userPhonNumber;
+			text = "signUp," + id + "," + pw + "," + userName + "," + userPhonNumber;
 			Client.client.send(text);
-			System.out.println(MessageListener.msg);
 			Thread.sleep(1000);
 			
 			if(MessageListener.msg.equals("account create success")) {
 				Parent StartView = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/StartView.fxml"));
-				Scene scene = new Scene(StartView);
-				Stage primaryStage = (Stage) btnBack.getScene().getWindow();
-				primaryStage.setScene(scene);
+				AnchorPane root = (AnchorPane) StartClient.stage.getScene().getRoot();
+				root.getChildren().add(StartView);
 			}else {
-				System.out.println("2"+MessageListener.msg);
 				lblPhonNumberStatus.setText("회원가입에 실패했습니다.");
 			}
 		}
@@ -87,8 +95,7 @@ public class SignUpViewController {
 	
 	public void back(ActionEvent event) throws Exception {
 		Parent StartView = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/StartView.fxml"));
-		Scene scene = new Scene(StartView);
-		Stage primaryStage = (Stage) btnBack.getScene().getWindow();
-		primaryStage.setScene(scene);
+		AnchorPane root = (AnchorPane) StartClient.stage.getScene().getRoot();
+		root.getChildren().add(StartView);
 	}
 }

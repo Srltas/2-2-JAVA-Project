@@ -4,16 +4,16 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import clientSocketConnection.Client;
+import clientStarter.StartClient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
-
+import clientLoginData.Account;
 public class MenuRoomViewController implements Initializable{
 	@FXML
 	private Text txtRating;
@@ -22,25 +22,27 @@ public class MenuRoomViewController implements Initializable{
 	@FXML
 	private Button btnExit;
 	
+	Account account = new Account();
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		printRating();
 	}
 	
 	public void play(ActionEvent event)throws Exception {
-		Client.client.send("4" + Client.client.toString());
-		Thread.sleep(100);
+		Client.client.send("enterGameRoom," + account.getId());
+		//Thread.sleep(100);
 
-		Parent WaitRoomtView = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/WaitRoomView.fxml"));
-		Scene scene = new Scene(WaitRoomtView);
-		Stage primaryStage = (Stage) btnPlay.getScene().getWindow();
-		primaryStage.setScene(scene);
+		Parent GameRoomView = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/InGameView.fxml"));
+		AnchorPane root = (AnchorPane) StartClient.stage.getScene().getRoot();
+		root.getChildren().add(GameRoomView);
 	}
 	public void printRating() {
-		//유저 랭킹 불러오는 메소드
-		txtRating.setText("90");
+		txtRating.setText(Integer.toString(account.getRankPoint()));
+		
 	}
 	public void exit() {
+		Client.client.stopClient();
 		System.exit(0);
 	}
 }

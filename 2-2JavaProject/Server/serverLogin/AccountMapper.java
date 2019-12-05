@@ -10,8 +10,8 @@ public class AccountMapper {
 
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:xe";
-	String userName = "LOGINMANAGER";
-	String password = "q1w2e3r4";
+	String userName = "LEE";
+	String password = "redsun";
 
 	public Account getAccountById(String id) {
 		Connection connection = null;
@@ -19,7 +19,7 @@ public class AccountMapper {
 		ResultSet resultSet = null;
 
 		Account account = new Account();
-		String sql = "SELECT USER_ID, USER_PW, RANKPOINT FROM USERINFO WHERE USER_ID = '" + id + "'";
+		String sql = "SELECT USER_ID, USER_PW, USER_NAME, RANKPOINT FROM USERINFO WHERE USER_ID = '" + id + "'";
 		System.out.println(sql);
 		try {
 			Class.forName(driver);
@@ -32,6 +32,7 @@ public class AccountMapper {
 			if (resultSet.next()) {
 				account.setId(resultSet.getString("USER_ID"));
 				account.setPassword(resultSet.getString("USER_PW"));
+				account.setUserName(resultSet.getString("USER_NAME"));
 				account.setRankPoint(resultSet.getInt("RANKPOINT"));
 			}
 		} catch (Exception e) {
@@ -71,9 +72,18 @@ public class AccountMapper {
 
 			resultSet = pst.executeQuery();
 
+			String text = null;
+			
 			if (resultSet.next()) {
-				account.setId(resultSet.getString("USER_ID"));
+				text = resultSet.getString("USER_ID");
 			}
+			
+			char[] ttxt = text.toCharArray();
+			for (int i = (text.length()/2); i<text.length(); i++) {
+				ttxt[i] = '*';
+			}
+			account.setId(String.valueOf(ttxt));
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -124,15 +134,15 @@ public class AccountMapper {
 		System.out.println(sql);
 
 		try {
-			System.out.println("try");
+			
 			Class.forName(driver);
-			System.out.println("driver");
+			
 			connection = DriverManager.getConnection(url, userName, this.password);
-			System.out.println("connection");
+			
 			pst = connection.prepareStatement(sql);
-			System.out.println("sql");
+			
 			pst.execute();
-			System.out.println("executed");
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
