@@ -60,12 +60,10 @@ public class StartViewController {
 
 			System.out.println(text);
 			Client.client.send(text);
-			Thread.sleep(1000);
+			Thread.sleep(100);
 
 			logindata = MessageListener.msg.split(",");
 			if (logindata[0].equals("Login success")) {
-				new Account().setRankPoint(Integer.parseInt(logindata[1]));
-				account.setUserName(logindata[2]);
 				Parent View = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/MenuRoomView.fxml"));
 				Scene scene = new Scene(View);
 				Stage primaryStage = (Stage) btnLogin.getScene().getWindow();

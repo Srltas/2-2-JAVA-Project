@@ -10,7 +10,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class StartClient extends Application {
-
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -21,7 +20,7 @@ public class StartClient extends Application {
 			primaryStage.setScene(scene);
 			primaryStage.setOnCloseRequest(evene -> {
 				if (InGameViewController.checkCount == 1) {
-					Client.client.send("exitGameRoom," + StartViewController.account.getId());
+					Client.client.send("exitGameRoom," + StartViewController.account.getUserName());
 				}
 				System.exit(0);
 			});
