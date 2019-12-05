@@ -5,7 +5,6 @@ import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
-import clientLoginData.Account;
 import serverLogin.LoginService;
 import serverLogin.CreateAccountService;
 import serverLogin.DeniedOverlapLoginService;
@@ -55,7 +54,7 @@ class ConnectedClient extends Thread {
 					if (id != null && account!=null) {
 						System.out.println("login success");
 						DeniedOverlapLoginService.dols.logInSuccess(id);
-						dataOutStream.writeUTF("Login success,"+","+account.getRankPoint()+","+account.getUserName());
+						dataOutStream.writeUTF("Login success,"+account.getRankPoint()+","+account.getUserName());
 					}
 					
 					System.out.println(id);
