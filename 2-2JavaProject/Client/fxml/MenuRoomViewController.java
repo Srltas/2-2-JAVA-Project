@@ -3,8 +3,8 @@ package fxml;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import clientLoginData.Account;
 import clientSocketConnection.Client;
+import clientSocketConnection.MessageListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,15 +22,20 @@ public class MenuRoomViewController implements Initializable{
 	@FXML
 	private Button btnExit;
 	
-	Account account = new Account();
-	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		printRating();
 	}
 	
+	public void getRankName() {
+		
+		String[] logindata = MessageListener.msg.split(",");
+		StartViewController.account.setRankPoint(Integer.parseInt(logindata[1]));
+		StartViewController.account.setUserName(logindata[2]);
+	}
+	
 	public void play(ActionEvent event)throws Exception {
-		Client.client.send("enterGameRoom," + account.getId());
+		Client.client.send("enterGameRoom," + StartViewController.account.getUserName());
 		Thread.sleep(1000);
 
 		Parent View = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/InGameView.fxml"));
@@ -39,7 +44,7 @@ public class MenuRoomViewController implements Initializable{
 		primaryStage.setScene(scene);
 	}
 	public void printRating() {
-		txtRating.setText(Integer.toString(account.getRankPoint()));
+		txtRating.setText(Integer.toString(StartViewController.account.getRankPoint()));
 		
 	}
 	public void exit() {
