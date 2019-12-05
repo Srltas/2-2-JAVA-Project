@@ -4,16 +4,16 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import clientSocketConnection.Client;
-import clientStarter.StartClient;
+import clientSocketConnection.MessageListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import clientLoginData.Account;
+import javafx.stage.Stage;
 public class MenuRoomViewController implements Initializable{
 	@FXML
 	private Text txtRating;
@@ -22,23 +22,29 @@ public class MenuRoomViewController implements Initializable{
 	@FXML
 	private Button btnExit;
 	
-	Account account = new Account();
-	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		printRating();
 	}
 	
+	public void getRankName() {
+		
+		String[] logindata = MessageListener.msg.split(",");
+		StartViewController.account.setRankPoint(Integer.parseInt(logindata[1]));
+		StartViewController.account.setUserName(logindata[2]);
+	}
+	
 	public void play(ActionEvent event)throws Exception {
-		Client.client.send("enterGameRoom," + account.getId());
-		//Thread.sleep(100);
+		Client.client.send("enterGameRoom," + StartViewController.account.getUserName());
+		Thread.sleep(1000);
 
-		Parent GameRoomView = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/InGameView.fxml"));
-		AnchorPane root = (AnchorPane) StartClient.stage.getScene().getRoot();
-		root.getChildren().add(GameRoomView);
+		Parent View = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/InGameView.fxml"));
+		Scene scene = new Scene(View);
+		Stage primaryStage = (Stage) btnPlay.getScene().getWindow();
+		primaryStage.setScene(scene);
 	}
 	public void printRating() {
-		txtRating.setText(Integer.toString(account.getRankPoint()));
+		txtRating.setText(Integer.toString(StartViewController.account.getRankPoint()));
 		
 	}
 	public void exit() {

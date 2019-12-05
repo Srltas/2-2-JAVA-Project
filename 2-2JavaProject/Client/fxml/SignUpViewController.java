@@ -2,15 +2,15 @@ package fxml;
 
 import clientSocketConnection.Client;
 import clientSocketConnection.MessageListener;
-import clientStarter.StartClient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 public class SignUpViewController {
 	@FXML
@@ -84,9 +84,10 @@ public class SignUpViewController {
 			Thread.sleep(1000);
 			
 			if(MessageListener.msg.equals("account create success")) {
-				Parent StartView = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/StartView.fxml"));
-				AnchorPane root = (AnchorPane) StartClient.stage.getScene().getRoot();
-				root.getChildren().add(StartView);
+				Parent View = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/MenuRoomView.fxml"));
+				Scene scene = new Scene(View);
+				Stage primaryStage = (Stage) btnsignUp.getScene().getWindow();
+				primaryStage.setScene(scene);
 			}else {
 				lblPhonNumberStatus.setText("회원가입에 실패했습니다.");
 			}
@@ -94,8 +95,9 @@ public class SignUpViewController {
 	}
 	
 	public void back(ActionEvent event) throws Exception {
-		Parent StartView = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/StartView.fxml"));
-		AnchorPane root = (AnchorPane) StartClient.stage.getScene().getRoot();
-		root.getChildren().add(StartView);
+		Parent View = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/MenuRoomView.fxml"));
+		Scene scene = new Scene(View);
+		Stage primaryStage = (Stage) btnBack.getScene().getWindow();
+		primaryStage.setScene(scene);
 	}
 }

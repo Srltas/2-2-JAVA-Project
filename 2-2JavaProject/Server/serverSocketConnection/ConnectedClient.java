@@ -51,11 +51,11 @@ class ConnectedClient extends Thread {
 					String password = message[2];
 
 					DeniedOverlapLoginService.dols.isOverlap(id);
-					
-					if (id != null && login.login(message[1], message[2])) {
+					serverLogin.Account account = login.login(message[1], message[2]);
+					if (id != null && account!=null) {
 						System.out.println("login success");
 						DeniedOverlapLoginService.dols.logInSuccess(id);
-						dataOutStream.writeUTF("Login success," + new Account().getRankPoint() + new Account().getUserName());
+						dataOutStream.writeUTF("Login success,"+","+account.getRankPoint()+","+account.getUserName());
 					}
 					
 					System.out.println(id);
@@ -75,8 +75,9 @@ class ConnectedClient extends Thread {
 					System.out.println("[catch by findID]");
 					
 					IdFindService idFindService = new IdFindService();
-					if (idFindService.FindId(message[2])) {
-						dataOutStream.writeUTF("success : "+new Account().getId());
+					serverLogin.Account idFindAccount = idFindService.FindId(message[1]);
+					if ((idFindAccount != null)) {
+						dataOutStream.writeUTF("success : " + "," + idFindAccount.getId());
 					}
 					
 				} else if (message[0].equals("findPW")) {

@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import clientLoginData.Account;
 import clientSocketConnection.Client;
 import clientSocketConnection.MessageListener;
 import javafx.application.Platform;
@@ -13,7 +12,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Labeled;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -122,7 +120,7 @@ public class InGameViewController implements Initializable{
 						
 					} else if(message[0].equals("startGame")) {
 						txtWord.setText("Start Game!!");
-						Client.client.send("myTurn," + StartViewController.account.getId());
+						Client.client.send("myTurn," + StartViewController.account.getUserName());
 					} else if(message[0].equals("myTurn")) {
 						txtFielWord.setOpacity(1);
 						btnWord.setOpacity(1);
@@ -163,47 +161,55 @@ public class InGameViewController implements Initializable{
 		}
 	}
 	public void sendMessage() {
-		Client.client.send("chat," + StartViewController.account.getId() + " : " +  txtFieldChat.getText());
+		Client.client.send("chat," + StartViewController.account.getUserName() + " : " +  txtFieldChat.getText());
 		txtFieldChat.setText("");
 	}
 	
 	public void enterPlayer1(String name) {
 		imgUser1.setOpacity(1);
 		txtUser1Name.setText(name);
+		txtUser1Heart.setText(name);
 	}
 
 	public void enterPlayer2(String name) {
 		imgUser2.setOpacity(1);
 		txtUser2Name.setText(name);
+		txtUser2Heart.setText(name);
 	}
 
 	public void enterPlayer3(String name) {
 		imgUser3.setOpacity(1);
 		txtUser3Name.setText(name);
+		txtUser3Heart.setText(name);
 	}
 
 	public void enterPlayer4(String name) {
 		imgUser4.setOpacity(1);
 		txtUser4Name.setText(name);
+		txtUser4Heart.setText(name);
 	}
 	
 	public void exitPlayer1() {
 		imgUser1.setOpacity(0);
 		txtUser1Name.setText("");
+		txtUser1Heart.setText("");
 	}
 	
 	public void exitPlayer2() {
 		imgUser2.setOpacity(0);
 		txtUser2Name.setText("");
+		txtUser2Heart.setText("");
 	}
 	
 	public void exitPlayer3() {
 		imgUser3.setOpacity(0);
 		txtUser3Name.setText("");
+		txtUser3Heart.setText("");
 	}
 	
 	public void exitPlayer4() {
 		imgUser4.setOpacity(0);
 		txtUser4Name.setText("");
+		txtUser4Heart.setText("");
 	}
 }
