@@ -49,12 +49,14 @@ class ConnectedClient extends Thread {
 					String id = message[1];
 					String password = message[2];
 
-					DeniedOverlapLoginService.dols.isOverlap(id);
-					serverLogin.Account account = login.login(message[1], message[2]);
+					if (DeniedOverlapLoginService.dols.isOverlap(id)) {
+						id = null;
+					}
+					serverLogin.Account account = login.login(id, password);
 					if (id != null && account!=null) {
 						System.out.println("login success");
 						DeniedOverlapLoginService.dols.logInSuccess(id);
-						dataOutStream.writeUTF("Login success,"+","+account.getRankPoint()+","+account.getUserName());
+						dataOutStream.writeUTF("Login success,"+account.getRankPoint()+","+account.getUserName());
 					}
 					
 					System.out.println(id);
