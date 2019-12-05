@@ -50,10 +50,10 @@ class ConnectedClient extends Thread {
 					String id = message[1];
 					String password = message[2];
 					
-					System.out.println("login overlap.");
-
+					if (DeniedOverlapLoginService.dols.isOverlap(id)) {
+						id = null;
+					}
 					
-					System.out.println("overlap test : "+id);
 					serverLogin.Account account = login.login(id, password);
 					if (id != null && account!=null) {
 						System.out.println("login success");
