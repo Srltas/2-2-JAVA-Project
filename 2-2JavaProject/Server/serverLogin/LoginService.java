@@ -1,15 +1,14 @@
 package serverLogin;
 
 public class LoginService {
-	public boolean login(String id, String password) {
-		if ((id != null) 
-				&& (password != null)) {
+
+	public Account login(String id, String password) {		
+		if ((id != null) && (password != null)) {
 			Account account = new AccountMapper().getAccountById(id);
-			if (account.getPassword() != null 
-					&& account.getPassword().equals(password)) {
-				return true;
+			if (account.getPassword() != null && account.getPassword().equals(password)) {
+				return account;
 			}
 		}
-		return false;
+		return null;
 	}
 }//

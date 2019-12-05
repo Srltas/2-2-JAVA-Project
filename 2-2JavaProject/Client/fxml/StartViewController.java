@@ -6,15 +6,15 @@ import java.io.OutputStream;
 import clientLoginData.Account;
 import clientSocketConnection.Client;
 import clientSocketConnection.MessageListener;
-import clientStarter.StartClient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 public class StartViewController {
 	@FXML
@@ -42,7 +42,6 @@ public class StartViewController {
 	OutputStream out = null;
 	DataOutputStream dout = null;
 	String[] logindata;
-	
 	public static Account account = new Account();
 
 	public void login(ActionEvent event) throws Exception {
@@ -61,17 +60,22 @@ public class StartViewController {
 
 			System.out.println(text);
 			Client.client.send(text);
-			Thread.sleep(1000);
+			Thread.sleep(100);
 
 			logindata = MessageListener.msg.split(",");
 			if (logindata[0].equals("Login success")) {
-				new Account().setRankPoint(Integer.parseInt(logindata[1]));
-				Parent menuView = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/MenuRoomView.fxml"));
-				AnchorPane root = (AnchorPane) StartClient.stage.getScene().getRoot();
-				root.getChildren().add(menuView);
+				Parent View = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/MenuRoomView.fxml"));
+				Scene scene = new Scene(View);
+				Stage primaryStage = (Stage) btnLogin.getScene().getWindow();
+				primaryStage.setScene(scene);
 			} else {
-				lblPwStatus.setText("가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.");
-				lblIdStatus.setText("");
+				
+				try {
+					lblPwStatus.setText("가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.");
+					lblIdStatus.setText("");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 
 				account.setId(null);
 				account.setPassword(null);
@@ -80,23 +84,26 @@ public class StartViewController {
 	}
 
 	public void enterSignUpView(ActionEvent event) throws Exception {
-		Parent signUpView = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/SignUpView.fxml"));
-		AnchorPane root = (AnchorPane) StartClient.stage.getScene().getRoot();
-		root.getChildren().add(signUpView);
+		Parent View = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/SignUpView.fxml"));
+		Scene scene = new Scene(View);
+		Stage primaryStage = (Stage) btnSignUp.getScene().getWindow();
+		primaryStage.setScene(scene);
 	}
 
 	public void enterFindIdView(ActionEvent event) throws Exception {
-		Parent findIdView = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/FindIDView.fxml"));
-		AnchorPane root = (AnchorPane) StartClient.stage.getScene().getRoot();
-		root.getChildren().add(findIdView);
+		Parent View = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/FindIDView.fxml"));
+		Scene scene = new Scene(View);
+		Stage primaryStage = (Stage) btnFindId.getScene().getWindow();
+		primaryStage.setScene(scene);
 	}
-	
+
 	public void enterFindPWView(ActionEvent event) throws Exception {
-		Parent findIdView = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/FindPWView.fxml"));
-		AnchorPane root = (AnchorPane) StartClient.stage.getScene().getRoot();
-		root.getChildren().add(findIdView);
+		Parent View = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/FindPWView.fxml"));
+		Scene scene = new Scene(View);
+		Stage primaryStage = (Stage) btnFindPW.getScene().getWindow();
+		primaryStage.setScene(scene);
 	}
-	
+
 	public void Eixt() {
 		System.exit(0);
 	}

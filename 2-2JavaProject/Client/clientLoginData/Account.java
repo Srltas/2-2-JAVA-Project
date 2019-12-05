@@ -1,9 +1,11 @@
 package clientLoginData;
+
 // login info
 public class Account {
 	private String id;
 	private String password;
 	private String phoneNumber;
+	private String userName;
 	private int rankPoint;
 	
 	public String getId() {
@@ -22,6 +24,10 @@ public class Account {
 		return rankPoint;
 	}
 	
+	public String getUserName() {
+		return userName;
+	}
+	
 	public void setId(String id) {
 		this.id = id;
 	}
@@ -37,4 +43,9 @@ public class Account {
 	public void setRankPoint(int rankPoint) {
 		this.rankPoint = rankPoint;
 	}
+	
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
 }
