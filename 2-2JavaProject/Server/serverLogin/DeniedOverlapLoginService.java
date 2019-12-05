@@ -18,7 +18,7 @@ public class DeniedOverlapLoginService {
 	
 	public boolean isOverlap(String userId) {
 		//중복 로그인인지 확인하는 메소드
-		while(!userIter.hasNext()) {
+		while(userIter.hasNext()) {
 			if (userIter.next()==userId) {
 				return true;
 			}
