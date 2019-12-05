@@ -79,7 +79,7 @@ public class SignUpViewController {
 		}
 		//회워가입
 		if(id.equals("") != true && pw.equals("") != true && userName.equals("") != true && userPhonNumber.equals("") != true) {
-			text = "signUp," + id + "," + pw + "," + userName + "," + userPhonNumber;
+			text = "signUp," + id + "," + pw + "," + pwCheck + "," + userName + "," + userPhonNumber;
 			Client.client.send(text);
 			Thread.sleep(1000);
 			

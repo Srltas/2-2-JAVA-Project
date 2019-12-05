@@ -119,8 +119,8 @@ public class InGameViewController implements Initializable{
 							exitPlayer4();
 						
 					} else if(message[0].equals("startGame")) {
-						txtWord.setText("Start Game!!");
-						Client.client.send("myTurn," + StartViewController.account.getUserName());
+						txtWord.setText("Start!!");
+						Client.client.send("Turn," + StartViewController.account.getUserName());
 					} else if(message[0].equals("myTurn")) {
 						txtFielWord.setOpacity(1);
 						btnWord.setOpacity(1);

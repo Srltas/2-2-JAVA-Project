@@ -49,8 +49,10 @@ class ConnectedClient extends Thread {
 					String id = message[1];
 					String password = message[2];
 
-					DeniedOverlapLoginService.dols.isOverlap(id);
-					serverLogin.Account account = login.login(message[1], message[2]);
+					if (DeniedOverlapLoginService.dols.isOverlap(id)) {
+						id = null;
+					}
+					serverLogin.Account account = login.login(id, password);
 					if (id != null && account!=null) {
 						System.out.println("login success");
 						DeniedOverlapLoginService.dols.logInSuccess(id);
@@ -149,7 +151,7 @@ class ConnectedClient extends Thread {
 						client.dataOutStream.writeUTF("exitGameRoom," + Integer.toString(exitPlayerNumber + 1));
 
 					}
-				} else if (message[0].equals("myTurn")) { // 각 턴에 해당하는 유저 지정
+				} else if (message[0].equals("Turn")) { // 각 턴에 해당하는 유저 지정
 					if (Server.playerList[Server.gameTurn % 4].equals(this.playerName)) {
 						dataOutStream.writeUTF("myTurn," + Integer.toString(Server.gameTurn));
 						Server.gameTurn++;
@@ -158,6 +160,7 @@ class ConnectedClient extends Thread {
 					if (Server.playerList[Server.gameTurnOff % 4].equals(this.playerName)) {
 						dataOutStream.writeUTF("myTurnOff,");
 						Server.gameTurnOff++;
+						message[0] = null;
 					}
 				} else if(message[0].equals("word")) { //단어 유효 검사
 					
@@ -167,6 +170,8 @@ class ConnectedClient extends Thread {
 					for (ConnectedClient client : Server.clients) {
 						client.dataOutStream.writeUTF("chat," + message[1]);
 					}
+				} else if(message[0] == null) {
+					
 				}
 			}
 		} catch (Exception e) {
