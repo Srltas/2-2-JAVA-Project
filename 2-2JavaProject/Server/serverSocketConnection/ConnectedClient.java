@@ -55,7 +55,7 @@ class ConnectedClient extends Thread {
 					if (id != null && account!=null) {
 						System.out.println("login success");
 						DeniedOverlapLoginService.dols.logInSuccess(id);
-						dataOutStream.writeUTF("Login success,"+","+account.getRankPoint()+","+account.getUserName());
+						dataOutStream.writeUTF("Login success,"+account.getRankPoint()+","+account.getUserName());
 					}
 					
 					System.out.println(id);
