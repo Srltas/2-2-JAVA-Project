@@ -66,7 +66,7 @@
          </font>
       </Text>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0e7245" height="244.0" layoutX="316.0" layoutY="129.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="562.0" />
-      <TextField fx:id="txtFielWord" disable="true" layoutX="317.0" layoutY="339.0" prefHeight="62.0" prefWidth="562.0" promptText="다음단어">
+      <TextField fx:id="txtFielWord" disable="true" layoutX="317.0" layoutY="339.0" onAction="#sendWord" prefHeight="62.0" prefWidth="562.0" promptText="다음단어">
          <font>
             <Font size="31.0" />
          </font>
@@ -91,7 +91,7 @@
             <Image url="@out.png" />
          </image>
       </ImageView>
-      <Button fx:id="btnWord" disable="true" layoutX="317.0" layoutY="401.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="562.0" text="단어입력">
+      <Button fx:id="btnWord" disable="true" layoutX="317.0" layoutY="401.0" mnemonicParsing="false" onAction="#sendWord" prefHeight="45.0" prefWidth="562.0" text="단어입력">
          <font>
             <Font size="18.0" />
          </font>
@@ -159,5 +159,6 @@
       <Circle fill="#55a45b" layoutX="1010.0" layoutY="426.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
       <Circle fill="#55a45b" layoutX="1062.0" layoutY="426.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
       <Circle fill="#55a45b" layoutX="1114.0" layoutY="426.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+      <Label fx:id="lblWordWarning" layoutX="463.0" layoutY="449.0" textFill="RED" />
    </children>
 </AnchorPane>

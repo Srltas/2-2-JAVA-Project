@@ -11,6 +11,8 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Labeled;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -34,6 +36,8 @@ public class InGameViewController implements Initializable{
 	private ImageView imgUser3;
 	@FXML
 	private ImageView imgUser4;
+	@FXML
+	private Label lblWordWarning;
 	@FXML
 	private Button btnChat;
 	@FXML
@@ -72,6 +76,7 @@ public class InGameViewController implements Initializable{
 	String msg;
 	String[] message;
 	public static int checkCount = 0;
+	int gameTurn;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -98,7 +103,7 @@ public class InGameViewController implements Initializable{
 							enterPlayer4(message[2]);
 						}
 					} else if(message[0].equals("chat")) {
-						String chatMessage = StartViewController.account.getId() +" : "+ message[1] + "\n";
+						String chatMessage = message[1] + "\n";
 						Platform.runLater(() -> {
 							txtAreaChat.appendText(chatMessage);
 						});
@@ -113,6 +118,18 @@ public class InGameViewController implements Initializable{
 						else if(message[1].equals("4"))
 							exitPlayer4();
 						
+					} else if(message[0].equals("startGame")) {
+						txtWord.setText("Start Game!!");
+						Client.client.send("myTurn," + StartViewController.account.getId());
+					} else if(message[0].equals("myTurn")) {
+						txtFielWord.setOpacity(1);
+						btnWord.setOpacity(1);
+						gameTurn = Integer.parseInt(message[1]);	//게임 턴
+					} else if(message[0].equals("myTurnOff")) {
+						txtFielWord.setOpacity(0);
+						btnWord.setOpacity(0);
+					} else if(message[0].equals("")) {
+						
 					} else if(message[0].equals(" ")) {
 						
 					}
@@ -122,9 +139,29 @@ public class InGameViewController implements Initializable{
 		thread.start();
 	}
 	
-	
+	public void sendWord() {
+		String word = txtFielWord.getText();
+		txtFielWord.setText("");	//txtFielWord 비우기
+		
+		if(word.length() > 1 && word.length() < 6) {
+			if(gameTurn != 0) {
+				char[] arrayWord = word.toCharArray();	//문자열 배열변환
+				char[] arrayText = txtWord.getText().toCharArray(); //문자열 배열변환
+				
+				if(arrayWord[0] == arrayText[arrayText.length]) {
+					Client.client.send("word," + word);	
+				}else {
+					lblWordWarning.setText("다시 입력하세요.");
+				}
+			}else {
+				Client.client.send("word," + word);
+			}
+		}else {
+			lblWordWarning.setText("다시 입력하세요.");
+		}
+	}
 	public void sendMessage() {
-		Client.client.send("chat," + txtFieldChat.getText());
+		Client.client.send("chat," + StartViewController.account.getId() + " : " +  txtFieldChat.getText());
 		txtFieldChat.setText("");
 	}
 	

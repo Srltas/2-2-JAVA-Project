@@ -1,8 +1,8 @@
 package clientStarter;
 
-import clientLoginData.Account;
 import clientSocketConnection.Client;
 import fxml.InGameViewController;
+import fxml.StartViewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 public class StartClient extends Application {
 
 	public static Stage stage = null;
-	Account account = new Account();
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -29,7 +28,7 @@ public class StartClient extends Application {
 			primaryStage.setScene(scene);
 			primaryStage.setOnCloseRequest(evene -> {
 				if (InGameViewController.checkCount == 1) {
-					Client.client.send("exitGameRoom," + account.getId());
+					Client.client.send("exitGameRoom," + StartViewController.account.getId());
 				}
 				System.exit(0);
 			});

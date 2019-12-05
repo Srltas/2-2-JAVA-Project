@@ -13,6 +13,8 @@ public class Server {
 	String ip = "210.119.33.40";
 	int port = 9876;
 	static int gameRoomCount = 0;
+	static int gameTurn = 0;
+	static int gameTurnOff = 0;
 	static String[] playerList = {"","","",""};
 	
 	public static void main(String[] args) {
