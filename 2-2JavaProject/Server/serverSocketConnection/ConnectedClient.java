@@ -5,7 +5,6 @@ import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
-import clientLoginData.Account;
 import serverLogin.LoginService;
 import serverLogin.CreateAccountService;
 import serverLogin.DeniedOverlapLoginService;
@@ -150,7 +149,7 @@ class ConnectedClient extends Thread {
 						client.dataOutStream.writeUTF("exitGameRoom," + Integer.toString(exitPlayerNumber + 1));
 
 					}
-				} else if (message[0].equals("myTurn")) { // 각 턴에 해당하는 유저 지정
+				} else if (message[0].equals("Turn")) { // 각 턴에 해당하는 유저 지정
 					if (Server.playerList[Server.gameTurn % 4].equals(this.playerName)) {
 						dataOutStream.writeUTF("myTurn," + Integer.toString(Server.gameTurn));
 						Server.gameTurn++;
@@ -159,6 +158,7 @@ class ConnectedClient extends Thread {
 					if (Server.playerList[Server.gameTurnOff % 4].equals(this.playerName)) {
 						dataOutStream.writeUTF("myTurnOff,");
 						Server.gameTurnOff++;
+						message[0] = null;
 					}
 				} else if(message[0].equals("word")) { //단어 유효 검사
 					
@@ -168,6 +168,8 @@ class ConnectedClient extends Thread {
 					for (ConnectedClient client : Server.clients) {
 						client.dataOutStream.writeUTF("chat," + message[1]);
 					}
+				} else if(message[0] == null) {
+					
 				}
 			}
 		} catch (Exception e) {
