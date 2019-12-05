@@ -43,7 +43,7 @@ public class StartViewController {
 	DataOutputStream dout = null;
 	String[] logindata;
 	public static Account account = new Account();
-	
+
 	public void login(ActionEvent event) throws Exception {
 		account.setId(txtUserId.getText());
 		account.setPassword(txtPassword.getText());
@@ -70,8 +70,13 @@ public class StartViewController {
 				AnchorPane root = (AnchorPane) StartClient.stage.getScene().getRoot();
 				root.getChildren().add(menuView);
 			} else {
-				lblPwStatus.setText("가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.");
-				lblIdStatus.setText("");
+				
+				try {
+					lblPwStatus.setText("가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.");
+					lblIdStatus.setText("");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 
 				account.setId(null);
 				account.setPassword(null);
@@ -90,13 +95,13 @@ public class StartViewController {
 		AnchorPane root = (AnchorPane) StartClient.stage.getScene().getRoot();
 		root.getChildren().add(findIdView);
 	}
-	
+
 	public void enterFindPWView(ActionEvent event) throws Exception {
 		Parent findIdView = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/FindPWView.fxml"));
 		AnchorPane root = (AnchorPane) StartClient.stage.getScene().getRoot();
 		root.getChildren().add(findIdView);
 	}
-	
+
 	public void Eixt() {
 		System.exit(0);
 	}
