@@ -5,8 +5,11 @@ import java.util.Set;
 import java.util.Iterator;
 
 public class DeniedOverlapLoginService {
+	
+	public static DeniedOverlapLoginService dols = new DeniedOverlapLoginService();
+	
 	private static Set<String> onlineUserId = new HashSet<String>();
-	Iterator<String> userIter = onlineUserId.iterator();
+	private static Iterator<String> userIter = onlineUserId.iterator();
 	
 	public void logInSuccess(String userId) {
 		//로그인 성공시 onlineUserId에 값 입력

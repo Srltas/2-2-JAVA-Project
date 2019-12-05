@@ -8,9 +8,9 @@ import java.net.Socket;
 import clientLoginData.Account;
 import serverLogin.LoginService;
 import serverLogin.CreateAccountService;
+import serverLogin.DeniedOverlapLoginService;
 import serverLogin.IdFindService;
 import serverLogin.ChangePasswordService;
-import serverLogin.IdFindService;
 
 class ConnectedClient extends Thread {
 	Socket socket;
@@ -20,6 +20,7 @@ class ConnectedClient extends Thread {
 	DataInputStream dataInStream;
 
 	LoginService login = new LoginService();
+	
 	int playerNumber = 0;
 
 	ConnectedClient(Socket _s) {
@@ -49,11 +50,14 @@ class ConnectedClient extends Thread {
 					String id = message[1];
 					String password = message[2];
 
+					DeniedOverlapLoginService.dols.isOverlap(id);
+					
 					if (id != null && login.login(message[1], message[2])) {
 						System.out.println("login success");
+						DeniedOverlapLoginService.dols.logInSuccess(id);
 						dataOutStream.writeUTF("Login success," + new Account().getRankPoint() + new Account().getUserName());
 					}
-
+					
 					System.out.println(id);
 					System.out.println(password);
 				} else if (message[0].equals("signUp")) {
@@ -144,11 +148,6 @@ class ConnectedClient extends Thread {
 						client.dataOutStream.writeUTF("chat," + message[1]);
 					}
 				}
-
-				/*
-				 * for(ConnectedClient client : LoginUIServer.clients) { if(this.equals(client))
-				 * continue; client.dataOutStream.writeUTF(msg); }
-				 */
 			}
 		} catch (Exception e) {
 			Server.clients.remove(this);
