@@ -9,11 +9,12 @@ public class DeniedOverlapLoginService {
 	public static DeniedOverlapLoginService dols = new DeniedOverlapLoginService();
 	
 	private static Set<String> onlineUserId = new HashSet<String>();
-	private static Iterator<String> userIter = onlineUserId.iterator();
+	private static Iterator<String> userIter;
 	
 	public void logInSuccess(String userId) {
 		//로그인 성공시 onlineUserId에 값 입력
 		onlineUserId.add(userId);
+		userIter = onlineUserId.iterator();
 	}
 	
 	public boolean isOverlap(String userId) {
