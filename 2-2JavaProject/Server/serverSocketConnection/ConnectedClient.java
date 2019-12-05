@@ -8,6 +8,9 @@ import java.net.Socket;
 import clientLoginData.Account;
 import serverLogin.LoginService;
 import serverLogin.CreateAccountService;
+import serverLogin.IdFindService;
+import serverLogin.ChangePasswordService;
+import serverLogin.IdFindService;
 
 class ConnectedClient extends Thread {
 	Socket socket;
@@ -66,8 +69,24 @@ class ConnectedClient extends Thread {
 					}
 				} else if (message[0].equals("findID")) {
 					// 아이디 찾기
+					System.out.println("[catch by findID]");
+					
+					IdFindService idFindService = new IdFindService();
+					if (idFindService.FindId(message[2])) {
+						dataOutStream.writeUTF("success : "+new Account().getId());
+					}
+					
 				} else if (message[0].equals("findPW")) {
 					// 비밀번호 변경
+					ChangePasswordService changePasswordService = new ChangePasswordService();
+					
+					System.out.println("catch by change PW");
+					
+					if(changePasswordService.changePassword(message[1],message[2],message[3])) {
+						System.out.println("change password success");
+						dataOutStream.writeUTF("password change success");
+					}
+					
 				} else if (message[0].equals("enterGameRoom")) {
 					// GameRoom에 입장하는 클라이언트
 					int enterPlayerNumber;

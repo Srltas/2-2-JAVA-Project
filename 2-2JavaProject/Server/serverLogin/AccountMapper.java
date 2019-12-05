@@ -72,9 +72,18 @@ public class AccountMapper {
 
 			resultSet = pst.executeQuery();
 
+			String text = null;
+			
 			if (resultSet.next()) {
-				account.setId(resultSet.getString("USER_ID"));
+				text = resultSet.getString("USER_ID");
 			}
+			
+			char[] ttxt = text.toCharArray();
+			for (int i = (text.length()/2); i<text.length(); i++) {
+				ttxt[i] = '*';
+			}
+			account.setId(String.valueOf(ttxt));
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
