@@ -48,7 +48,7 @@
       </ImageView>
       <ImageView fx:id="imgUser2" fitHeight="67.0" fitWidth="70.0" layoutX="17.0" layoutY="248.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@pppp.png" />
+            <Image url="@유저아이콘.png" />
          </image>
       </ImageView>
       <Text fx:id="txtUser1Name" fill="WHITE" layoutX="84.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="216.99999976158142">
