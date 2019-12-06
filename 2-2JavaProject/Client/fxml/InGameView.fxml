@@ -26,42 +26,34 @@
       </ImageView>
       <ImageView fitHeight="330.0" fitWidth="283.0" layoutX="17.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true">
          <image>
-<<<<<<< HEAD
-            <Image url="@playerpl.png" />
-=======
             <Image url="@유저리스트배경.png" />
->>>>>>> branch 'master' of https://github.com/Srltas/2-2-JAVA-Project.git
          </image>
       </ImageView>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#09511f" height="283.0" layoutY="464.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1196.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#034015" height="107.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1196.0" />
-      <ImageView fx:id="imgUser1" fitHeight="67.0" fitWidth="70.0" layoutX="17.0" layoutY="181.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-<<<<<<< HEAD
-            <Image url="@pppp.png" />
-=======
-            <Image url="@유저아이콘.png" />
->>>>>>> branch 'master' of https://github.com/Srltas/2-2-JAVA-Project.git
-         </image>
-      </ImageView>
-      <ImageView fx:id="imgUser3" fitHeight="67.0" fitWidth="70.0" layoutX="17.0" layoutY="315.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgUser1" fitHeight="67.0" fitWidth="70.0" layoutX="17.0" layoutY="181.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@pppp.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imgUser4" fitHeight="67.0" fitWidth="70.0" layoutX="17.0" layoutY="383.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgUser3" fitHeight="67.0" fitWidth="70.0" layoutX="17.0" layoutY="315.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@pppp.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imgUser2" fitHeight="67.0" fitWidth="70.0" layoutX="17.0" layoutY="248.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgUser4" fitHeight="67.0" fitWidth="70.0" layoutX="17.0" layoutY="383.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@pppp.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgUser2" fitHeight="67.0" fitWidth="70.0" layoutX="17.0" layoutY="248.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@유저아이콘.png" />
          </image>
       </ImageView>
       <Text fx:id="txtUser1Name" fill="WHITE" layoutX="84.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="216.99999976158142">
          <font>
-            <Font size="57.0" />
+            <Font size="30.0" />
          </font>
       </Text>
       <Text fx:id="txtUser2Name" fill="WHITE" layoutX="84.0" layoutY="303.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="216.99998939037323">
@@ -115,7 +107,7 @@
             <Image url="@time_1.png" />
          </image>
       </ImageView>
-      <Label layoutX="988.0" layoutY="216.0" prefHeight="90.0" prefWidth="102.0" textAlignment="CENTER" textFill="WHITE">
+      <Label fx:id="lblTime" layoutX="988.0" layoutY="216.0" prefHeight="90.0" prefWidth="102.0" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="77.0" />
          </font>
@@ -130,20 +122,6 @@
             <Font size="34.0" />
          </font>
       </Text>
-<<<<<<< HEAD
-<<<<<<< HEAD
-      <ImageView fitHeight="90.0" fitWidth="81.0" layoutX="352.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@pakapaka.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="90.0" fitWidth="81.0" layoutX="792.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@pakapaka.png" />
-         </image>
-      </ImageView>
-=======
-=======
       <ImageView fitHeight="90.0" fitWidth="81.0" layoutX="352.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@인게임제목.png" />
@@ -154,12 +132,5 @@
             <Image url="@인게임제목.png" />
          </image>
       </ImageView>
->>>>>>> branch 'master' of https://github.com/Srltas/2-2-JAVA-Project.git
-      <Text fx:id="txtTurnUserName" fill="WHITE" layoutX="24.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="a" textAlignment="RIGHT" wrappingWidth="519.251953125">
-         <font>
-            <Font size="58.0" />
-         </font>
-      </Text>
->>>>>>> branch 'master' of https://github.com/Srltas/2-2-JAVA-Project.git
    </children>
 </AnchorPane>

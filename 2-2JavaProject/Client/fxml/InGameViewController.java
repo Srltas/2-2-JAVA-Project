@@ -7,6 +7,8 @@ import java.util.ResourceBundle;
 
 import clientSocketConnection.Client;
 import clientSocketConnection.MessageListener;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.beans.property.IntegerProperty;
@@ -20,6 +22,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 public class InGameViewController implements Initializable {
 	@FXML
@@ -86,6 +89,16 @@ public class InGameViewController implements Initializable {
 	
 	public void time() {
 		lblTime.textProperty().bind(timeSeconds.divide(100).asString());
+		if (timeline != null) {
+            timeline.stop();
+        }
+        timeSeconds.set((STARTTIME+1)*100);
+        timeline = new Timeline();
+        timeline.getKeyFrames().add(
+
+                new KeyFrame(Duration.seconds(STARTTIME+1),
+                new KeyValue(timeSeconds, 0)));
+        timeline.playFromStart();
 	}
 	
 	public void Loop() {
