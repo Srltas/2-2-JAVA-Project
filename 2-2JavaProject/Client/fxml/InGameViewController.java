@@ -18,7 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
-public class InGameViewController implements Initializable{
+public class InGameViewController implements Initializable {
 	@FXML
 	private ImageView imgOut1;
 	@FXML
@@ -67,22 +67,22 @@ public class InGameViewController implements Initializable{
 	private Text txtUser4Heart;
 	@FXML
 	private ProgressBar pgbTime;
-	
+
 	InputStream inStream;
 	DataInputStream dataInStream;
-	
+
 	boolean loop = true;
 	String msg;
 	String[] message;
 	public static int checkCount = 0;
 	int gameTurn;
-	
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		Loop();
 		checkCount = 1;
 	}
-	
+
 	public void Loop() {
 		Thread thread = new Thread() {
 			@Override
@@ -101,70 +101,77 @@ public class InGameViewController implements Initializable{
 						else if (message[1].equals("4")) {
 							enterPlayer4(message[2]);
 						}
-					} else if(message[0].equals("chat")) {
+					} else if (message[0].equals("chat")) {
 						String chatMessage = message[1] + "\n";
 						Platform.runLater(() -> {
 							txtAreaChat.appendText(chatMessage);
 
 						});
 						MessageListener.msg = " ,";
-					} else if(message[0].equals("exitGameRoom")) {
-						if(message[1].equals("1"))
+					} else if (message[0].equals("exitGameRoom")) {
+						if (message[1].equals("1"))
 							exitPlayer1();
-						else if(message[1].equals("2"))
+						else if (message[1].equals("2"))
 							exitPlayer2();
-						else if(message[1].equals("3"))
+						else if (message[1].equals("3"))
 							exitPlayer3();
-						else if(message[1].equals("4"))
+						else if (message[1].equals("4"))
 							exitPlayer4();
-						
-					} else if(message[0].equals("startGame")) {
+
+					} else if (message[0].equals("startGame")) {
 						txtWord.setText("Start!!");
-						Client.client.send("Turn," + StartViewController.account.getUserName());
-					} else if(message[0].equals("myTurn")) {
-						txtFielWord.setOpacity(1);
-						btnWord.setOpacity(1);
-						gameTurn = Integer.parseInt(message[1]);	//게임 턴
-					} else if(message[0].equals("myTurnOff")) {
-						txtFielWord.setOpacity(0);
-						btnWord.setOpacity(0);
-					} else if(message[0].equals("")) {
-						
-					} else if(message[0].equals(" ")) {
-						
+					} else if (message[0].equals("myTurn")) {
+						if (message[2].equals(StartViewController.account.getUserName())) {
+							txtFielWord.setDisable(false);
+							btnWord.setDisable(false);
+							gameTurn = Integer.parseInt(message[1]); // 게임 턴
+						}
+						MessageListener.msg = " ,";
+					} else if (message[0].equals("success")) {
+						txtFielWord.setDisable(true);
+						btnWord.setDisable(true);
+						Client.client.send("changeWordText,");
+						MessageListener.msg = " ,";
+					} else if (message[0].equals("changeWordText")) {
+						txtWord.setText(message[1]);
+					} else if (message[0].equals(" ")) {
+
 					}
 				}
 			}
 		};
 		thread.start();
 	}
-	
+
 	public void sendWord() {
-		String word = txtFielWord.getText();
-		txtFielWord.setText("");	//txtFielWord 비우기
-		
-		if(word.length() > 1 && word.length() < 6) {
-			if(gameTurn != 0) {
-				char[] arrayWord = word.toCharArray();	//문자열 배열변환
-				char[] arrayText = txtWord.getText().toCharArray(); //문자열 배열변환
-				
-				if(arrayWord[0] == arrayText[arrayText.length]) {
-					Client.client.send("word," + word);	
-				}else {
+
+		String nextWord = txtFielWord.getText();
+		String word = txtWord.getText();
+		txtFielWord.setText(""); // txtFielWord 비우기
+
+		if (nextWord.length() > 1 && nextWord.length() < 6) {
+			if (gameTurn != 0) {
+				char[] arrayWord = word.toCharArray(); // 앞에 단어 문자열 배열변환
+				char[] arrayNextWord = nextWord.toCharArray(); // 이을 단어 문자열 배열변환
+				if (arrayWord[arrayWord.length - 1] == arrayNextWord[0]) {
+					Client.client.send("word," + nextWord);
+				} else {
 					lblWordWarning.setText("다시 입력하세요.");
 				}
-			}else {
-				Client.client.send("word," + word);
+			} else {
+				Client.client.send("word," + nextWord);
 			}
-		}else {
+		} else {
 			lblWordWarning.setText("다시 입력하세요.");
 		}
+
 	}
+
 	public void sendMessage() {
-		Client.client.send("chat," + StartViewController.account.getUserName() + " : " +  txtFieldChat.getText());
+		Client.client.send("chat," + StartViewController.account.getUserName() + " : " + txtFieldChat.getText());
 		txtFieldChat.setText("");
 	}
-	
+
 	public void enterPlayer1(String name) {
 		imgUser1.setOpacity(1);
 		txtUser1Name.setText(name);
@@ -188,25 +195,25 @@ public class InGameViewController implements Initializable{
 		txtUser4Name.setText(name);
 		txtUser4Heart.setText(name);
 	}
-	
+
 	public void exitPlayer1() {
 		imgUser1.setOpacity(0);
 		txtUser1Name.setText("");
 		txtUser1Heart.setText("");
 	}
-	
+
 	public void exitPlayer2() {
 		imgUser2.setOpacity(0);
 		txtUser2Name.setText("");
 		txtUser2Heart.setText("");
 	}
-	
+
 	public void exitPlayer3() {
 		imgUser3.setOpacity(0);
 		txtUser3Name.setText("");
 		txtUser3Heart.setText("");
 	}
-	
+
 	public void exitPlayer4() {
 		imgUser4.setOpacity(0);
 		txtUser4Name.setText("");

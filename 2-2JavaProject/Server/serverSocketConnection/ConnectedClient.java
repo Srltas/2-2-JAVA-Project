@@ -2,6 +2,7 @@ package serverSocketConnection;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
@@ -95,6 +96,7 @@ class ConnectedClient extends Thread {
 					// GameRoom에 입장하는 클라이언트
 					int enterPlayerNumber;
 					playerName = message[1]; // 각각 cc에 해당 유저닉네임 저장
+					System.out.println(playerName);
 
 					if (Server.gameRoomCount < 4) {
 						for(enterPlayerNumber = 0; enterPlayerNumber < Server.playerList.length; enterPlayerNumber++) {
@@ -108,7 +110,7 @@ class ConnectedClient extends Thread {
 								if (Server.playerList[i].equals("")) {
 									continue;
 								}
-								Thread.sleep(500);
+								Thread.sleep(600);
 								client.dataOutStream.writeUTF(
 										"enterGameRoom," + Integer.toString(i + 1) + "," + Server.playerList[i]);
 							}
@@ -120,6 +122,7 @@ class ConnectedClient extends Thread {
 							for (ConnectedClient client : Server.clients) {
 								client.dataOutStream.writeUTF("startGame");
 							}
+							gameTurnController();
 						}
 					} else {
 						playerNumber = 0;
@@ -128,7 +131,7 @@ class ConnectedClient extends Thread {
 							for (int i = 0; i < Server.playerList.length; i++) {
 								if (Server.playerList[i].equals(""))
 									continue;
-								Thread.sleep(500);
+								Thread.sleep(600);
 								client.dataOutStream.writeUTF(
 										"enterGameRoom," + Integer.toString(i + 1) + "," + Server.playerList[i]);
 							}
@@ -151,11 +154,6 @@ class ConnectedClient extends Thread {
 						client.dataOutStream.writeUTF("exitGameRoom," + Integer.toString(exitPlayerNumber + 1));
 
 					}
-				} else if (message[0].equals("Turn")) { // 각 턴에 해당하는 유저 지정
-					if (Server.playerList[Server.gameTurn % 4].equals(this.playerName)) {
-						dataOutStream.writeUTF("myTurn," + Integer.toString(Server.gameTurn));
-						Server.gameTurn++;
-					}
 				} else if (message[0].equals("myTurnOff")) { // 턴 종료
 					if (Server.playerList[Server.gameTurnOff % 4].equals(this.playerName)) {
 						dataOutStream.writeUTF("myTurnOff,");
@@ -165,7 +163,6 @@ class ConnectedClient extends Thread {
 				} else if(message[0].equals("word")) { //단어 유효 검사
 					
 				} else if (message[0].equals("chat")) { //채팅
-
 					System.out.println(message[1]);
 					for (ConnectedClient client : Server.clients) {
 						client.dataOutStream.writeUTF("chat," + message[1]);
@@ -177,6 +174,13 @@ class ConnectedClient extends Thread {
 		} catch (Exception e) {
 			Server.clients.remove(this);
 			System.out.println("[" + this.socket.toString() + "가 연결을 종료했습니다.]");
+		}
+	}
+	
+	public void gameTurnController() throws IOException {
+		if (Server.playerList[Server.gameTurn % 4].equals(this.playerName)) {
+			dataOutStream.writeUTF("myTurn," + Integer.toString(Server.gameTurn));
+			Server.gameTurn++;
 		}
 	}
 }
