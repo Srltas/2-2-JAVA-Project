@@ -21,7 +21,7 @@
             <Image url="@이름2.png" />
          </image>
       </ImageView>
-      <Button layoutX="373.0" layoutY="433.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="215.0" text="찾기">
+      <Button layoutX="373.0" layoutY="454.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="215.0" text="찾기">
          <font>
             <Font size="29.0" />
          </font>
@@ -31,7 +31,7 @@
             <Font size="32.0" />
          </font>
       </TextField>
-      <Button layoutX="605.0" layoutY="433.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="215.0" text="뒤로">
+      <Button layoutX="605.0" layoutY="454.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="215.0" text="뒤로">
          <font>
             <Font size="29.0" />
          </font>
@@ -51,5 +51,10 @@
             <Font size="58.0" />
          </font>
       </Text>
+      <Label layoutX="373.0" layoutY="415.0" prefHeight="34.0" prefWidth="447.0" textFill="RED">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
