@@ -49,7 +49,11 @@ public class MenuRoomViewController implements Initializable{
 		
 	}
 	public void exit() {
-		Client.client.stopClient();
+		if (InGameViewController.checkCount == 1) {
+			Client.client.send("exitGameRoom," + StartViewController.account.getUserName());
+		} else {
+			Client.client.send("exitGame," + StartViewController.account.getId());
+		}
 		System.exit(0);
 	}
 }

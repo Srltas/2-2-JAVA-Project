@@ -50,6 +50,8 @@ public class InGameViewController implements Initializable {
 	@FXML
 	private Text txtWord;
 	@FXML
+	private Text txtTurnUserName;
+	@FXML
 	private Text txtUser1Name;
 	@FXML
 	private Text txtUser2Name;
@@ -57,14 +59,6 @@ public class InGameViewController implements Initializable {
 	private Text txtUser3Name;
 	@FXML
 	private Text txtUser4Name;
-	@FXML
-	private Text txtUser1Heart;
-	@FXML
-	private Text txtUser2Heart;
-	@FXML
-	private Text txtUser3Heart;
-	@FXML
-	private Text txtUser4Heart;
 	@FXML
 	private ProgressBar pgbTime;
 
@@ -124,7 +118,7 @@ public class InGameViewController implements Initializable {
 						if (message[2].equals(StartViewController.account.getUserName())) {
 							txtFielWord.setDisable(false);
 							btnWord.setDisable(false);
-							gameTurn = Integer.parseInt(message[1]); // 게임 턴
+							txtTurnUserName.setText(message[2]);
 						}
 						MessageListener.msg = " ,";
 					} else if (message[0].equals("success")) {
@@ -175,48 +169,40 @@ public class InGameViewController implements Initializable {
 	public void enterPlayer1(String name) {
 		imgUser1.setOpacity(1);
 		txtUser1Name.setText(name);
-		txtUser1Heart.setText(name);
 	}
 
 	public void enterPlayer2(String name) {
 		imgUser2.setOpacity(1);
 		txtUser2Name.setText(name);
-		txtUser2Heart.setText(name);
 	}
 
 	public void enterPlayer3(String name) {
 		imgUser3.setOpacity(1);
 		txtUser3Name.setText(name);
-		txtUser3Heart.setText(name);
 	}
 
 	public void enterPlayer4(String name) {
 		imgUser4.setOpacity(1);
 		txtUser4Name.setText(name);
-		txtUser4Heart.setText(name);
 	}
 
 	public void exitPlayer1() {
 		imgUser1.setOpacity(0);
 		txtUser1Name.setText("");
-		txtUser1Heart.setText("");
 	}
 
 	public void exitPlayer2() {
 		imgUser2.setOpacity(0);
 		txtUser2Name.setText("");
-		txtUser2Heart.setText("");
 	}
 
 	public void exitPlayer3() {
 		imgUser3.setOpacity(0);
 		txtUser3Name.setText("");
-		txtUser3Heart.setText("");
 	}
 
 	public void exitPlayer4() {
 		imgUser4.setOpacity(0);
 		txtUser4Name.setText("");
-		txtUser4Heart.setText("");
 	}
 }
