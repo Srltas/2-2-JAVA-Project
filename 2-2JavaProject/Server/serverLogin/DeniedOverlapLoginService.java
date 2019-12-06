@@ -15,11 +15,6 @@ public class DeniedOverlapLoginService {
 			return false;
 		}
 
-		/*
-		 * userList = onlineUserId.iterator(); while (userList.hasNext()) {
-		 * System.out.println(userList.next()); if(userList.next().equals(id)) { return
-		 * false; } }
-		 */
 		return true;
 	}
 
@@ -29,5 +24,12 @@ public class DeniedOverlapLoginService {
 
 	public static int printer() {
 		return onlineUserId.size();
+	}
+	
+	public static boolean remove(String id) {
+		if(onlineUserId.remove(id)) {
+			return true;
+		}
+		return false;
 	}
 }
