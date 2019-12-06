@@ -84,14 +84,14 @@ class ConnectedClient extends Thread {
 					if ((idFindAccount != null)) {
 						dataOutStream.writeUTF("findIDsuccess," + idFindAccount.getId());
 					}
-				} else if (message[0].equals("findPW")) {
+				} else if (message[0].equals("changePW")) {
 					// 비밀번호 변경
 					ChangePasswordService changePasswordService = new ChangePasswordService();
 					
 					System.out.println("catch by change PW");
 					
 					if(changePasswordService.changePassword(message[1],message[2],message[3])) {
-						System.out.println("changePasswordSuccess");
+						System.out.println("change PW Success");
 						dataOutStream.writeUTF("changePWSuccess");
 					}
 				} else if (message[0].equals("enterGameRoom")) {

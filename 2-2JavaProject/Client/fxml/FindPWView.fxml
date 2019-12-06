@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -10,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="746.0" prefWidth="1196.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.GameMainController">
+<AnchorPane prefHeight="746.0" prefWidth="1196.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.FindPwViewController">
    <children>
       <ImageView pickOnBounds="true" preserveRatio="true">
          <image>
@@ -22,17 +27,17 @@
             <Image url="@이름2.png" />
          </image>
       </ImageView>
-      <Button layoutX="375.0" layoutY="492.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="215.0" text="찾기">
+      <Button fx:id="btnChange" layoutX="375.0" layoutY="492.0" mnemonicParsing="false" onAction="#changePW" prefHeight="55.0" prefWidth="215.0" text="찾기">
          <font>
             <Font size="29.0" />
          </font>
       </Button>
-      <TextField layoutX="375.0" layoutY="220.0" prefHeight="63.0" prefWidth="447.0" promptText="ID">
+      <TextField fx:id="txtFieldID" layoutX="375.0" layoutY="220.0" onAction="#changePW" prefHeight="63.0" prefWidth="447.0" promptText="ID">
          <font>
             <Font size="32.0" />
          </font>
       </TextField>
-      <Button layoutX="606.0" layoutY="492.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="215.0" text="뒤로">
+      <Button fx:id="btnBack" layoutX="606.0" layoutY="492.0" mnemonicParsing="false" onAction="#Back" prefHeight="32.0" prefWidth="215.0" text="뒤로">
          <font>
             <Font size="29.0" />
          </font>
@@ -42,27 +47,27 @@
             <Font size="58.0" />
          </font>
       </Text>
-      <PasswordField layoutX="375.0" layoutY="312.0" prefHeight="63.0" prefWidth="447.0" promptText="비밀번호">
+      <PasswordField fx:id="txtFieldPW" layoutX="375.0" layoutY="312.0" onAction="#changePW" prefHeight="63.0" prefWidth="447.0" promptText="비밀번호">
          <font>
             <Font size="32.0" />
          </font>
       </PasswordField>
-      <PasswordField layoutX="375.0" layoutY="403.0" prefHeight="63.0" prefWidth="447.0" promptText="비밀번호 확인">
+      <PasswordField fx:id="txtFieldPW2" layoutX="375.0" layoutY="403.0" onAction="#changePW" prefHeight="63.0" prefWidth="447.0" promptText="비밀번호 확인">
          <font>
             <Font size="32.0" />
          </font>
       </PasswordField>
-      <Label layoutX="375.0" layoutY="283.0" prefHeight="28.0" prefWidth="447.0" textFill="RED">
+      <Label fx:id="lblID" layoutX="375.0" layoutY="283.0" prefHeight="28.0" prefWidth="447.0" textFill="RED">
          <font>
             <Font size="19.0" />
          </font>
       </Label>
-      <Label layoutX="373.0" layoutY="375.0" prefHeight="28.0" prefWidth="447.0" textFill="RED">
+      <Label fx:id="lblPW" layoutX="373.0" layoutY="375.0" prefHeight="28.0" prefWidth="447.0" textFill="RED">
          <font>
             <Font size="19.0" />
          </font>
       </Label>
-      <Label layoutX="375.0" layoutY="465.0" prefHeight="28.0" prefWidth="447.0" textFill="RED">
+      <Label fx:id="lblPW2" layoutX="375.0" layoutY="465.0" prefHeight="28.0" prefWidth="447.0" textFill="RED">
          <font>
             <Font size="19.0" />
          </font>
