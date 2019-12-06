@@ -37,7 +37,6 @@ class ConnectedClient extends Thread {
 
 			dataOutStream.writeUTF("[Welcome to this Server]");
 
-			
 			serverLogin.Account account;
 			while (true) {
 
@@ -49,21 +48,21 @@ class ConnectedClient extends Thread {
 					// 로그인
 					String id = message[1];
 					String password = message[2];
-					
+
 					System.out.println(DeniedOverlapLoginService.printer());
-					
+
 					if (!DeniedOverlapLoginService.search(id)) {
-						id=null;
+						id = null;
 					}
-					
+
 					account = login.login(id, password);
-					if (id != null && account!=null) {
+					if (id != null && account != null) {
 						DeniedOverlapLoginService.add(id);
 						System.out.println("login success");
-						dataOutStream.writeUTF("Login success,"+account.getRankPoint()+","+account.getUserName());
+						dataOutStream.writeUTF("Login success," + account.getRankPoint() + "," + account.getUserName());
 
 					}
-					
+
 					System.out.println(id);
 					System.out.println(password);
 				} else if (message[0].equals("signUp")) {
@@ -77,7 +76,7 @@ class ConnectedClient extends Thread {
 				} else if (message[0].equals("findID")) {
 					// 아이디 찾기
 					System.out.println("[catch by findID]");
-					
+
 					IdFindService idFindService = new IdFindService();
 					serverLogin.Account idFindAccount = idFindService.FindId(message[1]);
 					if ((idFindAccount != null)) {
@@ -86,10 +85,10 @@ class ConnectedClient extends Thread {
 				} else if (message[0].equals("changePW")) {
 					// 비밀번호 변경
 					ChangePasswordService changePasswordService = new ChangePasswordService();
-					
+
 					System.out.println("catch by change PW");
-					
-					if(changePasswordService.changePassword(message[1],message[2],message[3])) {
+
+					if (changePasswordService.changePassword(message[1], message[2], message[3])) {
 						System.out.println("change PW Success");
 						dataOutStream.writeUTF("changePWSuccess");
 					}
@@ -100,8 +99,8 @@ class ConnectedClient extends Thread {
 					System.out.println(playerName);
 
 					if (Server.gameRoomCount < 4) {
-						for(enterPlayerNumber = 0; enterPlayerNumber < Server.playerList.length; enterPlayerNumber++) {
-							if(Server.playerList[enterPlayerNumber].equals("")) {
+						for (enterPlayerNumber = 0; enterPlayerNumber < Server.playerList.length; enterPlayerNumber++) {
+							if (Server.playerList[enterPlayerNumber].equals("")) {
 								Server.playerList[enterPlayerNumber] = message[1];
 								break;
 							}
@@ -120,11 +119,10 @@ class ConnectedClient extends Thread {
 						System.out.println("[방 인원 수 : " + Server.gameRoomCount + "]");
 						// 4명이면 게임 시작!
 						if (Server.gameRoomCount == 4) {
-							Thread.sleep(1000); //1초 대기
-							for(ConnectedClient client : Server.clients) {
-								client.dataOutStream.writeUTF("startGame,");
+							for (ConnectedClient client : Server.clients) {
+								client.dataOutStream.writeUTF("startGame");
 							}
-							message[0] = null;	//다시 안들어 오는 처리
+							message[0] = null; // 다시 안들어 오는 처리
 						}
 					} else {
 						playerNumber = 0;
@@ -134,7 +132,8 @@ class ConnectedClient extends Thread {
 								if (Server.playerList[i].equals(""))
 									continue;
 								Thread.sleep(100);
-								client.dataOutStream.writeUTF("enterGameRoom," + Integer.toString(i + 1) + "," + Server.playerList[i]);
+								client.dataOutStream.writeUTF(
+										"enterGameRoom," + Integer.toString(i + 1) + "," + Server.playerList[i]);
 							}
 						}
 						Server.gameRoomCount = 1;
@@ -146,12 +145,13 @@ class ConnectedClient extends Thread {
 					
 				} else if (message[0].equals("chat")) { 
 					//채팅
+				}else if (message[0].equals("chat")) { // 채팅
 					System.out.println(message[1]);
 					for (ConnectedClient client : Server.clients) {
 						client.dataOutStream.writeUTF("chat," + message[1]);
 					}
-				} else if(message[0] == null) {
-					//대기
+				} else if (message[0] == null) {
+
 				} else if (message[0].equals("exitGameRoom")) {
 					// GameRoom에서 퇴장하는 클라이언트
 					int exitPlayerNumber;
@@ -167,18 +167,19 @@ class ConnectedClient extends Thread {
 						client.dataOutStream.writeUTF("exitGameRoom," + Integer.toString(exitPlayerNumber + 1));
 
 					}
-				} else if(message[0].equals("exitGame")) {
-					//클라이언트 종료
+				} else if (message[0].equals("exitGame")) {
+					// 클라이언트 종료
+					System.out.println(message[1]);
 					if (DeniedOverlapLoginService.remove(message[1])) {
 						System.out.println("log out success");
 					} else {
 						System.out.println("log out failed");
 					}
-					
+
 				}
 			}
 		} catch (Exception e) {
-			//e.printStackTrace();
+			// e.printStackTrace();
 			Server.clients.remove(this);
 			System.out.println("[" + this.socket.toString() + "가 연결을 종료했습니다.]");
 		}
