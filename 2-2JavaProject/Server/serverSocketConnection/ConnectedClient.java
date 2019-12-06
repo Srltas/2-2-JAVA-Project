@@ -145,21 +145,6 @@ class ConnectedClient extends Thread {
 						Server.gameRoomCount = 1;
 						System.out.println("[방 인원 수 : " + Server.gameRoomCount + "]");
 					}
-				} else if (message[0].equals("exitGameRoom")) {
-					// GameRoom에서 퇴장하는 클라이언트
-					int exitPlayerNumber;
-					for (exitPlayerNumber = 0; exitPlayerNumber < Server.playerList.length; exitPlayerNumber++) {
-						if (Server.playerList[exitPlayerNumber].equals(message[1]) == true) {
-							Server.playerList[exitPlayerNumber] = "";
-							break;
-						}
-					}
-					Server.gameRoomCount--;
-					System.out.println("[방 인원 수 : " + Server.gameRoomCount + "]");
-					for (ConnectedClient client : Server.clients) {
-						client.dataOutStream.writeUTF("exitGameRoom," + Integer.toString(exitPlayerNumber + 1));
-
-					}
 				} else if (message[0].equals("myTurnOff")) { // 턴 종료
 					if (Server.playerList[Server.gameTurnOff % 4].equals(this.playerName)) {
 						dataOutStream.writeUTF("myTurnOff,");
@@ -175,6 +160,23 @@ class ConnectedClient extends Thread {
 					}
 				} else if(message[0] == null) {
 					
+				} else if (message[0].equals("exitGameRoom")) {
+					// GameRoom에서 퇴장하는 클라이언트
+					int exitPlayerNumber;
+					for (exitPlayerNumber = 0; exitPlayerNumber < Server.playerList.length; exitPlayerNumber++) {
+						if (Server.playerList[exitPlayerNumber].equals(message[1]) == true) {
+							Server.playerList[exitPlayerNumber] = "";
+							break;
+						}
+					}
+					Server.gameRoomCount--;
+					System.out.println("[방 인원 수 : " + Server.gameRoomCount + "]");
+					for (ConnectedClient client : Server.clients) {
+						client.dataOutStream.writeUTF("exitGameRoom," + Integer.toString(exitPlayerNumber + 1));
+
+					}
+				} else if(message[0].equals("exitGame")) {
+					//클라이언트 종료
 				}
 			}
 		} catch (Exception e) {
