@@ -20,7 +20,6 @@ class ConnectedClient extends Thread {
 	DataInputStream dataInStream;
 	int playerNumber = 0;
 	String playerName;
-
 	LoginService login = new LoginService();
 
 	ConnectedClient(Socket _s) {
@@ -39,6 +38,8 @@ class ConnectedClient extends Thread {
 
 			dataOutStream.writeUTF("[Welcome to this Server]");
 
+			
+			serverLogin.Account account;
 			while (true) {
 
 				String msg = dataInStream.readUTF();
@@ -50,15 +51,18 @@ class ConnectedClient extends Thread {
 					String id = message[1];
 					String password = message[2];
 					
-					if (DeniedOverlapLoginService.dols.isOverlap(id)) {
-						id = null;
+					System.out.println(DeniedOverlapLoginService.printer());
+					
+					if (!DeniedOverlapLoginService.search(id)) {
+						id=null;
 					}
 					
-					serverLogin.Account account = login.login(id, password);
+					account = login.login(id, password);
 					if (id != null && account!=null) {
+						DeniedOverlapLoginService.add(id);
 						System.out.println("login success");
-						DeniedOverlapLoginService.dols.loginSuccess(id);
 						dataOutStream.writeUTF("Login success,"+account.getRankPoint()+","+account.getUserName());
+
 					}
 					
 					System.out.println(id);
