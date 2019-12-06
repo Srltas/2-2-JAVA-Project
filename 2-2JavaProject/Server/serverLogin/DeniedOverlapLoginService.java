@@ -25,4 +25,11 @@ public class DeniedOverlapLoginService {
 	public static int printer() {
 		return onlineUserId.size();
 	}
+	
+	public static boolean remove(String id) {
+		if(onlineUserId.remove(id)) {
+			return true;
+		}
+		return false;
+	}
 }

@@ -177,6 +177,12 @@ class ConnectedClient extends Thread {
 					}
 				} else if(message[0].equals("exitGame")) {
 					//클라이언트 종료
+					if (DeniedOverlapLoginService.remove(message[1])) {
+						System.out.println("log out success");
+					} else {
+						System.out.println("log out failed");
+					}
+					
 				}
 			}
 		} catch (Exception e) {
