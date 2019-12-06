@@ -166,7 +166,7 @@ class ConnectedClient extends Thread {
 					Thread.sleep(100);
 					gameTurnController();
 				} else if(message[0].equals("changeWordText")) {
-					for(ConnectedClient client : Server.clients) {
+					for(ConnectedClient client : Server.clients) { 
 						client.dataOutStream.writeUTF("changeWordText," + Server.word);
 					}
 				}else if (message[0].equals("chat")) { //채팅

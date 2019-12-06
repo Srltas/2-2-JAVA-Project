@@ -13,8 +13,13 @@ public class DeniedOverlapLoginService {
 			return true;
 		} else if (onlineUserId.contains(id)) {
 			return false;
+<<<<<<< HEAD
 		}
 		
+=======
+		}
+
+>>>>>>> branch 'master' of https://github.com/Srltas/2-2-JAVA-Project
 		return true;
 
 	}
@@ -25,5 +30,12 @@ public class DeniedOverlapLoginService {
 
 	public static int printer() {
 		return onlineUserId.size();
+	}
+	
+	public static boolean remove(String id) {
+		if(onlineUserId.remove(id)) {
+			return true;
+		}
+		return false;
 	}
 }
