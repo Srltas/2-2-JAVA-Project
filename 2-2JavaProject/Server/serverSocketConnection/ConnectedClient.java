@@ -101,6 +101,7 @@ class ConnectedClient extends Thread {
 					// GameRoom에 입장하는 클라이언트
 					int enterPlayerNumber;
 					playerName = message[1]; // 각각 cc에 해당 유저닉네임 저장
+					System.out.println(playerName);
 
 					if (Server.gameRoomCount < 4) {
 						for(enterPlayerNumber = 0; enterPlayerNumber < Server.playerList.length; enterPlayerNumber++) {
@@ -114,7 +115,7 @@ class ConnectedClient extends Thread {
 								if (Server.playerList[i].equals("")) {
 									continue;
 								}
-								Thread.sleep(500);
+								Thread.sleep(600);
 								client.dataOutStream.writeUTF(
 										"enterGameRoom," + Integer.toString(i + 1) + "," + Server.playerList[i]);
 							}
@@ -168,7 +169,6 @@ class ConnectedClient extends Thread {
 				} else if(message[0].equals("word")) { //단어 유효 검사
 					
 				} else if (message[0].equals("chat")) { //채팅
-
 					System.out.println(message[1]);
 					for (ConnectedClient client : Server.clients) {
 						client.dataOutStream.writeUTF("chat," + message[1]);
