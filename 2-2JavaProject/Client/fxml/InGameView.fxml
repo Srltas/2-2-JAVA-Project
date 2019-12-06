@@ -115,7 +115,7 @@
             <Image url="@../../../../../Desktop/알파카파카%20끝말잇기%20게임%20자료/500ppi/time_1.png" />
          </image>
       </ImageView>
-      <Text fill="WHITE" layoutX="242.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="~~~님의 턴입니다" textAlignment="CENTER" wrappingWidth="727.12109375">
+      <Text fill="WHITE" layoutX="542.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="님의 차레입니다." textAlignment="CENTER" wrappingWidth="455.12109375">
          <font>
             <Font size="58.0" />
          </font>
@@ -123,6 +123,11 @@
       <Text fill="WHITE" layoutX="970.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="133.12109375">
          <font>
             <Font size="72.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="24.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="a" textAlignment="RIGHT" wrappingWidth="519.251953125">
+         <font>
+            <Font size="58.0" />
          </font>
       </Text>
    </children>

@@ -20,27 +20,22 @@
             <Image url="@이름2.png" />
          </image>
       </ImageView>
-      <Button layoutX="373.0" layoutY="433.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="215.0" text="찾기">
+      <Button layoutX="489.0" layoutY="435.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="215.0" text="변경">
          <font>
             <Font size="29.0" />
          </font>
       </Button>
-      <TextField layoutX="373.0" layoutY="271.0" prefHeight="63.0" prefWidth="447.0" promptText="ID">
+      <TextField layoutX="373.0" layoutY="271.0" prefHeight="63.0" prefWidth="447.0" promptText="새 비밀번호">
          <font>
             <Font size="32.0" />
          </font>
       </TextField>
-      <TextField layoutX="373.0" layoutY="349.0" prefHeight="63.0" prefWidth="447.0" promptText="전화번호">
+      <TextField layoutX="373.0" layoutY="349.0" prefHeight="63.0" prefWidth="447.0" promptText="비밀번호 확인">
          <font>
             <Font size="32.0" />
          </font>
       </TextField>
-      <Button layoutX="605.0" layoutY="433.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="215.0" text="뒤로">
-         <font>
-            <Font size="29.0" />
-         </font>
-      </Button>
-      <Text fill="WHITE" layoutX="497.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PW 찾기">
+      <Text fill="WHITE" layoutX="488.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PW 찾기">
          <font>
             <Font size="58.0" />
          </font>
