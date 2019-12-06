@@ -39,6 +39,8 @@ class ConnectedClient extends Thread {
 
 			dataOutStream.writeUTF("[Welcome to this Server]");
 
+			
+			serverLogin.Account account;
 			while (true) {
 
 				String msg = dataInStream.readUTF();
@@ -48,21 +50,18 @@ class ConnectedClient extends Thread {
 				if (message[0].equals("Login")) {
 					// 로그인
 					String id = message[1];
-					String password = message[2];
-
-					DeniedOverlapLoginService.dols.printer();
-
-					/*
-					 * boolean online = DeniedOverlapLoginService.dols.isOverlap(id);
-					 * 
-					 * if (online) { id = null; }
-					 */
-
-					serverLogin.Account account = login.login(id, password);
-					if (id != null && account != null) {
-						System.out.println("login success");
-						DeniedOverlapLoginService.dols.loginSuccess(id);
+					String password = message[2];		
+					System.out.println(DeniedOverlapLoginService.printer());
+					
+					if (!DeniedOverlapLoginService.search(id)) {
+						id=null;
+					}
+					
+					account = login.login(id, password);
+					if (id != null && account!=null) {
+						DeniedOverlapLoginService.add(id);
 						dataOutStream.writeUTF("Login success," + account.getRankPoint() + "," + account.getUserName());
+
 					}
 
 					System.out.println(id);
@@ -101,6 +100,7 @@ class ConnectedClient extends Thread {
 					// GameRoom에 입장하는 클라이언트
 					int enterPlayerNumber;
 					playerName = message[1]; // 각각 cc에 해당 유저닉네임 저장
+					System.out.println(playerName);
 
 					if (Server.gameRoomCount < 4) {
 						for (enterPlayerNumber = 0; enterPlayerNumber < Server.playerList.length; enterPlayerNumber++) {
@@ -114,7 +114,7 @@ class ConnectedClient extends Thread {
 								if (Server.playerList[i].equals("")) {
 									continue;
 								}
-								Thread.sleep(500);
+								Thread.sleep(600);
 								client.dataOutStream.writeUTF(
 										"enterGameRoom," + Integer.toString(i + 1) + "," + Server.playerList[i]);
 							}
@@ -128,7 +128,7 @@ class ConnectedClient extends Thread {
 								client.dataOutStream.writeUTF("startGame");
 							}
 							gameTurnController();
-							message[0] = null; // 다시 안들어 오는 처리
+							message[0] = null;	//다시 안들어 오는 처리
 						}
 					} else {
 						playerNumber = 0;
@@ -169,8 +169,7 @@ class ConnectedClient extends Thread {
 					for(ConnectedClient client : Server.clients) {
 						client.dataOutStream.writeUTF("changeWordText," + Server.word);
 					}
-				} else if (message[0].equals("chat")) { // 채팅
-
+				}else if (message[0].equals("chat")) { //채팅
 					System.out.println(message[1]);
 					for (ConnectedClient client : Server.clients) {
 						client.dataOutStream.writeUTF("chat," + message[1]);
@@ -187,6 +186,7 @@ class ConnectedClient extends Thread {
 	}
 
 	public void gameTurnController() throws IOException {
+
 		for (ConnectedClient client : Server.clients) {
 			client.dataOutStream.writeUTF("myTurn," + Integer.toString(Server.gameTurn) + "," + Server.playerList[Server.gameTurn % 4]);
 		}
