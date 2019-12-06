@@ -6,11 +6,20 @@ public class DeniedOverlapLoginService {
 
 	String[] onlineUserId = new String[4];
 
-	public boolean isOverlap(String userId) {
-		for (int i = 0; i < 4; i++) {
-			if (onlineUserId[i].equals(userId)) {
+	public void printer() {
+		for (int i = 0; i < onlineUserId.length; i++) {
+			System.out.println(i + onlineUserId[i]);
+		}
+	}
 
-				return true;
+	public boolean isOverlap(String userId) {
+		if (onlineUserId == null) {
+			return false;
+		} else {
+			for (int i = 0; i < 4; i++) {
+				if (onlineUserId[i].equals(userId)) {
+					return true;
+				}
 			}
 		}
 		return false;

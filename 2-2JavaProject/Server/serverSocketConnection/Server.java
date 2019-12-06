@@ -15,6 +15,7 @@ public class Server {
 	static int gameRoomCount = 0;
 	static int gameTurn = 0;
 	static int gameTurnOff = 0;
+	static String word;
 	static String[] playerList = {"","","",""};
 
 	
