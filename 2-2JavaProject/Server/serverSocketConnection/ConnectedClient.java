@@ -20,7 +20,6 @@ class ConnectedClient extends Thread {
 	DataInputStream dataInStream;
 	int playerNumber = 0;
 	String playerName;
-
 	LoginService login = new LoginService();
 
 	ConnectedClient(Socket _s) {
@@ -39,6 +38,8 @@ class ConnectedClient extends Thread {
 
 			dataOutStream.writeUTF("[Welcome to this Server]");
 
+			
+			serverLogin.Account account;
 			while (true) {
 
 				String msg = dataInStream.readUTF();
@@ -49,15 +50,19 @@ class ConnectedClient extends Thread {
 					// 로그인
 					String id = message[1];
 					String password = message[2];
-
-					if (DeniedOverlapLoginService.dols.isOverlap(id)) {
-						id = null;
+					
+					System.out.println(DeniedOverlapLoginService.printer());
+					
+					if (!DeniedOverlapLoginService.search(id)) {
+						id=null;
 					}
-					serverLogin.Account account = login.login(id, password);
+					
+					account = login.login(id, password);
 					if (id != null && account!=null) {
+						DeniedOverlapLoginService.add(id);
 						System.out.println("login success");
-						DeniedOverlapLoginService.dols.logInSuccess(id);
 						dataOutStream.writeUTF("Login success,"+account.getRankPoint()+","+account.getUserName());
+
 					}
 					
 					System.out.println(id);
@@ -119,10 +124,11 @@ class ConnectedClient extends Thread {
 						System.out.println("[방 인원 수 : " + Server.gameRoomCount + "]");
 						// 4명이면 게임 시작!
 						if (Server.gameRoomCount == 4) {
-							for (ConnectedClient client : Server.clients) {
+							for(ConnectedClient client : Server.clients) {
 								client.dataOutStream.writeUTF("startGame");
 							}
 							gameTurnController();
+							message[0] = null;	//다시 안들어 오는 처리
 						}
 					} else {
 						playerNumber = 0;
@@ -131,7 +137,7 @@ class ConnectedClient extends Thread {
 							for (int i = 0; i < Server.playerList.length; i++) {
 								if (Server.playerList[i].equals(""))
 									continue;
-								Thread.sleep(600);
+								Thread.sleep(100);
 								client.dataOutStream.writeUTF(
 										"enterGameRoom," + Integer.toString(i + 1) + "," + Server.playerList[i]);
 							}
@@ -172,6 +178,7 @@ class ConnectedClient extends Thread {
 				}
 			}
 		} catch (Exception e) {
+			//e.printStackTrace();
 			Server.clients.remove(this);
 			System.out.println("[" + this.socket.toString() + "가 연결을 종료했습니다.]");
 		}
@@ -179,7 +186,7 @@ class ConnectedClient extends Thread {
 	
 	public void gameTurnController() throws IOException {
 		if (Server.playerList[Server.gameTurn % 4].equals(this.playerName)) {
-			dataOutStream.writeUTF("myTurn," + Integer.toString(Server.gameTurn));
+			this.dataOutStream.writeUTF("myTurn," + Integer.toString(Server.gameTurn));
 			Server.gameTurn++;
 		}
 	}

@@ -16,10 +16,12 @@ public class AccountMapper {
 	public Account getAccountById(String id) {
 		Connection connection = null;
 		PreparedStatement pst = null;
+		PreparedStatement pst2 = null;
 		ResultSet resultSet = null;
 
 		Account account = new Account();
-		String sql = "SELECT USER_ID, USER_PW, USER_NAME, RANKPOINT FROM USERINFO WHERE USER_ID = '" + id + "'";
+		String sql = "SELECT USER_ID, USER_PW, USER_NAME, RANKPOINT FROM USERINFO WHERE USER_ID = '" + id
+				+ "'";
 		System.out.println(sql);
 		try {
 			Class.forName(driver);
@@ -35,6 +37,7 @@ public class AccountMapper {
 				account.setUserName(resultSet.getString("USER_NAME"));
 				account.setRankPoint(resultSet.getInt("RANKPOINT"));
 			}
+	
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -44,6 +47,10 @@ public class AccountMapper {
 				}
 				if (pst != null) {
 					pst.close();
+				}
+
+				if (pst2 != null) {
+					pst2.close();
 				}
 				if (connection != null) {
 					connection.close();
@@ -73,17 +80,17 @@ public class AccountMapper {
 			resultSet = pst.executeQuery();
 
 			String text = null;
-			
+
 			if (resultSet.next()) {
 				text = resultSet.getString("USER_ID");
 			}
-			
+
 			char[] ttxt = text.toCharArray();
-			for (int i = (text.length()/2); i<text.length(); i++) {
+			for (int i = (text.length() / 2); i < text.length(); i++) {
 				ttxt[i] = '*';
 			}
 			account.setId(String.valueOf(ttxt));
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -129,20 +136,16 @@ public class AccountMapper {
 		Connection connection = null;
 		PreparedStatement pst = null;
 
-		String sql = "INSERT INTO USERINFO VALUES('" + id + "','" + password + "','" + phoneNumber + "','"+ nickName +"', '0')";
+		String sql = "INSERT INTO USERINFO VALUES('" + id + "','" + password + "','" + phoneNumber + "','" + nickName
+				+ "', '0')";
 
 		System.out.println(sql);
 
 		try {
-			
 			Class.forName(driver);
-			
 			connection = DriverManager.getConnection(url, userName, this.password);
-			
 			pst = connection.prepareStatement(sql);
-			
 			pst.execute();
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -156,4 +159,5 @@ public class AccountMapper {
 		}
 		return true;
 	}
+	
 }
