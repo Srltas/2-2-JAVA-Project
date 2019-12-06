@@ -119,6 +119,7 @@ class ConnectedClient extends Thread {
 						System.out.println("[방 인원 수 : " + Server.gameRoomCount + "]");
 						// 4명이면 게임 시작!
 						if (Server.gameRoomCount == 4) {
+							Thread.sleep(1000);
 							for (ConnectedClient client : Server.clients) {
 								client.dataOutStream.writeUTF("startGame");
 							}
@@ -143,15 +144,13 @@ class ConnectedClient extends Thread {
 					
 				} else if(message[0].equals("")) {
 					
-				} else if (message[0].equals("chat")) { 
-					//채팅
-				}else if (message[0].equals("chat")) { // 채팅
+				} else if (message[0].equals("chat")) { // 채팅
 					System.out.println(message[1]);
 					for (ConnectedClient client : Server.clients) {
 						client.dataOutStream.writeUTF("chat," + message[1]);
 					}
 				} else if (message[0] == null) {
-
+					//대기
 				} else if (message[0].equals("exitGameRoom")) {
 					// GameRoom에서 퇴장하는 클라이언트
 					int exitPlayerNumber;

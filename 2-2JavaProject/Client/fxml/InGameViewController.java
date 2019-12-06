@@ -7,7 +7,10 @@ import java.util.ResourceBundle;
 
 import clientSocketConnection.Client;
 import clientSocketConnection.MessageListener;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -60,11 +63,15 @@ public class InGameViewController implements Initializable {
 	@FXML
 	private Text txtUser4Name;
 	@FXML
-	private ProgressBar pgbTime;
+	private Label lblTime;
 
 	InputStream inStream;
 	DataInputStream dataInStream;
 
+	private Timeline timeline;
+	private static final Integer STARTTIME = 15;
+	private IntegerProperty timeSeconds = new SimpleIntegerProperty(STARTTIME*100);
+	 
 	boolean loop = true;
 	String msg;
 	String[] message;
@@ -76,7 +83,11 @@ public class InGameViewController implements Initializable {
 		Loop();
 		checkCount = 1;
 	}
-
+	
+	public void time() {
+		lblTime.textProperty().bind(timeSeconds.divide(100).asString());
+	}
+	
 	public void Loop() {
 		Thread thread = new Thread() {
 			@Override
