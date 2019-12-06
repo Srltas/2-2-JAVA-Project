@@ -44,6 +44,8 @@ public class SignUpViewController {
 	String pwCheck;
 	String userName;
 	String userPhonNumber;
+	String msg;
+	String[] message;
 	
 	public void signUp(ActionEvent event)throws Exception {
 		id = txtUserID.getText();
@@ -83,7 +85,10 @@ public class SignUpViewController {
 			Client.client.send(text);
 			Thread.sleep(1000);
 			
-			if(MessageListener.msg.equals("account create success")) {
+			msg = MessageListener.msg;
+			message = msg.split(",");
+			
+			if(message[0].equals("account create success")) {
 				Parent View = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/MenuRoomView.fxml"));
 				Scene scene = new Scene(View);
 				Stage primaryStage = (Stage) btnsignUp.getScene().getWindow();

@@ -74,8 +74,6 @@ class ConnectedClient extends Thread {
 					CreateAccountService createAccount = new CreateAccountService();
 					if (createAccount.createAccount(message[1], message[2], message[3], message[4], message[5])) {
 						dataOutStream.writeUTF("account create success");
-					} else {
-						dataOutStream.writeUTF("account create failed");
 					}
 				} else if (message[0].equals("findID")) {
 					// 아이디 찾기
@@ -84,9 +82,8 @@ class ConnectedClient extends Thread {
 					IdFindService idFindService = new IdFindService();
 					serverLogin.Account idFindAccount = idFindService.FindId(message[1]);
 					if ((idFindAccount != null)) {
-						dataOutStream.writeUTF("success : " + "," + idFindAccount.getId());
+						dataOutStream.writeUTF("findIDsuccess," + idFindAccount.getId());
 					}
-					
 				} else if (message[0].equals("findPW")) {
 					// 비밀번호 변경
 					ChangePasswordService changePasswordService = new ChangePasswordService();
@@ -94,8 +91,10 @@ class ConnectedClient extends Thread {
 					System.out.println("catch by change PW");
 					
 					if(changePasswordService.changePassword(message[1],message[2],message[3])) {
-						System.out.println("change password success");
-						dataOutStream.writeUTF("password change success");
+						System.out.println("changePasswordSuccess");
+						dataOutStream.writeUTF("findPWSuccess");
+					}else {
+						dataOutStream.writeUTF("findPWFailed");
 					}
 				} else if (message[0].equals("enterGameRoom")) {
 					// GameRoom에 입장하는 클라이언트
