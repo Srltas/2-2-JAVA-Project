@@ -92,9 +92,7 @@ class ConnectedClient extends Thread {
 					
 					if(changePasswordService.changePassword(message[1],message[2],message[3])) {
 						System.out.println("changePasswordSuccess");
-						dataOutStream.writeUTF("findPWSuccess");
-					}else {
-						dataOutStream.writeUTF("findPWFailed");
+						dataOutStream.writeUTF("changePWSuccess");
 					}
 				} else if (message[0].equals("enterGameRoom")) {
 					// GameRoom에 입장하는 클라이언트

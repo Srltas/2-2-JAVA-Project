@@ -14,14 +14,16 @@ public class FindPwViewController {
 	@FXML
 	private TextField txtFieldID;
 	@FXML
-	private TextField txtFieldPhon;
+	private TextField txtFieldPW;
 	@FXML
-	private Button btnFind;
+	private TextField txtFieldPW2;
+	@FXML
+	private Button btnChange;
 	@FXML
 	private Button btnBack;
 	
-	public void findID() throws IOException {
-		Parent View = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/.fxml"));
+	public void changePW() throws IOException {
+		Parent View = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/FindPWView2.fxml"));
 		Scene scene = new Scene(View);
 		Stage primaryStage = (Stage) btnBack.getScene().getWindow();
 		primaryStage.setScene(scene);
