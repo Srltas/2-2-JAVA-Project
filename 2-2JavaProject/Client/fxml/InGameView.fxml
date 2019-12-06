@@ -1,24 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="746.0" prefWidth="1196.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.InGameViewController">
+<AnchorPane prefHeight="746.0" prefWidth="1196.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.InGameViewController">
    <children>
       <ImageView fitHeight="746.0" fitWidth="1196.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -35,7 +28,7 @@
             <Image url="@lama.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imgUser4" fitHeight="276.0" fitWidth="296.0" layoutX="895.0" layoutY="469.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgUser4" fitHeight="276.0" fitWidth="296.0" layoutX="895.0" layoutY="470.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@lama.png" />
          </image>
@@ -45,22 +38,22 @@
             <Image url="@lama.png" />
          </image>
       </ImageView>
-      <Text fx:id="txtUser1Name" layoutX="127.0" layoutY="500.0" strokeType="OUTSIDE" strokeWidth="0.0">
+      <Text fx:id="txtUser1Name" layoutX="24.0" layoutY="502.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="276.9999997615814">
          <font>
             <Font size="33.0" />
          </font>
       </Text>
-      <Text fx:id="txtUser2Name" layoutX="411.0" layoutY="500.0" strokeType="OUTSIDE" strokeWidth="0.0">
+      <Text fx:id="txtUser2Name" layoutX="316.0" layoutY="503.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="276.63349467515945">
          <font>
             <Font size="33.0" />
          </font>
       </Text>
-      <Text fx:id="txtUser3Name" layoutX="709.0" layoutY="500.0" strokeType="OUTSIDE" strokeWidth="0.0">
+      <Text fx:id="txtUser3Name" layoutX="607.0" layoutY="502.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="276.63348632119596">
          <font>
             <Font size="33.0" />
          </font>
       </Text>
-      <Text fx:id="txtUser4Name" layoutX="997.0" layoutY="500.0" strokeType="OUTSIDE" strokeWidth="0.0">
+      <Text fx:id="txtUser4Name" layoutX="895.0" layoutY="502.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="276.63348019495606">
          <font>
             <Font size="33.0" />
          </font>
@@ -96,13 +89,7 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <ProgressBar layoutY="44.0" prefHeight="18.0" prefWidth="1196.0" progress="0.0" />
-      <ImageView fitHeight="328.0" fitWidth="295.0" layoutX="894.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@heartBackGround.png" />
-         </image>
-      </ImageView>
-      <Text fx:id="txtWord" fill="WHITE" layoutX="421.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="357.12109375">
+      <Text fx:id="txtWord" fill="WHITE" layoutX="316.0" layoutY="283.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="561.9999866485596">
          <font>
             <Font size="73.0" />
          </font>
@@ -122,43 +109,21 @@
             <Font size="29.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="1002.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="목숨">
-         <font>
-            <Font size="31.0" />
-         </font>
-      </Text>
-      <Text fx:id="txtUser1Heart" fill="WHITE" layoutX="908.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0">
-         <font>
-            <Font size="23.0" />
-         </font>
-      </Text>
-      <Text fx:id="txtUser2Heart" fill="WHITE" layoutX="908.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0">
-         <font>
-            <Font size="23.0" />
-         </font>
-      </Text>
-      <Text fx:id="txtUser3Heart" fill="WHITE" layoutX="908.0" layoutY="340.0" strokeType="OUTSIDE" strokeWidth="0.0">
-         <font>
-            <Font size="23.0" />
-         </font>
-      </Text>
-      <Text fx:id="txtUser4Heart" fill="WHITE" layoutX="908.0" layoutY="409.0" strokeType="OUTSIDE" strokeWidth="0.0">
-         <font>
-            <Font size="23.0" />
-         </font>
-      </Text>
-      <Circle fill="#55a45b" layoutX="1010.0" layoutY="216.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-      <Circle fill="#55a45b" layoutX="1062.0" layoutY="216.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-      <Circle fill="#55a45b" layoutX="1114.0" layoutY="216.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-      <Circle fill="#55a45b" layoutX="1010.0" layoutY="285.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-      <Circle fill="#55a45b" layoutX="1062.0" layoutY="285.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-      <Circle fill="#55a45b" layoutX="1114.0" layoutY="285.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-      <Circle fill="#55a45b" layoutX="1010.0" layoutY="358.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-      <Circle fill="#55a45b" layoutX="1062.0" layoutY="358.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-      <Circle fill="#55a45b" layoutX="1114.0" layoutY="358.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-      <Circle fill="#55a45b" layoutX="1010.0" layoutY="426.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-      <Circle fill="#55a45b" layoutX="1062.0" layoutY="426.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-      <Circle fill="#55a45b" layoutX="1114.0" layoutY="426.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
       <Label fx:id="lblWordWarning" layoutX="463.0" layoutY="449.0" textFill="RED" />
+      <ImageView fitHeight="330.0" fitWidth="287.0" layoutX="895.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../Desktop/알파카파카%20끝말잇기%20게임%20자료/500ppi/time_1.png" />
+         </image>
+      </ImageView>
+      <Text fill="WHITE" layoutX="242.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="~~~님의 턴입니다" textAlignment="CENTER" wrappingWidth="727.12109375">
+         <font>
+            <Font size="58.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="970.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="133.12109375">
+         <font>
+            <Font size="72.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>
