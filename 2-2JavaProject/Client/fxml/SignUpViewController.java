@@ -54,33 +54,33 @@ public class SignUpViewController {
 		userName = txtUserName.getText();
 		userPhonNumber = txtUserPhonNumber.getText();
 		
-		if(id.equals("") == true) {
+		if(id.equals("")) {
 			lblIdStatus.setText("필수 정보입니다.");
 		}else {
 			lblIdStatus.setText("");
 		}
-		if(pw.equals("") == true) {
+		if(pw.equals("")) {
 			lblPwStatus.setText("필수 정보입니다.");
 		}else {
 			lblPwStatus.setText("");
 		}
-		if(pwCheck.equals("") == true) {
+		if(pwCheck.equals("")) {
 			lblPwStatus.setText("비밀번호를 입력하세요");
 		}else {
 			lblPwStatus.setText("");
 		}
-		if(userName.equals("") == true) {
+		if(userName.equals("")) {
 			lblNameStatus.setText("필수 정보입니다.");
 		}else {
 			lblNameStatus.setText("");
 		}
-		if(userPhonNumber.equals("") == true) {
+		if(userPhonNumber.equals("")) {
 			lblPhonNumberStatus.setText("필수 정보입니다.");
 		}else {
 			lblPhonNumberStatus.setText("");
 		}
 		//회워가입
-		if(id.equals("") != true && pw.equals("") != true && userName.equals("") != true && userPhonNumber.equals("") != true) {
+		if(!id.equals("") && !pw.equals("") && !userName.equals("") && !userPhonNumber.equals("")) {
 			text = "signUp," + id + "," + pw + "," + pwCheck + "," + userName + "," + userPhonNumber;
 			Client.client.send(text);
 			Thread.sleep(1000);

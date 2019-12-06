@@ -33,25 +33,32 @@ public class FindPwViewController {
 	
 	String msg;
 	String[] message;
+	String ID;
+	String PW;
+	String PW2;
 	
 	public void changePW() throws IOException, InterruptedException {
 		if(btnChange.getText().equals("찾기")) {
-			if(txtFieldID.getText().equals("") == true) {
+			ID = txtFieldID.getText();
+			PW = txtFieldPW.getText();
+			PW2 = txtFieldPW2.getText();
+ 
+			if(ID.equals("")) {
 				lblID.setText("필수 정보입니다.");
 			}else {
 				lblID.setText("");
 			}
-			if(txtFieldPW.getText().equals("") == true) {
+			if(PW.equals("")) {
 				lblPW.setText("필수 정보입니다.");
 			}else {
 				lblPW.setText("");
 			}
-			if(txtFieldPW2.getText().equals("") == true) {
+			if(PW2.equals("")) {
 				lblPW2.setText("필수 정보입니다.");
 			}else {
 				lblPW2.setText("");
 			}
-			if(txtFieldID.getText().equals("") != true && txtFieldPW.getText().equals("") != true && txtFieldPW2.getText().equals("") != true) {
+			if(!ID.equals("") && !PW.equals("") && !PW2.equals("")) {
 				Client.client.send("changePW," + txtFieldID.getText() +"," + txtFieldPW.getText()+ "," + txtFieldPW2.getText());
 				Thread.sleep(100);
 				msg = MessageListener.msg;
@@ -61,13 +68,13 @@ public class FindPwViewController {
 					lblPW2.setText("비밀번호가 변경되었습니다.");
 					btnChange.setText("확인");
 				}else {
-					lblPW2.setText("해당 아이가 없거나 잘못입력하였습니다.");
+					lblPW2.setText("해당 아이디가 없거나 잘못입력하였습니다.");
 				}
 			}
 		}else if(btnChange.getText().equals("확인")) {
 			Parent View = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/MenuRoomView.fxml"));
 			Scene scene = new Scene(View);
-			Stage primaryStage = (Stage) btnBack.getScene().getWindow();
+			Stage primaryStage = (Stage) btnChange.getScene().getWindow();
 			primaryStage.setScene(scene);
 		}
 	}
