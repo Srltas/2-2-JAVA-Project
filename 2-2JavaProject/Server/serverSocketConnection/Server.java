@@ -16,6 +16,7 @@ public class Server {
 	static int gameTurn = 0;
 	static int gameTurnOff = 0;
 	static String[] playerList = {"","","",""};
+	static final String[] wordList = {"사자","바나나","자바","커피","강아지","컴퓨터","신발","치약","호랑이","칠판","판금"};
 
 	
 	public static void main(String[] args) {
