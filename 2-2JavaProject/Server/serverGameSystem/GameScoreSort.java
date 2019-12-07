@@ -4,9 +4,10 @@ public class GameScoreSort {
 	public static String[] playerName = new String[4];
 	public static int[] playerScore = new int[4];
 	public static int index = 0;
+	public static boolean check = true;
 
 	public static void sorting() {
-		
+		check = false;
 		int i;
 		int j;
 		int temp;
