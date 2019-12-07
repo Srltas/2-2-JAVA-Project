@@ -73,8 +73,10 @@ public class InGameViewController implements Initializable {
 	DataInputStream dataInStream;
 
 	private Timeline timeline;
-	private static final Integer STARTTIME = 15;
-	private IntegerProperty timeSeconds = new SimpleIntegerProperty(STARTTIME * 100);
+	private static final Integer READYTIME = 10;
+	private static final Integer GAMETIME = 60;
+	private IntegerProperty readyTimeSeconds = new SimpleIntegerProperty(READYTIME * 100);
+	private IntegerProperty gameTimeSeconds = new SimpleIntegerProperty(GAMETIME * 100);
 
 	boolean loop = true;
 	String msg;
@@ -89,24 +91,24 @@ public class InGameViewController implements Initializable {
 	}
 
 	public void readyTime() {
-		lblTime.textProperty().bind(timeSeconds.divide(100).asString());
+		lblTime.textProperty().bind(readyTimeSeconds.divide(100).asString());
 		if (timeline != null) {
 			timeline.stop();
 		}
-		timeSeconds.set((STARTTIME + 1) * 100);
+		readyTimeSeconds.set((READYTIME + 1) * 100);
 		timeline = new Timeline();
-		timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(STARTTIME + 1), new KeyValue(timeSeconds, 0)));
+		timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(READYTIME + 1), new KeyValue(readyTimeSeconds, 0)));
 		timeline.playFromStart();
 	}
 	
 	public void gameTime() {
-		lblTime.textProperty().bind(timeSeconds.divide(100).asString());
+		lblTime.textProperty().bind(gameTimeSeconds.divide(100).asString());
 		if (timeline != null) {
 			timeline.stop();
 		}
-		timeSeconds.set((STARTTIME + 1) * 100);
+		gameTimeSeconds.set((GAMETIME + 1) * 100);
 		timeline = new Timeline();
-		timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(STARTTIME + 1), new KeyValue(timeSeconds, 0)));
+		timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(GAMETIME + 1), new KeyValue(gameTimeSeconds, 0)));
 		timeline.playFromStart();
 	}
 
