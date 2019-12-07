@@ -10,13 +10,13 @@ public class GameScoreCounter {
 	static API2 apiControl = new API2();
 	
 
-	public static boolean scoreControl(String word) {
+	public static int scoreControl(String word) {
 		if (addList(word)) {
 			score += 1;
-			return true;
+			return 1;
 		} else {
 			score -= 1;
-			return false;
+			return 0;
 		}
 	}
 
