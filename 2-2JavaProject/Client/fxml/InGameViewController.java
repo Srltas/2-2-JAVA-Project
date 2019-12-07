@@ -174,7 +174,7 @@ public class InGameViewController implements Initializable {
 						txtFieldWord.setDisable(false);
 						Platform.runLater(() -> {
 							gameTime();
-							new GameTimer().timerSetter(StartViewController.account.getUserName(),Integer.toString(GameScoreCounter.score));
+							new GameTimer().timerSetter(StartViewController.account.getUserName());
 						});
 						MessageListener.msg = " ,";
 					} else if(message[0].equals("endGame")) {
