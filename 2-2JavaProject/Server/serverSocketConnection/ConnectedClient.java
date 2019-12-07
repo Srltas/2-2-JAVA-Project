@@ -8,6 +8,7 @@ import java.net.Socket;
 
 import com.sun.javafx.scene.paint.GradientUtils.Parser;
 
+import serverGameSystem.GameScoreSort;
 import serverLogin.LoginService;
 import serverLogin.CreateAccountService;
 import serverLogin.DeniedOverlapLoginService;
@@ -150,15 +151,19 @@ class ConnectedClient extends Thread {
 					
 				} else if(message[0].equals("endGame")) {
 					//게임종료
-					Server.playerName[Server.index] = message[1];
-					Server.playerScore[Server.index] = Integer.parseInt(message[2]);
-					Server.index++;
+					GameScoreSort.playerName[GameScoreSort.index] = message[2]+","+message[1];
+					GameScoreSort.playerScore[GameScoreSort.index] = Integer.parseInt(message[2]);
+					GameScoreSort.index++;
+					
+					if(GameScoreSort.index==3) {
+						
+					}
 					
 				} else if(message[0].equals("resultGame")) {
-					dataOutStream.writeUTF("resultGame," + Server.playerName[0] + "," + Server.playerScore[0] + "," 
-				+ Server.playerName[1] + "," + Server.playerScore[1] + "," 
-				+ Server.playerName[2] + "," + Server.playerScore[2] + "," 
-				+ Server.playerName[3] + "," + Server.playerScore[3]);
+					dataOutStream.writeUTF("resultGame," + GameScoreSort.playerName[0] + "," + GameScoreSort.playerScore[0] + "," 
+				+ GameScoreSort.playerName[1] + "," + GameScoreSort.playerScore[1] + "," 
+				+ GameScoreSort.playerName[2] + "," + GameScoreSort.playerScore[2] + "," 
+				+ GameScoreSort.playerName[3] + "," + GameScoreSort.playerScore[3]);
 				}
 				
 				else if (message[0].equals("chat")) { // 채팅
