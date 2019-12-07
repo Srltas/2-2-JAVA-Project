@@ -212,11 +212,10 @@ public class InGameViewController implements Initializable {
 			if (stageWordChar[word.length()-1] == nextWordChar[0]) {
 				System.out.println(word);
 				System.out.println(nextWord);
+				System.out.println(GameScoreCounter.scoreControl(nextWord));
 				System.out.println(GameScoreCounter.score);
 				if((GameScoreCounter.scoreControl(nextWord)) == true) {
 					System.out.println("if check");
-					System.out.println(word);
-					System.out.println(nextWord);
 					txtWord.setText(nextWord);					
 				}
 			}
