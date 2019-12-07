@@ -21,7 +21,7 @@ public class GameScoreCounter {
 	}
 
 	public static boolean addList(String word) {
-		if (!wordSearchResult(word)) {
+		if (wordSearchResult(word)==false) {
 			return false;
 		} else {
 			wordList.add(word);

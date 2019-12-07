@@ -13,18 +13,22 @@ public class GameScoreSort {
 		int j;
 		int temp;
 		String tmp;
+		int min;
+		
 		for (i = 0; i<4;i++) {
-			for (j = i+1;j<4;j++) {
-				if(playerScore[i]<playerScore[j]) {
-					temp = playerScore[i];
-					playerScore[i] = playerScore[j];
-					playerScore[j] = temp;
-					
-					tmp = playerName[i];
-					playerName[i] = playerName[j];
-					playerName[j] = tmp;
+			min=i;
+			for (j = i+1;j<=4;j++) {
+				if(playerScore[min]<playerScore[j]) {
+					min = j;
 				}
 			}
+			temp = playerScore[min];
+			playerScore[min] = playerScore[j];
+			playerScore[j] = temp;
+			
+			tmp = playerName[min];
+			playerName[min] = playerName[j];
+			playerName[j] = tmp;
 		}
 	}
 }

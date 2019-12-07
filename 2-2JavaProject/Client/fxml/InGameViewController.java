@@ -210,7 +210,6 @@ public class InGameViewController implements Initializable {
 			char[] nextWordChar = nextWord.toCharArray();
 			
 			if (stageWordChar[word.length()-1] == nextWordChar[0]) {
-				System.out.println(GameScoreCounter.score);
 				if(GameScoreCounter.scoreControl(nextWord) == 1) {
 					System.out.println("if check");
 					txtWord.setText(nextWord);
@@ -219,6 +218,7 @@ public class InGameViewController implements Initializable {
 		}else {
 			lblWordWarning.setText("다시 입력하세요");
 		}
+		System.out.println(GameScoreCounter.score);
 	}
 	
 	public void showResult() throws IOException {
