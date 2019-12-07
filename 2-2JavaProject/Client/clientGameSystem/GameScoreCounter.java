@@ -5,7 +5,6 @@ import clientRequestApi.API2;
 public class GameScoreCounter {
 
 	static HashSet<String> wordList = new HashSet<String>();
-	//static Iterator<String> wordListSearch;
 
 	public static int score = 0;
 	static API2 apiControl = new API2();
