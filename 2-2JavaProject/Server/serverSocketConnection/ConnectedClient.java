@@ -126,7 +126,7 @@ class ConnectedClient extends Thread {
 						System.out.println("[방 인원 수 : " + Server.gameRoomCount + "]");
 						// 4명이면 게임 시작!
 						if (Server.gameRoomCount == 4) {
-							Thread.sleep(7000);
+							Thread.sleep(3000);
 							for (ConnectedClient client : Server.clients) {
 								client.dataOutStream.writeUTF("readyGame");
 							}
@@ -213,7 +213,7 @@ class ConnectedClient extends Thread {
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			Server.clients.remove(this);
 			System.out.println("[" + this.socket.toString() + "가 연결을 종료했습니다.]");
 		}

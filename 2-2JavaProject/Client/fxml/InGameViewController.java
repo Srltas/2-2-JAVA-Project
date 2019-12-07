@@ -75,8 +75,8 @@ public class InGameViewController implements Initializable {
 	DataInputStream dataInStream;
 
 	private Timeline timeline;
-	private static final Integer READYTIME = 10;
-	private static final Integer GAMETIME = 60;
+	private static final Integer READYTIME = 5;
+	private static final Integer GAMETIME = 10;
 	private static final Integer ENDTIME = 3;
 	private IntegerProperty endTimeSeconds = new SimpleIntegerProperty(ENDTIME * 100);
 	private IntegerProperty readyTimeSeconds = new SimpleIntegerProperty(READYTIME * 100);
