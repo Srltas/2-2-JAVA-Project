@@ -5,16 +5,16 @@ import java.util.TimerTask;
 
 import clientSocketConnection.Client;
 
-public class GameTimer {
+public class GameEndTimer {
 
-	public static void timerSetter(String playerName,String score) {
+	public static void timerSetter() {
 		Timer timer = new Timer();
 		TimerTask timerTask = new TimerTask() {
 			public void run() {
-				Client.client.send("endGame," + playerName +","+ score);
+				
 			}
 		};
 
-		timer.schedule(timerTask, 60000);
+		timer.schedule(timerTask, 3000);
 	}
 }

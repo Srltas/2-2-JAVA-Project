@@ -160,4 +160,34 @@ public class AccountMapper {
 		return true;
 	}
 	
+	public boolean commitGameScore(String id, int score) {
+		
+		Connection connection = null;
+		PreparedStatement pst = null;
+
+		String sql = "UPDATE USERINFO SET RANKPOINT = '" + score + "' WHERE USER_ID = '" + id + "'";
+
+		System.out.println(sql);
+
+		try {
+			Class.forName(driver);
+			connection = DriverManager.getConnection(url, userName, this.password);
+
+			pst = connection.prepareStatement(sql);
+			pst.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			try {
+				pst.close();
+				connection.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return true;
+	}
 }
