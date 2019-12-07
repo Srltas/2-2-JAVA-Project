@@ -18,9 +18,10 @@ public class GameScoreSort {
 		for (i = 0; i<4;i++) {
 			System.out.println("for - i");
 			min=i;
-			for (j = i+1;j<=4;j++) {
+			for (j = i+1;j<4;j++) {
 				System.out.println("for - j");
 				if(playerScore[min]<playerScore[j]) {
+					System.out.println("for - min = j");
 					min = j;
 				}
 			}
