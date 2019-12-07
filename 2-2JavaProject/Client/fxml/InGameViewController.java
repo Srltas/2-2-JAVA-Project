@@ -55,7 +55,7 @@ public class InGameViewController implements Initializable {
 	@FXML
 	private TextField txtFieldChat;
 	@FXML
-	private TextField txtFielWord;
+	private TextField txtFieldWord;
 	@FXML
 	private Text txtWord;
 	@FXML
@@ -157,7 +157,7 @@ public class InGameViewController implements Initializable {
 					} else if (message[0].equals("startWord")) {
 						txtWord.setText(message[1]);
 						btnWord.setDisable(false);
-						txtFielWord.setDisable(false);
+						txtFieldWord.setDisable(false);
 						Platform.runLater(() -> {
 							gameTime();
 							new GameTimer().timerSetter();
@@ -173,9 +173,9 @@ public class InGameViewController implements Initializable {
 	}
 
 	public void sendWord() {
-		String nextWord = txtFielWord.getText();
+		String nextWord = txtFieldWord.getText();
 		String word = txtWord.getText();
-		txtFielWord.setText(""); // txtFielWord 비우기
+		txtFieldWord.setText(""); // txtFielWord 비우기
 		
 		if (nextWord.length()>1 && nextWord.length()<6) {
 			char[] stageWordChar = word.toCharArray();
@@ -184,6 +184,8 @@ public class InGameViewController implements Initializable {
 			if (stageWordChar[word.length()-1] == nextWordChar[0]) {
 				System.out.println(GameScoreCounter.scoreControl(word));
 				System.out.println(GameScoreCounter.score);
+				
+				txtWord.setText(nextWord);
 			}
 		}
 		
