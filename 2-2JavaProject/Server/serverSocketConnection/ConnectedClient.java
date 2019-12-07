@@ -8,7 +8,7 @@ import java.net.Socket;
 
 import com.sun.javafx.scene.paint.GradientUtils.Parser;
 
-import serverGameSystem.GameScoreSort;
+import clientGameSystem.GameScoreSort;
 import serverLogin.LoginService;
 import serverLogin.CreateAccountService;
 import serverLogin.DeniedOverlapLoginService;
