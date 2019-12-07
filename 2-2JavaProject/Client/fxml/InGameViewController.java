@@ -86,7 +86,6 @@ public class InGameViewController implements Initializable {
 	String msg;
 	String[] message;
 	public static boolean checkCount = false;	//게임방에 들어오면 true
-	int gameTurn;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -186,6 +185,8 @@ public class InGameViewController implements Initializable {
 							new GameEndTimer().timerSetter();
 						});
 						MessageListener.msg = " ,";
+					} else if(message[0].equals("resultGame")) {
+						
 					} else if(message[0].equals("onResultButton")) {
 						btnResult.setDisable(false);
 						btnResult.setOpacity(1);

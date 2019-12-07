@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import clientGameSystem.GameScoreSort;
 import clientSocketConnection.Client;
 import clientSocketConnection.MessageListener;
 import javafx.fxml.FXML;
@@ -68,8 +67,8 @@ public class GameEndViewController implements Initializable {
 	int arrayRank[] = new int[4];
 	int arrayScore[] = new int[4];
 	int arryaPoint[] = new int[4];
-	public static String[] playerName = new String[5];
-	public static int[] playerScore = new int[5];
+	public String[] playerName = new String[4];
+	public int[] playerScore = new int[4];
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -78,11 +77,11 @@ public class GameEndViewController implements Initializable {
 	}
 
 	public void setResult() {
-		
+
 		msg = MessageListener.msg;
 		message = msg.split(",");
-		
-		if(message[0].equals("resultGame")) {
+
+		if (message[0].equals("resultGame")) {
 			playerName[0] = message[1];
 			playerName[1] = message[3];
 			playerName[2] = message[5];
@@ -92,22 +91,42 @@ public class GameEndViewController implements Initializable {
 			playerScore[2] = Integer.parseInt(message[6]);
 			playerScore[3] = Integer.parseInt(message[8]);
 		}
-		new GameScoreSort().sorting();
+		sorting();
+	}
+
+	public void sorting() {
+		int i;
+		int j;
+		int temp;
+		String tmp;
+		for (i = 0; i < 4; i++) {
+			for (j = i + 1; j < 4; j++) {
+				if (playerScore[i] < playerScore[j]) {
+					temp = playerScore[i];
+					playerScore[i] = playerScore[j];
+					playerScore[j] = temp;
+
+					tmp = playerName[i];
+					playerName[i] = playerName[j];
+					playerName[j] = tmp;
+				}
+			}
+		}
 		sortScore();
 	}
-	
+
 	public void sortScore() {
 		int rank = 1;
 		int count = 1;
 		int set = 0;
 		int[] arrayScore = new int[5];
-		
+
 		arrayScore[0] = playerScore[0];
 		arrayScore[1] = playerScore[1];
 		arrayScore[2] = playerScore[2];
 		arrayScore[3] = playerScore[3];
 		arrayScore[4] = -100;
-		
+
 		for (int j = 0; j < 4; j++) {
 			if (arrayScore[j] == arrayScore[j + 1]) {
 				count++;
@@ -122,21 +141,21 @@ public class GameEndViewController implements Initializable {
 		}
 		setScore();
 	}
-	
+
 	public void setScore() {
 		for (int i = 0; i < 4; i++) {
-			if(arrayRank[i] == 1)
+			if (arrayRank[i] == 1)
 				arryaPoint[i] = 3;
-			else if(arrayRank[i] == 2)
+			else if (arrayRank[i] == 2)
 				arryaPoint[i] = 2;
-			else if(arrayRank[i] == 3)
+			else if (arrayRank[i] == 3)
 				arryaPoint[i] = 1;
-			else if(arrayRank[i] == 4)
+			else if (arrayRank[i] == 4)
 				arryaPoint[i] = 0;
 		}
 	}
-	
-	public void setUi(){
+
+	public void setUi() {
 		txtPlayerName1.setText(playerName1);
 		txtPlayerName2.setText(playerName2);
 		txtPlayerName3.setText(playerName3);
@@ -154,17 +173,18 @@ public class GameEndViewController implements Initializable {
 		txtWordCount3.setText(wordCount3);
 		txtWordCount4.setText(wordCount4);
 	}
-	
+
 	public void enterMain() throws IOException {
 		Parent View = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/MenuRoom.fxml"));
 		Scene scene = new Scene(View);
 		Stage primaryStage = (Stage) btnMain.getScene().getWindow();
 		primaryStage.setScene(scene);
 	}
-	
+
 	public void eixt() throws IOException {
 		if (InGameViewController.checkCount) {
-			Client.client.send("exitGameRoom," + StartViewController.account.getUserName() + "," +StartViewController.account.getId());
+			Client.client.send("exitGameRoom," + StartViewController.account.getUserName() + ","
+					+ StartViewController.account.getId());
 		} else {
 			Client.client.send("exitGame," + StartViewController.account.getId());
 		}
