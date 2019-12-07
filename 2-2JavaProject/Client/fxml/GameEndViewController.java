@@ -80,6 +80,7 @@ public class GameEndViewController implements Initializable {
 				arryaPlayerWordCount[i] = Integer.parseInt(message[i*2+2]);
 			}
 		}
+		MessageListener.msg = " ,";
 		sorting();
 	}
 
@@ -168,7 +169,7 @@ public class GameEndViewController implements Initializable {
 	}
 
 	public void enterMain() throws IOException {
-		Parent View = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/MenuRoom.fxml"));
+		Parent View = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/MenuRoomView.fxml"));
 		Scene scene = new Scene(View);
 		Stage primaryStage = (Stage) btnMain.getScene().getWindow();
 		primaryStage.setScene(scene);
