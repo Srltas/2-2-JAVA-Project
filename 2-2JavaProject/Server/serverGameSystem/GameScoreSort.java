@@ -15,10 +15,10 @@ public class GameScoreSort {
 		String tmp;
 		int min;
 		
-		for (i = 0; i<5;i++) {
+		for (i = 0; i<playerName.length-1;i++) {
 			System.out.println("for - i");
 			min=i;
-			for (j = i+1;j<5;j++) {
+			for (j = i+1;j<playerName.length;j++) {
 				System.out.println("for - j");
 				if(playerScore[min]<playerScore[j]) {
 					System.out.println("for - min = j");
