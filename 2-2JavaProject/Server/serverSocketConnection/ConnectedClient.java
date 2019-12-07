@@ -146,6 +146,7 @@ class ConnectedClient extends Thread {
 						System.out.println("[방 인원 수 : " + Server.gameRoomCount + "]");
 					}
 				} else if(message[0].equals("startGame")) {
+					GameScoreSort.index = 0;
 					int number = (int)(Math.random() * Server.wordList.length); //랜덤숫자 뽑기
 					dataOutStream.writeUTF("startWord," + Server.wordList[number]); //랜덤단어 주기
 					
