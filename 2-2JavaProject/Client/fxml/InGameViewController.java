@@ -1,6 +1,7 @@
 package fxml;
 
 import java.io.DataInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -17,26 +18,22 @@ import javafx.application.Platform;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import clientGameSystem.GameScoreCounter;
 
 
 public class InGameViewController implements Initializable {
-	@FXML
-	private ImageView imgOut1;
-	@FXML
-	private ImageView imgOut2;
-	@FXML
-	private ImageView imgOut3;
-	@FXML
-	private ImageView imgOut4;
 	@FXML
 	private ImageView imgUser1;
 	@FXML
@@ -52,7 +49,7 @@ public class InGameViewController implements Initializable {
 	@FXML
 	private Button btnWord;
 	@FXML
-	static private Button btnResult;
+	public static Button btnResult;
 	@FXML
 	private TextArea txtAreaChat;
 	@FXML
@@ -188,10 +185,7 @@ public class InGameViewController implements Initializable {
 							endTime();
 							new GameEndTimer().timerSetter();
 						});
-					} else if(message[0].equals("resultGame")) {
-						
-					}
-					else if (message[0].equals(" ")) {
+					} else if (message[0].equals(" ")) {
 						//대기
 					}
 				}
@@ -217,24 +211,15 @@ public class InGameViewController implements Initializable {
 				}
 			}
 		}
+	}
+	
+	public void showResult() throws IOException {
+		Client.client.send("resultGame,");
 		
-		/*
-		if (nextWord.length() > 1 && nextWord.length() < 6) {
-			if (gameTurn != 0) {
-				char[] arrayWord = word.toCharArray(); // 앞에 단어 문자열 배열변환
-				char[] arrayNextWord = nextWord.toCharArray(); // 이을 단어 문자열 배열변환
-				if (arrayWord[arrayWord.length - 1] == arrayNextWord[0]) {
-					Client.client.send("word," + nextWord);
-				} else {
-					lblWordWarning.setText("다시 입력하세요.");
-				}
-			} else {
-				Client.client.send("word," + nextWord);
-			}
-		} else {
-			lblWordWarning.setText("다시 입력하세요.");
-		}
-		*/
+		Parent View = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/GameEndView.fxml"));
+		Scene scene = new Scene(View);
+		Stage primaryStage = (Stage) btnResult.getScene().getWindow();
+		primaryStage.setScene(scene);
 	}
 
 	public void sendMessage() {
