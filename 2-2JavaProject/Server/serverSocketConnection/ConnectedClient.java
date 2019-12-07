@@ -159,6 +159,9 @@ class ConnectedClient extends Thread {
 						GameScoreSort.sorting();
 					}
 					
+				} else if(message[0].equals("onResultButton")) {
+					dataOutStream.writeUTF("onResultButton,");
+					
 				} else if(message[0].equals("resultGame")) {
 					dataOutStream.writeUTF("resultGame," + GameScoreSort.playerName[0] + "," + GameScoreSort.playerScore[0] + "," 
 				+ GameScoreSort.playerName[1] + "," + GameScoreSort.playerScore[1] + "," 

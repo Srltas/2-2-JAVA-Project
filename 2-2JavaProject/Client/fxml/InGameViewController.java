@@ -49,7 +49,7 @@ public class InGameViewController implements Initializable {
 	@FXML
 	private Button btnWord;
 	@FXML
-	public static Button btnResult;
+	private Button btnResult;
 	@FXML
 	private TextArea txtAreaChat;
 	@FXML
@@ -185,7 +185,13 @@ public class InGameViewController implements Initializable {
 							endTime();
 							new GameEndTimer().timerSetter();
 						});
-					} else if (message[0].equals(" ")) {
+						MessageListener.msg = " ,";
+					} else if(message[0].equals("onResultButton")) {
+						btnResult.setDisable(false);
+						btnResult.setOpacity(0);
+						MessageListener.msg = " ,";
+					}
+					else if (message[0].equals(" ")) {
 						//대기
 					}
 				}
@@ -204,9 +210,10 @@ public class InGameViewController implements Initializable {
 			char[] nextWordChar = nextWord.toCharArray();
 			
 			if (stageWordChar[word.length()-1] == nextWordChar[0]) {
-				System.out.println(GameScoreCounter.scoreControl(word));
+				System.out.println(GameScoreCounter.scoreControl(nextWord));
 				System.out.println(GameScoreCounter.score);
-				if(GameScoreCounter.scoreControl(word)) {
+				if(GameScoreCounter.scoreControl(nextWord)) {
+					System.out.println("if check");
 					System.out.println(word);
 					System.out.println(nextWord);
 					txtWord.setText(nextWord);					
