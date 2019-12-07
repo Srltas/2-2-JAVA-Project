@@ -216,6 +216,8 @@ public class InGameViewController implements Initializable {
 					txtWord.setText(nextWord);
 				}
 			}
+		}else {
+			lblWordWarning.setText("다시 입력하세요");
 		}
 	}
 	

@@ -7,6 +7,7 @@ public class GameScoreSort {
 	public static boolean check = true;
 
 	public static void sorting() {
+		System.out.println("sorting enter");
 		check = false;
 		int i;
 		int j;
