@@ -151,7 +151,7 @@ class ConnectedClient extends Thread {
 					
 				} else if(message[0].equals("endGame")) {
 					//게임종료
-					GameScoreSort.playerName[GameScoreSort.index] = message[2]+","+message[1];
+					GameScoreSort.playerName[GameScoreSort.index] = message[1];
 					GameScoreSort.playerScore[GameScoreSort.index] = Integer.parseInt(message[2]);
 					GameScoreSort.index++;
 					dataOutStream.writeUTF("endGame,");
