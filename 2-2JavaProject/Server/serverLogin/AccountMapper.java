@@ -84,7 +84,12 @@ public class AccountMapper {
 			if (resultSet.next()) {
 				text = resultSet.getString("USER_ID");
 			}
-
+			
+			if(text == null) {
+				System.out.println("no id find");
+				return null;
+			}
+			
 			char[] ttxt = text.toCharArray();
 			for (int i = (text.length() / 2); i < text.length(); i++) {
 				ttxt[i] = '*';
