@@ -134,7 +134,7 @@ public class InGameViewController implements Initializable {
 						txtWord.setText("Ready!!");
 						Platform.runLater(() -> {
 							time();
-							Client.client.send("startGame,");
+							//여기다가 강부가 만든 타이머 넣으면 됨
 						});
 						MessageListener.msg = " ,";
 					} else if (message[0].equals("startWord")) {
@@ -169,7 +169,6 @@ public class InGameViewController implements Initializable {
 		} else {
 			lblWordWarning.setText("다시 입력하세요.");
 		}
-
 	}
 
 	public void sendMessage() {
