@@ -143,8 +143,11 @@ class ConnectedClient extends Thread {
 						Server.gameRoomCount = 1;
 						System.out.println("[방 인원 수 : " + Server.gameRoomCount + "]");
 					}
-				} else if(message[0].equals("   ")) {
-					
+				} else if(message[0].equals("startGame")) {
+					int number = (int)(Math.random() * Server.wordList.length); //랜덤숫자 뽑기
+					for(ConnectedClient client : Server.clients) {
+						client.dataOutStream.writeUTF("startWord," + Server.wordList[number]); //랜덤단어 주기
+					}
 				} else if(message[0].equals("")) {
 					
 				} else if (message[0].equals("chat")) { // 채팅
@@ -167,18 +170,16 @@ class ConnectedClient extends Thread {
 					for (ConnectedClient client : Server.clients) {
 						client.dataOutStream.writeUTF("exitGameRoom," + Integer.toString(exitPlayerNumber + 1));
 					}
-					
+					//로그아웃
 					if (DeniedOverlapLoginService.remove(message[2])) {
 						System.out.println("log out success");
 					} else {
 						System.out.println("log out failed");
 					}
-				}  else if (message[0] == null) {
-					//대기
 				} else if (message[0].equals("exitGame")) {
 					// 클라이언트 종료
 					System.out.println(message[1]);
-					
+					//로그아웃
 					if (DeniedOverlapLoginService.remove(message[1])) {
 						System.out.println("log out success");
 					} else {

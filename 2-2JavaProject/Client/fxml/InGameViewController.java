@@ -77,7 +77,7 @@ public class InGameViewController implements Initializable {
 	boolean loop = true;
 	String msg;
 	String[] message;
-	public static boolean checkCount =false;	//게임방에 들어오면 true
+	public static boolean checkCount = false;	//게임방에 들어오면 true
 	int gameTurn;
 
 	@Override
@@ -134,12 +134,13 @@ public class InGameViewController implements Initializable {
 						txtWord.setText("Ready!!");
 						Platform.runLater(() -> {
 							time();
+							Client.client.send("startGame,");
 						});
 						MessageListener.msg = " ,";
-					} else if (message[0].equals("changeWordText")) {
+					} else if (message[0].equals("startWord")) {
 						txtWord.setText(message[1]);
 					} else if (message[0].equals(" ")) {
-
+						//대기
 					}
 				}
 			}
