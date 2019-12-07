@@ -86,6 +86,8 @@ class ConnectedClient extends Thread {
 					serverLogin.Account idFindAccount = idFindService.FindId(message[1]);
 					if ((idFindAccount != null)) {
 						dataOutStream.writeUTF("findIDsuccess,"+ idFindAccount.getId());
+					} else {
+						//id없음
 					}
 				} else if (message[0].equals("changePW")) {
 					// 비밀번호 변경
@@ -211,7 +213,7 @@ class ConnectedClient extends Thread {
 				}
 			}
 		} catch (Exception e) {
-			// e.printStackTrace();
+			e.printStackTrace();
 			Server.clients.remove(this);
 			System.out.println("[" + this.socket.toString() + "가 연결을 종료했습니다.]");
 		}
