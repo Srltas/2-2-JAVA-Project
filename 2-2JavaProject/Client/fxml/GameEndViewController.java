@@ -102,7 +102,7 @@ public class GameEndViewController implements Initializable {
 		arrayScore[1] = Integer.parseInt(wordCount2);
 		arrayScore[2] = Integer.parseInt(wordCount3);
 		arrayScore[3] = Integer.parseInt(wordCount4);
-		arrayScore[4] = -1;
+		arrayScore[4] = -100;
 		
 		for (int j = 0; j < 4; j++) {
 			if (arrayScore[j] == arrayScore[j + 1]) {

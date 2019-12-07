@@ -158,6 +158,7 @@ class ConnectedClient extends Thread {
 					dataOutStream.writeUTF("endGame,");
 					if(GameScoreSort.index==3) {
 						if(GameScoreSort.check) {
+							System.out.println("sorting start");
 							GameScoreSort.sorting();
 						}					
 					}
