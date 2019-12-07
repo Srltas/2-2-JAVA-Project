@@ -89,7 +89,7 @@ public class SignUpViewController {
 			message = msg.split(",");
 			
 			if(message[0].equals("account create success")) {
-				Parent View = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/MenuRoomView.fxml"));
+				Parent View = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/StartView.fxml"));
 				Scene scene = new Scene(View);
 				Stage primaryStage = (Stage) btnsignUp.getScene().getWindow();
 				primaryStage.setScene(scene);
@@ -100,7 +100,7 @@ public class SignUpViewController {
 	}
 	
 	public void back(ActionEvent event) throws Exception {
-		Parent View = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/MenuRoomView.fxml"));
+		Parent View = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/StartView.fxml"));
 		Scene scene = new Scene(View);
 		Stage primaryStage = (Stage) btnBack.getScene().getWindow();
 		primaryStage.setScene(scene);

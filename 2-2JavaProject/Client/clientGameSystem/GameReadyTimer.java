@@ -14,6 +14,6 @@ public class GameReadyTimer {
 				Client.client.send("startGame,");
 			}
 		};
-		timer.schedule(timerTask, 15000);
+		timer.schedule(timerTask, 10000);
 	}
 }

@@ -30,57 +30,51 @@ public class FindPwViewController {
 	private Label lblPW;
 	@FXML
 	private Label lblPW2;
-	
+
 	String msg;
 	String[] message;
 	String ID;
 	String PW;
 	String PW2;
-	
+
 	public void changePW() throws IOException, InterruptedException {
-		if(btnChange.getText().equals("찾기")) {
-			ID = txtFieldID.getText();
-			PW = txtFieldPW.getText();
-			PW2 = txtFieldPW2.getText();
- 
-			if(ID.equals("")) {
-				lblID.setText("필수 정보입니다.");
-			}else {
-				lblID.setText("");
+		ID = txtFieldID.getText();
+		PW = txtFieldPW.getText();
+		PW2 = txtFieldPW2.getText();
+
+		if (ID.equals("")) {
+			lblID.setText("필수 정보입니다.");
+		} else {
+			lblID.setText("");
+		}
+		if (PW.equals("")) {
+			lblPW.setText("필수 정보입니다.");
+		} else {
+			lblPW.setText("");
+		}
+		if (PW2.equals("")) {
+			lblPW2.setText("필수 정보입니다.");
+		} else {
+			lblPW2.setText("");
+		}
+		if (!ID.equals("") && !PW.equals("") && !PW2.equals("")) {
+			Client.client.send(
+					"changePW," + txtFieldID.getText() + "," + txtFieldPW.getText() + "," + txtFieldPW2.getText());
+			Thread.sleep(2000);
+			msg = MessageListener.msg;
+			message = msg.split(",");
+
+			if (message[0].equals("changePWSuccess")) {
+				lblPW2.setText("비밀번호가 변경되었습니다.");
+				MessageListener.msg = null;
+			} else {
+				lblPW2.setText("해당 아이디가 없거나 잘못입력하였습니다.");
 			}
-			if(PW.equals("")) {
-				lblPW.setText("필수 정보입니다.");
-			}else {
-				lblPW.setText("");
-			}
-			if(PW2.equals("")) {
-				lblPW2.setText("필수 정보입니다.");
-			}else {
-				lblPW2.setText("");
-			}
-			if(!ID.equals("") && !PW.equals("") && !PW2.equals("")) {
-				Client.client.send("changePW," + txtFieldID.getText() +"," + txtFieldPW.getText()+ "," + txtFieldPW2.getText());
-				Thread.sleep(100);
-				msg = MessageListener.msg;
-				message = msg.split(",");
-				
-				if(message[0].equals("changePWSuccess")) {
-					lblPW2.setText("비밀번호가 변경되었습니다.");
-					btnChange.setText("확인");
-				}else {
-					lblPW2.setText("해당 아이디가 없거나 잘못입력하였습니다.");
-				}
-			}
-		}else if(btnChange.getText().equals("확인")) {
-			Parent View = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/MenuRoomView.fxml"));
-			Scene scene = new Scene(View);
-			Stage primaryStage = (Stage) btnChange.getScene().getWindow();
-			primaryStage.setScene(scene);
 		}
 	}
-	
+
 	public void Back() throws IOException {
-		Parent View = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/MenuRoomView.fxml"));
+		Parent View = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/StartView.fxml"));
 		Scene scene = new Scene(View);
 		Stage primaryStage = (Stage) btnBack.getScene().getWindow();
 		primaryStage.setScene(scene);

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -27,16 +28,6 @@
             <Font size="29.0" />
          </font>
       </Button>
-      <Button fx:id="btnBack" layoutX="606.0" layoutY="492.0" mnemonicParsing="false" onAction="#Back" prefHeight="32.0" prefWidth="215.0" text="뒤로">
-         <font>
-            <Font size="29.0" />
-         </font>
-      </Button>
-      <Text fill="WHITE" layoutX="497.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PW 변경">
-         <font>
-            <Font size="58.0" />
-         </font>
-      </Text>
       <TextField fx:id="txtFieldID" layoutX="375.0" layoutY="220.0" onAction="#changePW" prefHeight="63.0" prefWidth="447.0" promptText="ID">
          <font>
             <Font size="32.0" />
@@ -52,6 +43,16 @@
             <Font size="32.0" />
          </font>
       </PasswordField>
+      <Button fx:id="btnBack" layoutX="606.0" layoutY="492.0" mnemonicParsing="false" onAction="#Back" prefHeight="32.0" prefWidth="215.0" text="뒤로">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Button>
+      <Text fill="WHITE" layoutX="497.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PW 변경">
+         <font>
+            <Font size="58.0" />
+         </font>
+      </Text>
       <Label fx:id="lblID" layoutX="375.0" layoutY="283.0" prefHeight="28.0" prefWidth="447.0" textFill="RED">
          <font>
             <Font size="19.0" />
