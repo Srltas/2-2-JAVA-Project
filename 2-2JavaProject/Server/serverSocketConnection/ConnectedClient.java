@@ -154,7 +154,7 @@ class ConnectedClient extends Thread {
 					GameScoreSort.playerName[GameScoreSort.index] = message[2]+","+message[1];
 					GameScoreSort.playerScore[GameScoreSort.index] = Integer.parseInt(message[2]);
 					GameScoreSort.index++;
-					
+					dataOutStream.writeUTF("endGame,");
 					if(GameScoreSort.index==3) {
 						
 					}
