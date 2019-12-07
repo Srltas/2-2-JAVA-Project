@@ -2,24 +2,28 @@ package clientGameSystem;
 
 import java.util.HashSet;
 import java.util.Iterator;
-
+import clientRequestApi.API2;
 public class GameScoreCounter {
 
-	HashSet<String> wordList = new HashSet<String>();
-	Iterator<String> wordListSearch;
+	static HashSet<String> wordList = new HashSet<String>();
+	//static Iterator<String> wordListSearch;
 
-	int score = 0;
+	public static int score = 0;
+	static API2 apiControl = new API2();
+	
 
-	public void scoreControl(String word) {
+	public static boolean scoreControl(String word) {
 		if (addList(word)) {
 			score += 1;
+			return true;
 		} else {
 			score -= 1;
+			return false;
 		}
 	}
 
-	public boolean addList(String word) {
-		if (search(word)) {
+	public static boolean addList(String word) {
+		if (!wordSearchResult(word)) {
 			return false;
 		} else {
 			wordList.add(word);
@@ -27,8 +31,19 @@ public class GameScoreCounter {
 		}
 	}
 
-	public boolean search(String word) {
+	public static boolean wordSearchResult(String word) {
+		if(search(word)) {
+			return false;
+		} else {
+			if(apiControl.CallAPI(word) == 1) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+	
+	public static boolean search(String word) {
 		return (wordList.contains(word));
 	}
-
 }
