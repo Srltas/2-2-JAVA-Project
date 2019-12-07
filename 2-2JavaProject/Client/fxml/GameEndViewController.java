@@ -56,11 +56,10 @@ public class GameEndViewController implements Initializable {
 
 	String msg;
 	String[] message;
-	int arrayRank[] = new int[4];
-	int arrayScore[] = new int[4];
-	int arryaPoint[] = new int[4];
-	public String[] playerName = new String[4];
-	public int[] playerScore = new int[4];
+	private int arrayRank[] = new int[4];
+	private int arryaScore[] = new int[4];
+	private String[] arrayPlayerName = new String[4];
+	private int[] arryaPlayerWordCount = new int[4];
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -74,14 +73,12 @@ public class GameEndViewController implements Initializable {
 		message = msg.split(",");
 
 		if (message[0].equals("resultGame")) {
-			playerName[0] = message[1];
-			playerName[1] = message[3];
-			playerName[2] = message[5];
-			playerName[3] = message[7];
-			playerScore[0] = Integer.parseInt(message[2]);
-			playerScore[1] = Integer.parseInt(message[4]);
-			playerScore[2] = Integer.parseInt(message[6]);
-			playerScore[3] = Integer.parseInt(message[8]);
+			for(int i = 0; i < 4; i++) {
+				arrayPlayerName[i] = message[i*2+1];
+			}
+			for(int i = 0; i < 4; i++) {
+				arryaPlayerWordCount[i] = Integer.parseInt(message[i*2+2]);
+			}
 		}
 		sorting();
 	}
@@ -93,14 +90,14 @@ public class GameEndViewController implements Initializable {
 		String tmp;
 		for (i = 0; i < 4; i++) {
 			for (j = i + 1; j < 4; j++) {
-				if (playerScore[i] < playerScore[j]) {
-					temp = playerScore[i];
-					playerScore[i] = playerScore[j];
-					playerScore[j] = temp;
+				if (arryaPlayerWordCount[i] < arryaPlayerWordCount[j]) {
+					temp = arryaPlayerWordCount[i];
+					arryaPlayerWordCount[i] = arryaPlayerWordCount[j];
+					arryaPlayerWordCount[j] = temp;
 
-					tmp = playerName[i];
-					playerName[i] = playerName[j];
-					playerName[j] = tmp;
+					tmp = arrayPlayerName[i];
+					arrayPlayerName[i] = arrayPlayerName[j];
+					arrayPlayerName[j] = tmp;
 				}
 			}
 		}
@@ -113,10 +110,10 @@ public class GameEndViewController implements Initializable {
 		int set = 0;
 		int[] arrayScore = new int[5];
 
-		arrayScore[0] = playerScore[0];
-		arrayScore[1] = playerScore[1];
-		arrayScore[2] = playerScore[2];
-		arrayScore[3] = playerScore[3];
+		arrayScore[0] = arryaPlayerWordCount[0];
+		arrayScore[1] = arryaPlayerWordCount[1];
+		arrayScore[2] = arryaPlayerWordCount[2];
+		arrayScore[3] = arryaPlayerWordCount[3];
 		arrayScore[4] = -100;
 
 		for (int j = 0; j < 4; j++) {
@@ -136,34 +133,38 @@ public class GameEndViewController implements Initializable {
 
 	public void setScore() {
 		for (int i = 0; i < 4; i++) {
-			if (arrayRank[i] == 1)
-				arryaPoint[i] = 3;
-			else if (arrayRank[i] == 2)
-				arryaPoint[i] = 2;
-			else if (arrayRank[i] == 3)
-				arryaPoint[i] = 1;
-			else if (arrayRank[i] == 4)
-				arryaPoint[i] = 0;
+			if (arrayRank[i] == 1) {
+				arryaScore[i] = 3;
+			}
+			else if (arrayRank[i] == 2) {
+				arryaScore[i] = 2;
+			}
+			else if (arrayRank[i] == 3) {
+				arryaScore[i] = 1;
+			}				
+			else if (arrayRank[i] == 4) {
+				arryaScore[i] = 0;
+			}
 		}
 	}
 
 	public void setUi() {
-		txtPlayerName1.setText(playerName[0]);
-		txtPlayerName2.setText(playerName[1]);
-		txtPlayerName3.setText(playerName[2]);
-		txtPlayerName4.setText(playerName[3]);
+		txtPlayerName1.setText(arrayPlayerName[0]);
+		txtPlayerName2.setText(arrayPlayerName[1]);
+		txtPlayerName3.setText(arrayPlayerName[2]);
+		txtPlayerName4.setText(arrayPlayerName[3]);
 		lblRank1.setText(Integer.toString(arrayRank[0]));
 		lblRank2.setText(Integer.toString(arrayRank[1]));
 		lblRank3.setText(Integer.toString(arrayRank[2]));
 		lblRank4.setText(Integer.toString(arrayRank[3]));
-		lblScore1.setText(Integer.toString(arryaPoint[0]));
-		lblScore1.setText(Integer.toString(arryaPoint[1]));
-		lblScore1.setText(Integer.toString(arryaPoint[2]));
-		lblScore1.setText(Integer.toString(arryaPoint[3]));
-		txtWordCount1.setText(Integer.toString(playerScore[0]));
-		txtWordCount2.setText(Integer.toString(playerScore[1]));
-		txtWordCount3.setText(Integer.toString(playerScore[2]));
-		txtWordCount4.setText(Integer.toString(playerScore[3]));
+		lblScore1.setText(Integer.toString(arryaScore[0]));
+		lblScore1.setText(Integer.toString(arryaScore[1]));
+		lblScore1.setText(Integer.toString(arryaScore[2]));
+		lblScore1.setText(Integer.toString(arryaScore[3]));
+		txtWordCount1.setText(Integer.toString(arryaPlayerWordCount[0]));
+		txtWordCount2.setText(Integer.toString(arryaPlayerWordCount[1]));
+		txtWordCount3.setText(Integer.toString(arryaPlayerWordCount[2]));
+		txtWordCount4.setText(Integer.toString(arryaPlayerWordCount[3]));
 	}
 
 	public void enterMain() throws IOException {
