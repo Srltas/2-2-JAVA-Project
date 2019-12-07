@@ -185,6 +185,7 @@ public class InGameViewController implements Initializable {
 							endTime();
 							new GameEndTimer().timerSetter();
 						});
+						MessageListener.msg = " ,";
 					} else if (message[0].equals(" ")) {
 						//대기
 					}
