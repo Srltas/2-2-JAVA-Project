@@ -37,16 +37,6 @@
             <Font size="32.0" />
          </font>
       </TextField>
-      <Button fx:id="btnBack" layoutX="606.0" layoutY="492.0" mnemonicParsing="false" onAction="#Back" prefHeight="32.0" prefWidth="215.0" text="뒤로">
-         <font>
-            <Font size="29.0" />
-         </font>
-      </Button>
-      <Text fill="WHITE" layoutX="497.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PW 변경">
-         <font>
-            <Font size="58.0" />
-         </font>
-      </Text>
       <PasswordField fx:id="txtFieldPW" layoutX="375.0" layoutY="312.0" onAction="#changePW" prefHeight="63.0" prefWidth="447.0" promptText="비밀번호">
          <font>
             <Font size="32.0" />
@@ -57,6 +47,16 @@
             <Font size="32.0" />
          </font>
       </PasswordField>
+      <Button fx:id="btnBack" layoutX="606.0" layoutY="492.0" mnemonicParsing="false" onAction="#Back" prefHeight="32.0" prefWidth="215.0" text="뒤로">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Button>
+      <Text fill="WHITE" layoutX="497.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PW 변경">
+         <font>
+            <Font size="58.0" />
+         </font>
+      </Text>
       <Label fx:id="lblID" layoutX="375.0" layoutY="283.0" prefHeight="28.0" prefWidth="447.0" textFill="RED">
          <font>
             <Font size="19.0" />

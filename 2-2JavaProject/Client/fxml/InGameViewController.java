@@ -6,6 +6,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import clientGameSystem.GameReadyTimer;
+import clientGameSystem.GameTimer;
 import clientSocketConnection.Client;
 import clientSocketConnection.MessageListener;
 import javafx.animation.KeyFrame;
@@ -87,7 +88,18 @@ public class InGameViewController implements Initializable {
 		checkCount = true;
 	}
 
-	public void time() {
+	public void readyTime() {
+		lblTime.textProperty().bind(timeSeconds.divide(100).asString());
+		if (timeline != null) {
+			timeline.stop();
+		}
+		timeSeconds.set((STARTTIME + 1) * 100);
+		timeline = new Timeline();
+		timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(STARTTIME + 1), new KeyValue(timeSeconds, 0)));
+		timeline.playFromStart();
+	}
+	
+	public void gameTime() {
 		lblTime.textProperty().bind(timeSeconds.divide(100).asString());
 		if (timeline != null) {
 			timeline.stop();
@@ -134,13 +146,19 @@ public class InGameViewController implements Initializable {
 					} else if (message[0].equals("readyGame")) {
 						txtWord.setText("Ready!!");
 						Platform.runLater(() -> {
-							time();
-							GameReadyTimer timer = new GameReadyTimer();
-							timer.timerSetter();
+							readyTime();
+							new GameReadyTimer().timerSetter();
 						});
 						MessageListener.msg = " ,";
 					} else if (message[0].equals("startWord")) {
 						txtWord.setText(message[1]);
+						btnWord.setDisable(false);
+						txtFielWord.setDisable(false);
+						Platform.runLater(() -> {
+							gameTime();
+							new GameTimer().timerSetter();
+						});
+						MessageListener.msg = " ,";
 					} else if (message[0].equals(" ")) {
 						//대기
 					}

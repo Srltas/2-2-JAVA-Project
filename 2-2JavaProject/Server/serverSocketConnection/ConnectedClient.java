@@ -146,7 +146,8 @@ class ConnectedClient extends Thread {
 					for(ConnectedClient client : Server.clients) {
 						client.dataOutStream.writeUTF("startWord," + Server.wordList[number]); //랜덤단어 주기
 					}
-				} else if(message[0].equals("")) {
+				} else if(message[0].equals("endGame")) {
+					//게임종료
 					
 				} else if (message[0].equals("chat")) { // 채팅
 					System.out.println(message[1]);
