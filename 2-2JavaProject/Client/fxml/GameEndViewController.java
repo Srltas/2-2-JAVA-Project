@@ -158,9 +158,9 @@ public class GameEndViewController implements Initializable {
 		lblRank3.setText(Integer.toString(arrayRank[2]));
 		lblRank4.setText(Integer.toString(arrayRank[3]));
 		lblScore1.setText(Integer.toString(arryaScore[0]));
-		lblScore1.setText(Integer.toString(arryaScore[1]));
-		lblScore1.setText(Integer.toString(arryaScore[2]));
-		lblScore1.setText(Integer.toString(arryaScore[3]));
+		lblScore2.setText(Integer.toString(arryaScore[1]));
+		lblScore3.setText(Integer.toString(arryaScore[2]));
+		lblScore4.setText(Integer.toString(arryaScore[3]));
 		txtWordCount1.setText(Integer.toString(arryaPlayerWordCount[0]));
 		txtWordCount2.setText(Integer.toString(arryaPlayerWordCount[1]));
 		txtWordCount3.setText(Integer.toString(arryaPlayerWordCount[2]));
