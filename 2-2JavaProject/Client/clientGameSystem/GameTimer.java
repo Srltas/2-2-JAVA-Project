@@ -15,6 +15,6 @@ public class GameTimer {
 			}
 		};
 
-		timer.schedule(timerTask, 10000);
+		timer.schedule(timerTask, 60000);
 	}
 }
