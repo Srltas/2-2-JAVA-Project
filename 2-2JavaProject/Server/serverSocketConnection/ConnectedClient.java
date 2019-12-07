@@ -31,7 +31,6 @@ class ConnectedClient extends Thread {
 
 	public void run() {
 		try {
-
 			System.out.println("[" + this.socket.toString() + "에서 접속이 연결되었습니다.]");
 
 			outStream = this.socket.getOutputStream();
