@@ -136,8 +136,7 @@ class ConnectedClient extends Thread {
 								if (Server.playerList[i].equals(""))
 									continue;
 								Thread.sleep(500);
-								client.dataOutStream.writeUTF(
-										"enterGameRoom," + Integer.toString(i + 1) + "," + Server.playerList[i]);
+								client.dataOutStream.writeUTF("enterGameRoom," + Integer.toString(i + 1) + "," + Server.playerList[i]);
 							}
 						}
 						Server.gameRoomCount = 1;
@@ -145,9 +144,7 @@ class ConnectedClient extends Thread {
 					}
 				} else if(message[0].equals("startGame")) {
 					int number = (int)(Math.random() * Server.wordList.length); //랜덤숫자 뽑기
-					for(ConnectedClient client : Server.clients) {
-						client.dataOutStream.writeUTF("startWord," + Server.wordList[number]); //랜덤단어 주기
-					}
+					dataOutStream.writeUTF("startWord," + Server.wordList[number]); //랜덤단어 주기
 				} else if(message[0].equals("endGame")) {
 					//게임종료
 					
