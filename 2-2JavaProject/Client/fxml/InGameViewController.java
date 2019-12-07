@@ -24,6 +24,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import clientGameSystem.GameScoreCounter;
+
 
 public class InGameViewController implements Initializable {
 	@FXML
@@ -171,11 +173,21 @@ public class InGameViewController implements Initializable {
 	}
 
 	public void sendWord() {
-
 		String nextWord = txtFielWord.getText();
 		String word = txtWord.getText();
 		txtFielWord.setText(""); // txtFielWord 비우기
-
+		
+		if (nextWord.length()>1 && nextWord.length()<6) {
+			char[] stageWordChar = word.toCharArray();
+			char[] nextWordChar = nextWord.toCharArray();
+			
+			if (stageWordChar[word.length()-1] == nextWordChar[0]) {
+				System.out.println(GameScoreCounter.scoreControl(word));
+				System.out.println(GameScoreCounter.score);
+			}
+		}
+		
+		/*
 		if (nextWord.length() > 1 && nextWord.length() < 6) {
 			if (gameTurn != 0) {
 				char[] arrayWord = word.toCharArray(); // 앞에 단어 문자열 배열변환
@@ -191,6 +203,7 @@ public class InGameViewController implements Initializable {
 		} else {
 			lblWordWarning.setText("다시 입력하세요.");
 		}
+		*/
 	}
 
 	public void sendMessage() {
