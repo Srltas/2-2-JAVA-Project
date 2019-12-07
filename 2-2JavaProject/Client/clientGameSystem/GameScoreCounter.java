@@ -13,29 +13,37 @@ public class GameScoreCounter {
 	public static int scoreControl(String word) {
 		if (addList(word)) {
 			score += 1;
+			System.out.println("score : +1");
 			return 1;
 		} else {
 			score -= 1;
+			System.out.println("score : -1");
 			return 0;
 		}
 	}
 
 	public static boolean addList(String word) {
 		if (wordSearchResult(word)==false) {
+			System.out.println("add : false");
 			return false;
 		} else {
 			wordList.add(word);
+			System.out.println("add : true");
 			return true;
 		}
 	}
 
 	public static boolean wordSearchResult(String word) {
 		if(search(word)) {
+			System.out.println("contains : true");
 			return false;
 		} else {
+			System.out.println("contains : false");
 			if(apiControl.CallAPI(word) == 1) {
+				System.out.println("API : true");
 				return true;
 			} else {
+				System.out.println("API : false");
 				return false;
 			}
 		}
