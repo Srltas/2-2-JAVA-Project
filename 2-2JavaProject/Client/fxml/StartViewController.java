@@ -105,7 +105,7 @@ public class StartViewController {
 	}
 
 	public void Eixt() {
-		if (InGameViewController.checkCount == 1) {
+		if (InGameViewController.checkCount) {
 			Client.client.send("exitGameRoom," + StartViewController.account.getUserName());
 		} else {
 			Client.client.send("exitGame," + StartViewController.account.getId());

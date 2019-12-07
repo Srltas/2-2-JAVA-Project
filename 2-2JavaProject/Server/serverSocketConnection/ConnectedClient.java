@@ -36,7 +36,7 @@ class ConnectedClient extends Thread {
 			inStream = this.socket.getInputStream();
 			dataInStream = new DataInputStream(inStream);
 
-			dataOutStream.writeUTF("[Welcome to this Server]");
+			dataOutStream.writeUTF("Welcome to this Server");
 
 			serverLogin.Account account;
 			while (true) {
@@ -67,7 +67,7 @@ class ConnectedClient extends Thread {
 					System.out.println(password);
 				} else if (message[0].equals("signUp")) {
 					// 회원가입
-					System.out.println("[catch by create]");
+					System.out.println("catch by create");
 
 					CreateAccountService createAccount = new CreateAccountService();
 					if (createAccount.createAccount(message[1], message[2], message[3], message[4], message[5])) {
@@ -77,7 +77,7 @@ class ConnectedClient extends Thread {
 					}
 				} else if (message[0].equals("findID")) {
 					// 아이디 찾기
-					System.out.println("[catch by findID]");
+					System.out.println("catch by findID");
 
 					IdFindService idFindService = new IdFindService();
 					serverLogin.Account idFindAccount = idFindService.FindId(message[1]);
@@ -121,20 +121,21 @@ class ConnectedClient extends Thread {
 						System.out.println("[방 인원 수 : " + Server.gameRoomCount + "]");
 						// 4명이면 게임 시작!
 						if (Server.gameRoomCount == 4) {
-							Thread.sleep(6000);
+							Thread.sleep(5000);
 							for (ConnectedClient client : Server.clients) {
-								client.dataOutStream.writeUTF("startGame");
+								client.dataOutStream.writeUTF("readyGame");
 							}
 							message[0] = null; // 다시 안들어 오는 처리
 						}
 					} else {
+						//5번째 사람부터 다른 방으로 초기화
 						playerNumber = 0;
 						Server.playerList[playerNumber] = message[1];
 						for (ConnectedClient client : Server.clients) {
 							for (int i = 0; i < Server.playerList.length; i++) {
 								if (Server.playerList[i].equals(""))
 									continue;
-								Thread.sleep(100);
+								Thread.sleep(500);
 								client.dataOutStream.writeUTF(
 										"enterGameRoom," + Integer.toString(i + 1) + "," + Server.playerList[i]);
 							}
@@ -151,6 +152,7 @@ class ConnectedClient extends Thread {
 					for (ConnectedClient client : Server.clients) {
 						client.dataOutStream.writeUTF("chat," + message[1]);
 					}
+
 				} else if (message[0].equals("exitGameRoom")) {
 					// GameRoom에서 퇴장하는 클라이언트
 					int exitPlayerNumber;
