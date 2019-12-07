@@ -3,16 +3,17 @@ package clientGameSystem;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import clientSocketConnection.Client;
+
 public class GameReadyTimer {
-	public static void timerSetter(String[] args) {
+	public static void timerSetter() {
 		Timer timer = new Timer();
 
 		TimerTask timerTask = new TimerTask() {
 			public void run() {
-				System.out.println("Start!");
+				Client.client.send("startGame,");
 			}
 		};
-		System.out.println("ready");
-		timer.schedule(timerTask, 3000);
+		timer.schedule(timerTask, 15000);
 	}
 }

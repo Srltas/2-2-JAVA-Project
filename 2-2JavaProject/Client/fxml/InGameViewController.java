@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import clientGameSystem.GameReadyTimer;
 import clientSocketConnection.Client;
 import clientSocketConnection.MessageListener;
 import javafx.animation.KeyFrame;
@@ -134,7 +135,8 @@ public class InGameViewController implements Initializable {
 						txtWord.setText("Ready!!");
 						Platform.runLater(() -> {
 							time();
-							//여기다가 강부가 만든 타이머 넣으면 됨
+							GameReadyTimer timer = new GameReadyTimer();
+							timer.timerSetter();
 						});
 						MessageListener.msg = " ,";
 					} else if (message[0].equals("startWord")) {
