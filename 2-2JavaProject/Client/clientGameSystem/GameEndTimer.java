@@ -3,6 +3,7 @@ package clientGameSystem;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import clientSocketConnection.Client;
 import fxml.InGameViewController;
 
 public class GameEndTimer {
@@ -11,8 +12,7 @@ public class GameEndTimer {
 		Timer timer = new Timer();
 		TimerTask timerTask = new TimerTask() {
 			public void run() {
-				InGameViewController.btnResult.setDisable(false);
-				InGameViewController.btnResult.setOpacity(1);
+				Client.client.send("onResultButton,");
 			}
 		};
 

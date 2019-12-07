@@ -49,7 +49,7 @@ public class InGameViewController implements Initializable {
 	@FXML
 	private Button btnWord;
 	@FXML
-	public static Button btnResult;
+	private Button btnResult;
 	@FXML
 	private TextArea txtAreaChat;
 	@FXML
@@ -186,7 +186,12 @@ public class InGameViewController implements Initializable {
 							new GameEndTimer().timerSetter();
 						});
 						MessageListener.msg = " ,";
-					} else if (message[0].equals(" ")) {
+					} else if(message[0].equals("onResultButton")) {
+						btnResult.setDisable(false);
+						btnResult.setOpacity(0);
+						MessageListener.msg = " ,";
+					}
+					else if (message[0].equals(" ")) {
 						//대기
 					}
 				}
