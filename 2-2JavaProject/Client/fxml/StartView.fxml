@@ -51,7 +51,7 @@
             <Font size="29.0" />
          </font>
       </Button>
-      <Button fx:id="btnFindPW" layoutX="592.0" layoutY="468.0" mnemonicParsing="false" onAction="#enterFindPWView" prefHeight="55.0" prefWidth="116.0" text="PW찾기" textAlignment="CENTER">
+      <Button fx:id="btnFindPW" layoutX="592.0" layoutY="468.0" mnemonicParsing="false" onAction="#enterFindPWView" prefHeight="55.0" prefWidth="116.0" text="PW변경" textAlignment="CENTER">
          <font>
             <Font name="Microsoft JhengHei UI Bold" size="21.0" />
          </font>
