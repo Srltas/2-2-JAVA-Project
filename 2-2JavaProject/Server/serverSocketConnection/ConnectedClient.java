@@ -86,6 +86,8 @@ class ConnectedClient extends Thread {
 					serverLogin.Account idFindAccount = idFindService.FindId(message[1]);
 					if ((idFindAccount != null)) {
 						dataOutStream.writeUTF("findIDsuccess,"+ idFindAccount.getId());
+					} else {
+						//id없음
 					}
 				} else if (message[0].equals("changePW")) {
 					// 비밀번호 변경
