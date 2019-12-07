@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import clientGameSystem.GameScoreSort;
 import clientSocketConnection.Client;
 import clientSocketConnection.MessageListener;
 import javafx.fxml.FXML;
@@ -66,7 +67,9 @@ public class GameEndViewController implements Initializable {
 	String wordCount4;
 	int arrayRank[] = new int[4];
 	int arrayScore[] = new int[4];
-	int index = 0;
+	int arryaPoint[] = new int[4];
+	public static String[] playerName = new String[5];
+	public static int[] playerScore = new int[5];
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -80,15 +83,16 @@ public class GameEndViewController implements Initializable {
 		message = msg.split(",");
 		
 		if(message[0].equals("resultGame")) {
-			playerName1 = message[1];
-			wordCount1 = message[2];
-			playerName2 = message[3];
-			wordCount2 = message[4];
-			playerName3 = message[5];
-			wordCount3 = message[6];
-			playerName4 = message[7];
-			wordCount4 = message[8];
+			playerName[0] = message[1];
+			playerName[1] = message[3];
+			playerName[2] = message[5];
+			playerName[3] = message[7];
+			playerScore[0] = Integer.parseInt(message[2]);
+			playerScore[1] = Integer.parseInt(message[4]);
+			playerScore[2] = Integer.parseInt(message[6]);
+			playerScore[3] = Integer.parseInt(message[8]);
 		}
+		new GameScoreSort().sorting();
 		sortScore();
 	}
 	
@@ -98,10 +102,10 @@ public class GameEndViewController implements Initializable {
 		int set = 0;
 		int[] arrayScore = new int[5];
 		
-		arrayScore[0] = Integer.parseInt(wordCount1);
-		arrayScore[1] = Integer.parseInt(wordCount2);
-		arrayScore[2] = Integer.parseInt(wordCount3);
-		arrayScore[3] = Integer.parseInt(wordCount4);
+		arrayScore[0] = playerScore[0];
+		arrayScore[1] = playerScore[1];
+		arrayScore[2] = playerScore[2];
+		arrayScore[3] = playerScore[3];
 		arrayScore[4] = -100;
 		
 		for (int j = 0; j < 4; j++) {
@@ -122,13 +126,13 @@ public class GameEndViewController implements Initializable {
 	public void setScore() {
 		for (int i = 0; i < 4; i++) {
 			if(arrayRank[i] == 1)
-				arrayScore[i] = 3;
+				arryaPoint[i] = 3;
 			else if(arrayRank[i] == 2)
-				arrayScore[i] = 2;
+				arryaPoint[i] = 2;
 			else if(arrayRank[i] == 3)
-				arrayScore[i] = 1;
+				arryaPoint[i] = 1;
 			else if(arrayRank[i] == 4)
-				arrayScore[i] = 0;
+				arryaPoint[i] = 0;
 		}
 	}
 	
@@ -141,10 +145,10 @@ public class GameEndViewController implements Initializable {
 		lblRank2.setText(Integer.toString(arrayRank[1]));
 		lblRank3.setText(Integer.toString(arrayRank[2]));
 		lblRank4.setText(Integer.toString(arrayRank[3]));
-		lblScore1.setText(Integer.toString(arrayScore[0]));
-		lblScore1.setText(Integer.toString(arrayScore[1]));
-		lblScore1.setText(Integer.toString(arrayScore[2]));
-		lblScore1.setText(Integer.toString(arrayScore[3]));
+		lblScore1.setText(Integer.toString(arryaPoint[0]));
+		lblScore1.setText(Integer.toString(arryaPoint[1]));
+		lblScore1.setText(Integer.toString(arryaPoint[2]));
+		lblScore1.setText(Integer.toString(arryaPoint[3]));
 		txtWordCount1.setText(wordCount1);
 		txtWordCount2.setText(wordCount2);
 		txtWordCount3.setText(wordCount3);

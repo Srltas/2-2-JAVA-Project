@@ -1,14 +1,11 @@
 package clientGameSystem;
 
-public class GameScoreSort {
-	public static String[] playerName = new String[5];
-	public static int[] playerScore = new int[5];
-	public static int index = 0;
-	public static boolean check = true;
+import fxml.GameEndViewController;
 
-	public static void sorting() {
+public class GameScoreSort {
+
+	public void sorting() {
 		System.out.println("sorting enter");
-		check = false;
 		int i;
 		int j;
 		int temp;
@@ -20,19 +17,19 @@ public class GameScoreSort {
 			min=i;
 			for (j = i+1;j<5;j++) {
 				System.out.println("for - j");
-				if(playerScore[min]<playerScore[j]) {
+				if(GameEndViewController.playerScore[min]<GameEndViewController.playerScore[j]) {
 					System.out.println("for - min = j");
 					min = j;
 				}
 			}
-			temp = playerScore[min];
-			playerScore[min] = playerScore[j];
-			playerScore[j] = temp;
-			System.out.println(playerScore[j] + "<->" + playerScore[min]);
-			tmp = playerName[min];
-			playerName[min] = playerName[j];
-			playerName[j] = tmp;
-			System.out.println(playerName[j] + "<->" + playerName[min]);
+			temp = GameEndViewController.playerScore[min];
+			GameEndViewController.playerScore[min] = GameEndViewController.playerScore[j];
+			GameEndViewController.playerScore[j] = temp;
+			System.out.println(GameEndViewController.playerScore[j] + "<->" + GameEndViewController.playerScore[min]);
+			tmp = GameEndViewController.playerName[min];
+			GameEndViewController.playerName[min] = GameEndViewController.playerName[j];
+			GameEndViewController.playerName[j] = tmp;
+			System.out.println(GameEndViewController.playerName[j] + "<->" + GameEndViewController.playerName[min]);
 		}
 	}
 }
