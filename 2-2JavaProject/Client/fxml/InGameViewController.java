@@ -38,7 +38,7 @@ public class InGameViewController implements Initializable {
 	private ImageView imgUser2;
 	@FXML
 	private ImageView imgUser3;
-	@FXML
+	@FXML 
 	private ImageView imgUser4;
 	@FXML
 	private Label lblWordWarning;
