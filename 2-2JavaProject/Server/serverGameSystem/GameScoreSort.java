@@ -1,8 +1,8 @@
 package serverGameSystem;
 
 public class GameScoreSort {
-	public static String[] playerName = new String[4];
-	public static int[] playerScore = new int[4];
+	public static String[] playerName = new String[5];
+	public static int[] playerScore = new int[5];
 	public static int index = 0;
 	public static boolean check = true;
 
@@ -15,10 +15,10 @@ public class GameScoreSort {
 		String tmp;
 		int min;
 		
-		for (i = 0; i<4;i++) {
+		for (i = 0; i<5;i++) {
 			System.out.println("for - i");
 			min=i;
-			for (j = i+1;j<4;j++) {
+			for (j = i+1;j<5;j++) {
 				System.out.println("for - j");
 				if(playerScore[min]<playerScore[j]) {
 					System.out.println("for - min = j");
