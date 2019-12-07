@@ -207,6 +207,8 @@ public class InGameViewController implements Initializable {
 				System.out.println(GameScoreCounter.scoreControl(word));
 				System.out.println(GameScoreCounter.score);
 				if(GameScoreCounter.scoreControl(word)) {
+					System.out.println(word);
+					System.out.println(nextWord);
 					txtWord.setText(nextWord);					
 				}
 			}
