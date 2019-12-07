@@ -37,7 +37,6 @@ public class MenuRoomViewController implements Initializable{
 	
 	public void play(ActionEvent event)throws Exception {
 		Client.client.send("enterGameRoom," + StartViewController.account.getUserName());
-		Thread.sleep(1000);
 
 		Parent View = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/InGameView.fxml"));
 		Scene scene = new Scene(View);
@@ -49,7 +48,7 @@ public class MenuRoomViewController implements Initializable{
 		
 	}
 	public void exit() {
-		if (InGameViewController.checkCount == 1) {
+		if (InGameViewController.checkCount) {
 			Client.client.send("exitGameRoom," + StartViewController.account.getUserName());
 		} else {
 			Client.client.send("exitGame," + StartViewController.account.getId());

@@ -19,7 +19,7 @@ public class StartClient extends Application {
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
 			primaryStage.setOnCloseRequest(evene -> {
-				if (InGameViewController.checkCount == 1) {
+				if (InGameViewController.checkCount) {
 					Client.client.send("exitGameRoom," + StartViewController.account.getUserName());
 				} else {
 					Client.client.send("exitGame," + StartViewController.account.getId());

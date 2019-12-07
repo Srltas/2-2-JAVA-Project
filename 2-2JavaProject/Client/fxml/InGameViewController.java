@@ -1,4 +1,4 @@
- package fxml;
+package fxml;
 
 import java.io.DataInputStream;
 import java.io.InputStream;
@@ -17,7 +17,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -73,34 +72,31 @@ public class InGameViewController implements Initializable {
 
 	private Timeline timeline;
 	private static final Integer STARTTIME = 15;
-	private IntegerProperty timeSeconds = new SimpleIntegerProperty(STARTTIME*100);
-	 
+	private IntegerProperty timeSeconds = new SimpleIntegerProperty(STARTTIME * 100);
+
 	boolean loop = true;
 	String msg;
 	String[] message;
-	public static int checkCount = 0;
+	public static boolean checkCount =false;	//게임방에 들어오면 true
 	int gameTurn;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		Loop();
-		checkCount = 1;
+		checkCount = true;
 	}
-	
+
 	public void time() {
 		lblTime.textProperty().bind(timeSeconds.divide(100).asString());
 		if (timeline != null) {
-            timeline.stop();
-        }
-        timeSeconds.set((STARTTIME+1)*100);
-        timeline = new Timeline();
-        timeline.getKeyFrames().add(
-
-                new KeyFrame(Duration.seconds(STARTTIME+1),
-                new KeyValue(timeSeconds, 0)));
-        timeline.playFromStart();
+			timeline.stop();
+		}
+		timeSeconds.set((STARTTIME + 1) * 100);
+		timeline = new Timeline();
+		timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(STARTTIME + 1), new KeyValue(timeSeconds, 0)));
+		timeline.playFromStart();
 	}
-	
+
 	public void Loop() {
 		Thread thread = new Thread() {
 			@Override
@@ -123,7 +119,6 @@ public class InGameViewController implements Initializable {
 						String chatMessage = message[1] + "\n";
 						Platform.runLater(() -> {
 							txtAreaChat.appendText(chatMessage);
-
 						});
 						MessageListener.msg = " ,";
 					} else if (message[0].equals("exitGameRoom")) {
@@ -135,20 +130,11 @@ public class InGameViewController implements Initializable {
 							exitPlayer3();
 						else if (message[1].equals("4"))
 							exitPlayer4();
-
-					} else if (message[0].equals("startGame")) {
-						txtWord.setText("Start!!");
-					} else if (message[0].equals("myTurn")) {
-						if (message[2].equals(StartViewController.account.getUserName())) {
-							txtFielWord.setDisable(false);
-							btnWord.setDisable(false);
-							txtTurnUserName.setText(message[2]);
-						}
-						MessageListener.msg = " ,";
-					} else if (message[0].equals("success")) {
-						txtFielWord.setDisable(true);
-						btnWord.setDisable(true);
-						Client.client.send("changeWordText,");
+					} else if (message[0].equals("readyGame")) {
+						txtWord.setText("Ready!!");
+						Platform.runLater(() -> {
+							time();
+						});
 						MessageListener.msg = " ,";
 					} else if (message[0].equals("changeWordText")) {
 						txtWord.setText(message[1]);
