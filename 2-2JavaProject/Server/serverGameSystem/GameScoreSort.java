@@ -5,7 +5,7 @@ public class GameScoreSort {
 	public static int[] playerScore = new int[4];
 	public static int index = 0;
 
-	public void sorting() {
+	public static void sorting() {
 		
 		int i;
 		int j;

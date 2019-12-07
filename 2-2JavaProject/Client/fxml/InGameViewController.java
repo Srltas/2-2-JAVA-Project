@@ -107,7 +107,7 @@ public class InGameViewController implements Initializable {
 	}
 	
 	public void readyTime() {
-		lblTime.textProperty().bind(endTimeSeconds.divide(100).asString());
+		lblTime.textProperty().bind(readyTimeSeconds.divide(100).asString());
 		if (timeline != null) {
 			timeline.stop();
 		}
