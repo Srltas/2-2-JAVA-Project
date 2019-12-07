@@ -35,6 +35,7 @@ public class Server {
 			while(true) {
 				try {
 					Socket socket = serverSocket.accept();
+					
 					ConnectedClient connectedClient = new ConnectedClient(socket);
 					clients.add(connectedClient);
 					connectedClient.start();
