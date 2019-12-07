@@ -1,4 +1,4 @@
-package serverGameSystem;
+package clientGameSystem;
 
 public class GameScoreSort {
 	public static String[] playerName = new String[5];
