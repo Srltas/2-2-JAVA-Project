@@ -5,6 +5,10 @@ import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+
+import com.sun.javafx.scene.paint.GradientUtils.Parser;
+
+import serverGameSystem.GameScoreSort;
 import serverLogin.LoginService;
 import serverLogin.CreateAccountService;
 import serverLogin.DeniedOverlapLoginService;
@@ -28,7 +32,6 @@ class ConnectedClient extends Thread {
 
 	public void run() {
 		try {
-
 			System.out.println("[" + this.socket.toString() + "에서 접속이 연결되었습니다.]");
 
 			outStream = this.socket.getOutputStream();
@@ -145,10 +148,25 @@ class ConnectedClient extends Thread {
 				} else if(message[0].equals("startGame")) {
 					int number = (int)(Math.random() * Server.wordList.length); //랜덤숫자 뽑기
 					dataOutStream.writeUTF("startWord," + Server.wordList[number]); //랜덤단어 주기
+					
 				} else if(message[0].equals("endGame")) {
 					//게임종료
+					GameScoreSort.playerName[GameScoreSort.index] = message[2]+","+message[1];
+					GameScoreSort.playerScore[GameScoreSort.index] = Integer.parseInt(message[2]);
+					GameScoreSort.index++;
 					
-				} else if (message[0].equals("chat")) { // 채팅
+					if(GameScoreSort.index==3) {
+						
+					}
+					
+				} else if(message[0].equals("resultGame")) {
+					dataOutStream.writeUTF("resultGame," + GameScoreSort.playerName[0] + "," + GameScoreSort.playerScore[0] + "," 
+				+ GameScoreSort.playerName[1] + "," + GameScoreSort.playerScore[1] + "," 
+				+ GameScoreSort.playerName[2] + "," + GameScoreSort.playerScore[2] + "," 
+				+ GameScoreSort.playerName[3] + "," + GameScoreSort.playerScore[3]);
+				}
+				
+				else if (message[0].equals("chat")) { // 채팅
 					System.out.println(message[1]);
 					for (ConnectedClient client : Server.clients) {
 						client.dataOutStream.writeUTF("chat," + message[1]);

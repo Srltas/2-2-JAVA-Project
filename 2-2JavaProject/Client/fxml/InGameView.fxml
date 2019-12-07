@@ -71,7 +71,7 @@
             <Font size="30.0" />
          </font>
       </Text>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0e7245" height="244.0" layoutX="316.0" layoutY="123.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="562.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0e7245" height="218.0" layoutX="316.0" layoutY="123.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="562.0" />
       <TextField fx:id="txtFieldWord" disable="true" layoutX="317.0" layoutY="340.0" onAction="#sendWord" prefHeight="62.0" prefWidth="562.0" promptText="다음단어">
          <font>
             <Font size="31.0" />
@@ -132,5 +132,10 @@
             <Image url="@인게임제목.png" />
          </image>
       </ImageView>
+      <Button fx:id="btnResult" disable="true" layoutX="961.0" layoutY="219.0" mnemonicParsing="false" onAction="#showResult" opacity="0.0" prefHeight="85.0" prefWidth="151.0" text="결과 보러가기" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

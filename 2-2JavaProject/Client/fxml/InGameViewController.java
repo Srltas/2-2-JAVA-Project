@@ -1,10 +1,12 @@
 package fxml;
 
 import java.io.DataInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import clientGameSystem.GameEndTimer;
 import clientGameSystem.GameReadyTimer;
 import clientGameSystem.GameTimer;
 import clientSocketConnection.Client;
@@ -16,26 +18,22 @@ import javafx.application.Platform;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import clientGameSystem.GameScoreCounter;
 
 
 public class InGameViewController implements Initializable {
-	@FXML
-	private ImageView imgOut1;
-	@FXML
-	private ImageView imgOut2;
-	@FXML
-	private ImageView imgOut3;
-	@FXML
-	private ImageView imgOut4;
 	@FXML
 	private ImageView imgUser1;
 	@FXML
@@ -50,6 +48,8 @@ public class InGameViewController implements Initializable {
 	private Button btnChat;
 	@FXML
 	private Button btnWord;
+	@FXML
+	public static Button btnResult;
 	@FXML
 	private TextArea txtAreaChat;
 	@FXML
@@ -77,6 +77,8 @@ public class InGameViewController implements Initializable {
 	private Timeline timeline;
 	private static final Integer READYTIME = 10;
 	private static final Integer GAMETIME = 60;
+	private static final Integer ENDTIME = 3;
+	private IntegerProperty endTimeSeconds = new SimpleIntegerProperty(ENDTIME * 100);
 	private IntegerProperty readyTimeSeconds = new SimpleIntegerProperty(READYTIME * 100);
 	private IntegerProperty gameTimeSeconds = new SimpleIntegerProperty(GAMETIME * 100);
 
@@ -92,8 +94,20 @@ public class InGameViewController implements Initializable {
 		checkCount = true;
 	}
 
+	
+	public void endTime() {
+		lblTime.textProperty().bind(endTimeSeconds.divide(100).asString());
+		if (timeline != null) {
+			timeline.stop();
+		}
+		readyTimeSeconds.set((ENDTIME + 1) * 100);
+		timeline = new Timeline();
+		timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(ENDTIME + 1), new KeyValue(endTimeSeconds, 0)));
+		timeline.playFromStart();
+	}
+	
 	public void readyTime() {
-		lblTime.textProperty().bind(readyTimeSeconds.divide(100).asString());
+		lblTime.textProperty().bind(endTimeSeconds.divide(100).asString());
 		if (timeline != null) {
 			timeline.stop();
 		}
@@ -160,9 +174,17 @@ public class InGameViewController implements Initializable {
 						txtFieldWord.setDisable(false);
 						Platform.runLater(() -> {
 							gameTime();
-							new GameTimer().timerSetter();
+							new GameTimer().timerSetter(StartViewController.account.getUserName(),Integer.toString(GameScoreCounter.score));
 						});
 						MessageListener.msg = " ,";
+					} else if(message[0].equals("endGame")) {
+						btnWord.setDisable(true);
+						txtFieldWord.setDisable(true);
+						txtWord.setText("End!!");
+						Platform.runLater(() ->{
+							endTime();
+							new GameEndTimer().timerSetter();
+						});
 					} else if (message[0].equals(" ")) {
 						//대기
 					}
@@ -184,28 +206,20 @@ public class InGameViewController implements Initializable {
 			if (stageWordChar[word.length()-1] == nextWordChar[0]) {
 				System.out.println(GameScoreCounter.scoreControl(word));
 				System.out.println(GameScoreCounter.score);
-				
-				txtWord.setText(nextWord);
-			}
-		}
-		
-		/*
-		if (nextWord.length() > 1 && nextWord.length() < 6) {
-			if (gameTurn != 0) {
-				char[] arrayWord = word.toCharArray(); // 앞에 단어 문자열 배열변환
-				char[] arrayNextWord = nextWord.toCharArray(); // 이을 단어 문자열 배열변환
-				if (arrayWord[arrayWord.length - 1] == arrayNextWord[0]) {
-					Client.client.send("word," + nextWord);
-				} else {
-					lblWordWarning.setText("다시 입력하세요.");
+				if(GameScoreCounter.scoreControl(word)) {
+					txtWord.setText(nextWord);					
 				}
-			} else {
-				Client.client.send("word," + nextWord);
 			}
-		} else {
-			lblWordWarning.setText("다시 입력하세요.");
 		}
-		*/
+	}
+	
+	public void showResult() throws IOException {
+		Client.client.send("resultGame,");
+		
+		Parent View = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/GameEndView.fxml"));
+		Scene scene = new Scene(View);
+		Stage primaryStage = (Stage) btnResult.getScene().getWindow();
+		primaryStage.setScene(scene);
 	}
 
 	public void sendMessage() {

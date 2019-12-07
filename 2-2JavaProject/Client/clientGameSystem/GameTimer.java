@@ -7,11 +7,11 @@ import clientSocketConnection.Client;
 
 public class GameTimer {
 
-	public static void timerSetter() {
+	public static void timerSetter(String playerName,String score) {
 		Timer timer = new Timer();
 		TimerTask timerTask = new TimerTask() {
 			public void run() {
-				Client.client.send("endGame,");
+				Client.client.send("endGame," + playerName +","+ score);
 			}
 		};
 
