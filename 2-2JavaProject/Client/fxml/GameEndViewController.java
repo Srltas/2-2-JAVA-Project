@@ -56,14 +56,6 @@ public class GameEndViewController implements Initializable {
 
 	String msg;
 	String[] message;
-	String playerName1;
-	String playerName2;
-	String playerName3;
-	String playerName4;
-	String wordCount1;
-	String wordCount2;
-	String wordCount3;
-	String wordCount4;
 	int arrayRank[] = new int[4];
 	int arrayScore[] = new int[4];
 	int arryaPoint[] = new int[4];
@@ -156,10 +148,10 @@ public class GameEndViewController implements Initializable {
 	}
 
 	public void setUi() {
-		txtPlayerName1.setText(playerName1);
-		txtPlayerName2.setText(playerName2);
-		txtPlayerName3.setText(playerName3);
-		txtPlayerName4.setText(playerName4);
+		txtPlayerName1.setText(playerName[0]);
+		txtPlayerName2.setText(playerName[1]);
+		txtPlayerName3.setText(playerName[2]);
+		txtPlayerName4.setText(playerName[3]);
 		lblRank1.setText(Integer.toString(arrayRank[0]));
 		lblRank2.setText(Integer.toString(arrayRank[1]));
 		lblRank3.setText(Integer.toString(arrayRank[2]));
@@ -168,10 +160,10 @@ public class GameEndViewController implements Initializable {
 		lblScore1.setText(Integer.toString(arryaPoint[1]));
 		lblScore1.setText(Integer.toString(arryaPoint[2]));
 		lblScore1.setText(Integer.toString(arryaPoint[3]));
-		txtWordCount1.setText(wordCount1);
-		txtWordCount2.setText(wordCount2);
-		txtWordCount3.setText(wordCount3);
-		txtWordCount4.setText(wordCount4);
+		txtWordCount1.setText(Integer.toString(playerScore[0]));
+		txtWordCount2.setText(Integer.toString(playerScore[1]));
+		txtWordCount3.setText(Integer.toString(playerScore[2]));
+		txtWordCount4.setText(Integer.toString(playerScore[3]));
 	}
 
 	public void enterMain() throws IOException {
