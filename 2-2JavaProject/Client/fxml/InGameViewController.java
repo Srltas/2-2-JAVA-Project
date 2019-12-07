@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import clientGameSystem.GameReadyTimer;
 import clientSocketConnection.Client;
 import clientSocketConnection.MessageListener;
 import javafx.animation.KeyFrame;
@@ -134,7 +135,8 @@ public class InGameViewController implements Initializable {
 						txtWord.setText("Ready!!");
 						Platform.runLater(() -> {
 							time();
-							Client.client.send("startGame,");
+							GameReadyTimer timer = new GameReadyTimer();
+							timer.timerSetter();
 						});
 						MessageListener.msg = " ,";
 					} else if (message[0].equals("startWord")) {
@@ -169,7 +171,6 @@ public class InGameViewController implements Initializable {
 		} else {
 			lblWordWarning.setText("다시 입력하세요.");
 		}
-
 	}
 
 	public void sendMessage() {
