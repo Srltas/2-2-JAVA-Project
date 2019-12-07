@@ -1,7 +1,6 @@
 package clientGameSystem;
 
 import java.util.HashSet;
-import java.util.Iterator;
 import clientRequestApi.API2;
 public class GameScoreCounter {
 

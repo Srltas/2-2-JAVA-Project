@@ -3,7 +3,6 @@ package clientGameSystem;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import clientSocketConnection.Client;
 import fxml.InGameViewController;
 
 public class GameEndTimer {
