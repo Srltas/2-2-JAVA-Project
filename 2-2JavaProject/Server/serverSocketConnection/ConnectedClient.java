@@ -158,13 +158,6 @@ class ConnectedClient extends Thread {
 					GameScoreSort.playerScore[GameScoreSort.index] = Integer.parseInt(message[2]);
 					GameScoreSort.index++;
 					dataOutStream.writeUTF("endGame,");
-					if(GameScoreSort.index==4) {
-						if(GameScoreSort.check) {
-							System.out.println("sorting start");
-							GameScoreSort.sorting();
-						}					
-					}
-					
 				} else if(message[0].equals("onResultButton")) {
 					dataOutStream.writeUTF("onResultButton,");
 					
