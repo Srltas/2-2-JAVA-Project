@@ -14,8 +14,8 @@ public class DeniedOverlapLoginService {
 		} else if (onlineUserId.contains(id)) {
 			return false;
 		}
-
 		return true;
+
 	}
 
 	public static void add(String id) {

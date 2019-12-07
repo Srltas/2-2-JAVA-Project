@@ -3,13 +3,15 @@ package clientGameSystem;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import clientSocketConnection.Client;
+
 public class GameTimer {
 
-	public static void timerSetter(String[] args) {
+	public static void timerSetter() {
 		Timer timer = new Timer();
 		TimerTask timerTask = new TimerTask() {
 			public void run() {
-				System.out.println("bang");
+				Client.client.send("endGame,");
 			}
 		};
 
