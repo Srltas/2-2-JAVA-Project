@@ -156,7 +156,7 @@ class ConnectedClient extends Thread {
 					GameScoreSort.index++;
 					
 					if(GameScoreSort.index==3) {
-						
+						GameScoreSort.sorting();
 					}
 					
 				} else if(message[0].equals("resultGame")) {
