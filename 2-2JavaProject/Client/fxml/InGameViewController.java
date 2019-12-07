@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import clientGameSystem.GameEndTimer;
 import clientGameSystem.GameReadyTimer;
 import clientGameSystem.GameTimer;
 import clientSocketConnection.Client;
@@ -51,6 +52,8 @@ public class InGameViewController implements Initializable {
 	@FXML
 	private Button btnWord;
 	@FXML
+	static private Button btnResult;
+	@FXML
 	private TextArea txtAreaChat;
 	@FXML
 	private TextField txtFieldChat;
@@ -77,6 +80,8 @@ public class InGameViewController implements Initializable {
 	private Timeline timeline;
 	private static final Integer READYTIME = 10;
 	private static final Integer GAMETIME = 60;
+	private static final Integer ENDTIME = 3;
+	private IntegerProperty endTimeSeconds = new SimpleIntegerProperty(ENDTIME * 100);
 	private IntegerProperty readyTimeSeconds = new SimpleIntegerProperty(READYTIME * 100);
 	private IntegerProperty gameTimeSeconds = new SimpleIntegerProperty(GAMETIME * 100);
 
@@ -92,8 +97,20 @@ public class InGameViewController implements Initializable {
 		checkCount = true;
 	}
 
+	
+	public void endTime() {
+		lblTime.textProperty().bind(endTimeSeconds.divide(100).asString());
+		if (timeline != null) {
+			timeline.stop();
+		}
+		readyTimeSeconds.set((ENDTIME + 1) * 100);
+		timeline = new Timeline();
+		timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(ENDTIME + 1), new KeyValue(endTimeSeconds, 0)));
+		timeline.playFromStart();
+	}
+	
 	public void readyTime() {
-		lblTime.textProperty().bind(readyTimeSeconds.divide(100).asString());
+		lblTime.textProperty().bind(endTimeSeconds.divide(100).asString());
 		if (timeline != null) {
 			timeline.stop();
 		}
@@ -160,10 +177,21 @@ public class InGameViewController implements Initializable {
 						txtFieldWord.setDisable(false);
 						Platform.runLater(() -> {
 							gameTime();
-							new GameTimer().timerSetter();
+							new GameTimer().timerSetter(StartViewController.account.getUserName(),Integer.toString(GameScoreCounter.score));
 						});
 						MessageListener.msg = " ,";
-					} else if (message[0].equals(" ")) {
+					} else if(message[0].equals("endGame")) {
+						btnWord.setDisable(true);
+						txtFieldWord.setDisable(true);
+						txtWord.setText("End!!");
+						Platform.runLater(() ->{
+							endTime();
+							new GameEndTimer().timerSetter();
+						});
+					} else if(message[0].equals("resultGame")) {
+						
+					}
+					else if (message[0].equals(" ")) {
 						//대기
 					}
 				}
