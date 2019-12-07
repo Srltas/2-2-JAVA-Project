@@ -71,6 +71,11 @@ public class GameEndViewController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		setResult();
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		setUi();
 	}
 
