@@ -188,7 +188,7 @@ public class InGameViewController implements Initializable {
 						MessageListener.msg = " ,";
 					} else if(message[0].equals("onResultButton")) {
 						btnResult.setDisable(false);
-						btnResult.setOpacity(0);
+						btnResult.setOpacity(1);
 						MessageListener.msg = " ,";
 					}
 					else if (message[0].equals(" ")) {
