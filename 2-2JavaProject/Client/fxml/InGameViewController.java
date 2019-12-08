@@ -229,7 +229,7 @@ public class InGameViewController implements Initializable {
 	public void showResult() throws IOException {
 		loop = false;
 		checkCount = false;
-		Client.client.send("resultGame,");
+		Client.client.send("resultGame," + StartViewController.account.getUserName());
 		
 		Parent View = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/GameEndView.fxml"));
 		Scene scene = new Scene(View);

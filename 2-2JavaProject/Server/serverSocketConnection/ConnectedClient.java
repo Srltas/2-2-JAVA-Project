@@ -99,36 +99,32 @@ class ConnectedClient extends Thread {
 				} else if (message[0].equals("enterGameRoom")) {
 					// GameRoom에 입장하는 클라이언트
 					int enterPlayerNumber;
-					playerName = message[1]; // 각각 cc에 해당 유저닉네임 저장
-					System.out.println(playerName);
 
-					if (Server.gameRoomCount < 4) {
-						for (enterPlayerNumber = 0; enterPlayerNumber < Server.playerList.length; enterPlayerNumber++) {
-							if (Server.playerList[enterPlayerNumber].equals("")) {
-								Server.playerList[enterPlayerNumber] = message[1];
-								break;
-							}
+					for (enterPlayerNumber = 0; enterPlayerNumber < Server.playerList.length; enterPlayerNumber++) {
+						if (Server.playerList[enterPlayerNumber].equals("")) {
+							Server.playerList[enterPlayerNumber] = message[1];
+							break;
 						}
+					}
+					for (ConnectedClient client : Server.clients) {
+						for (int i = 0; i < Server.playerList.length; i++) {
+							if (Server.playerList[i].equals("")) {
+								continue;
+							}
+							Thread.sleep(500);
+							client.dataOutStream
+									.writeUTF("enterGameRoom," + Integer.toString(i + 1) + "," + Server.playerList[i]);
+						}
+					}
+					Server.gameRoomCount++;
+					System.out.println("[방 인원 수 : " + Server.gameRoomCount + "]");
+					// 4명이면 게임 시작!
+					if (Server.gameRoomCount == 4) {
+						Thread.sleep(3000);
 						for (ConnectedClient client : Server.clients) {
-							for (int i = 0; i < Server.playerList.length; i++) {
-								if (Server.playerList[i].equals("")) {
-									continue;
-								}
-								Thread.sleep(500);
-								client.dataOutStream.writeUTF(
-										"enterGameRoom," + Integer.toString(i + 1) + "," + Server.playerList[i]);
-							}
+							client.dataOutStream.writeUTF("readyGame");
 						}
-						Server.gameRoomCount++;
-						System.out.println("[방 인원 수 : " + Server.gameRoomCount + "]");
-						// 4명이면 게임 시작!
-						if (Server.gameRoomCount == 4) {
-							Thread.sleep(3000);
-							for (ConnectedClient client : Server.clients) {
-								client.dataOutStream.writeUTF("readyGame");
-							}
-							message[0] = null; // 다시 안들어 오는 처리
-						}
+						message[0] = null; // 다시 안들어 오는 처리
 					}
 				} else if (message[0].equals("startGame")) {
 					int number = (int) (Math.random() * Server.wordList.length); // 랜덤숫자 뽑기
@@ -136,18 +132,21 @@ class ConnectedClient extends Thread {
 
 				} else if (message[0].equals("endGame")) {
 					// 게임종료
+					dataOutStream.writeUTF("endGame,");
 					Server.endPlayerList[Server.index] = message[1];
 					Server.endPlayerScoreList[Server.index] = Integer.parseInt(message[2]);
 					Server.index++;
-					dataOutStream.writeUTF("endGame,");
 				} else if (message[0].equals("onResultButton")) {
 					dataOutStream.writeUTF("onResultButton,");
 
 				} else if (message[0].equals("resultGame")) {
 					Server.gameRoomCount--;
 					Server.index = 0;
-					for (int i = 0; i < 4; i++) {
-						Server.playerList[i] = "";
+					for(int i = 0; i < 4; i++) {
+						if(Server.playerList[i].equals(message[1])) {
+							Server.playerList[i] = "";
+							break;
+						}
 					}
 					dataOutStream.writeUTF("resultGame," + Server.endPlayerList[0] + "," + Server.endPlayerScoreList[0]
 							+ "," + Server.endPlayerList[1] + "," + Server.endPlayerScoreList[1] + ","
