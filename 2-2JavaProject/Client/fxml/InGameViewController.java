@@ -76,7 +76,7 @@ public class InGameViewController implements Initializable {
 
 	private Timeline timeline;
 	private static final Integer READYTIME = 5;
-	private static final Integer GAMETIME = 10;
+	private static final Integer GAMETIME = 60;
 	private static final Integer ENDTIME = 3;
 	private IntegerProperty endTimeSeconds = new SimpleIntegerProperty(ENDTIME * 100);
 	private IntegerProperty readyTimeSeconds = new SimpleIntegerProperty(READYTIME * 100);
@@ -86,7 +86,6 @@ public class InGameViewController implements Initializable {
 	String msg;
 	String[] message;
 	public static boolean checkCount = false;	//게임방에 들어오면 true
-	int gameTurn;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -186,6 +185,8 @@ public class InGameViewController implements Initializable {
 							new GameEndTimer().timerSetter();
 						});
 						MessageListener.msg = " ,";
+					} else if(message[0].equals("resultGame")) {
+						
 					} else if(message[0].equals("onResultButton")) {
 						btnResult.setDisable(false);
 						btnResult.setOpacity(1);
@@ -222,6 +223,7 @@ public class InGameViewController implements Initializable {
 	}
 	
 	public void showResult() throws IOException {
+		loop = false;
 		Client.client.send("resultGame,");
 		
 		Parent View = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/GameEndView.fxml"));

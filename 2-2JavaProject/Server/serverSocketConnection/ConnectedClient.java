@@ -5,10 +5,6 @@ import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
-
-import com.sun.javafx.scene.paint.GradientUtils.Parser;
-
-import clientGameSystem.GameScoreSort;
 import serverLogin.LoginService;
 import serverLogin.CreateAccountService;
 import serverLogin.DeniedOverlapLoginService;
@@ -148,31 +144,23 @@ class ConnectedClient extends Thread {
 						System.out.println("[방 인원 수 : " + Server.gameRoomCount + "]");
 					}
 				} else if(message[0].equals("startGame")) {
-					GameScoreSort.index = 0;
 					int number = (int)(Math.random() * Server.wordList.length); //랜덤숫자 뽑기
 					dataOutStream.writeUTF("startWord," + Server.wordList[number]); //랜덤단어 주기
 					
 				} else if(message[0].equals("endGame")) {
 					//게임종료
-					GameScoreSort.playerName[GameScoreSort.index] = message[1];
-					GameScoreSort.playerScore[GameScoreSort.index] = Integer.parseInt(message[2]);
-					GameScoreSort.index++;
+					Server.endPlayerList[Server.index] = message[1];
+					Server.endPlayerScoreList[Server.index] = Integer.parseInt(message[2]);
+					Server.index++;
 					dataOutStream.writeUTF("endGame,");
-					if(GameScoreSort.index==4) {
-						if(GameScoreSort.check) {
-							System.out.println("sorting start");
-							GameScoreSort.sorting();
-						}					
-					}
-					
 				} else if(message[0].equals("onResultButton")) {
 					dataOutStream.writeUTF("onResultButton,");
 					
 				} else if(message[0].equals("resultGame")) {
-					dataOutStream.writeUTF("resultGame," + GameScoreSort.playerName[0] + "," + GameScoreSort.playerScore[0] + "," 
-				+ GameScoreSort.playerName[1] + "," + GameScoreSort.playerScore[1] + "," 
-				+ GameScoreSort.playerName[2] + "," + GameScoreSort.playerScore[2] + "," 
-				+ GameScoreSort.playerName[3] + "," + GameScoreSort.playerScore[3]);
+					dataOutStream.writeUTF("resultGame," + Server.endPlayerList[0] + "," + Server.endPlayerScoreList[0] + "," 
+				+ Server.endPlayerList[1] + "," + Server.endPlayerScoreList[1] + "," 
+				+ Server.endPlayerList[2] + "," + Server.endPlayerScoreList[2] + "," 
+				+ Server.endPlayerList[3] + "," + Server.endPlayerScoreList[3]);
 				}
 				
 				else if (message[0].equals("chat")) { // 채팅

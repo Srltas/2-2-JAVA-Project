@@ -46,6 +46,7 @@ public class FindIdViewController {
 
 			if (message[0].equals("findIDsuccess")) {
 				lblFindID.setText(message[1]);
+				lblWaring.setText("");
 				MessageListener.msg = " ,";
 			} else {
 				lblWaring.setText("해당 아이디가 없습니다.");
