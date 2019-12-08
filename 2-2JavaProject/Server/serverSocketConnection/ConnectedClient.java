@@ -129,21 +129,6 @@ class ConnectedClient extends Thread {
 							}
 							message[0] = null; // 다시 안들어 오는 처리
 						}
-					} else {
-						// 5번째 사람부터 다른 방으로 초기화
-						playerNumber = 0;
-						Server.playerList[playerNumber] = message[1];
-						for (ConnectedClient client : Server.clients) {
-							for (int i = 0; i < Server.playerList.length; i++) {
-								if (Server.playerList[i].equals(""))
-									continue;
-								Thread.sleep(500);
-								client.dataOutStream.writeUTF(
-										"enterGameRoom," + Integer.toString(i + 1) + "," + Server.playerList[i]);
-							}
-						}
-						Server.gameRoomCount = 1;
-						System.out.println("[방 인원 수 : " + Server.gameRoomCount + "]");
 					}
 				} else if (message[0].equals("startGame")) {
 					int number = (int) (Math.random() * Server.wordList.length); // 랜덤숫자 뽑기
@@ -161,7 +146,7 @@ class ConnectedClient extends Thread {
 				} else if (message[0].equals("resultGame")) {
 					Server.gameRoomCount--;
 					Server.index = 0;
-					for(int i = 0; i < 4; i++) {
+					for (int i = 0; i < 4; i++) {
 						Server.playerList[i] = "";
 					}
 					dataOutStream.writeUTF("resultGame," + Server.endPlayerList[0] + "," + Server.endPlayerScoreList[0]
@@ -169,7 +154,7 @@ class ConnectedClient extends Thread {
 							+ Server.endPlayerList[2] + "," + Server.endPlayerScoreList[2] + ","
 							+ Server.endPlayerList[3] + "," + Server.endPlayerScoreList[3]);
 				} else if (message[0].equals("sendMyScore")) {
-					//플레이어가 획득한 점수 계산
+					// 플레이어가 획득한 점수 계산
 					String PlayerName = message[1]; // 플레이어 이름
 					int PlayerScore = Integer.parseInt(message[2]);// 플레이어 획득 점수
 					AccountMapper mapper = new AccountMapper();
@@ -181,7 +166,7 @@ class ConnectedClient extends Thread {
 					}
 					int oldScore = account.getRankPoint();
 					account.setRankPoint(oldScore + PlayerScore);
-					
+
 					dataOutStream.writeUTF("Login success," + account.getRankPoint() + "," + account.getUserName());
 				} else if (message[0].equals("chat")) {
 					// 채팅
