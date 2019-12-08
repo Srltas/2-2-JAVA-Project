@@ -92,7 +92,6 @@ public class InGameViewController implements Initializable {
 		Loop();
 		checkCount = true;
 	}
-
 	
 	public void endTime() {
 		lblTime.textProperty().bind(endTimeSeconds.divide(100).asString());
@@ -185,14 +184,11 @@ public class InGameViewController implements Initializable {
 							new GameEndTimer().timerSetter();
 						});
 						MessageListener.msg = " ,";
-					} else if(message[0].equals("resultGame")) {
-						
 					} else if(message[0].equals("onResultButton")) {
 						btnResult.setDisable(false);
 						btnResult.setOpacity(1);
 						MessageListener.msg = " ,";
-					}
-					else if (message[0].equals(" ")) {
+					} else if (message[0].equals(" ")) {
 						//대기
 					}
 				}
@@ -224,6 +220,7 @@ public class InGameViewController implements Initializable {
 	
 	public void showResult() throws IOException {
 		loop = false;
+		checkCount = false;
 		Client.client.send("resultGame,");
 		
 		Parent View = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/GameEndView.fxml"));
