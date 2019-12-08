@@ -160,6 +160,7 @@ class ConnectedClient extends Thread {
 
 				} else if (message[0].equals("resultGame")) {
 					Server.gameRoomCount--;
+					Server.index = 0;
 					for(int i = 0; i < 4; i++) {
 						Server.playerList[i] = "";
 					}
