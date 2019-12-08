@@ -170,8 +170,9 @@ class ConnectedClient extends Thread {
 					
 					if(mapper.commitGameScore(PlayerName, PlayerScore)) {
 						System.out.println("Score change success");
+					}else {
+						System.out.println("Score change false");
 					}
-					
 				} else if (message[0].equals("chat")) { 
 					// 채팅
 					System.out.println(message[1]);
