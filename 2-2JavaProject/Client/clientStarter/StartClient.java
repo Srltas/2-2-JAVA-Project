@@ -14,7 +14,7 @@ public class StartClient extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			Client.client.startClient();
-			primaryStage.setTitle("끝말잇기 게임");
+			primaryStage.setTitle("알파카파 끝말잇기");
 			Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/StartView.fxml"));
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
