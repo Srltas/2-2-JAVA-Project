@@ -208,8 +208,8 @@ public class InGameViewController implements Initializable {
 			
 			if (stageWordChar[word.length()-1] == nextWordChar[0]) {
 				if(GameScoreCounter.scoreControl(nextWord) == 1) {
-					System.out.println("if check");
 					txtWord.setText(nextWord);
+					lblWordWarning.setText("");
 				}
 			}
 		}else {
