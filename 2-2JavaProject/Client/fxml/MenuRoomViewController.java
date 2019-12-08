@@ -18,6 +18,8 @@ public class MenuRoomViewController implements Initializable{
 	@FXML
 	private Text txtRating;
 	@FXML
+	private Text txtPlayerName;
+	@FXML
 	private Button btnPlay;
 	@FXML
 	private Button btnExit;
@@ -44,7 +46,7 @@ public class MenuRoomViewController implements Initializable{
 	}
 	public void printRating() {
 		txtRating.setText(Integer.toString(StartViewController.account.getRankPoint()));
-		
+		txtPlayerName.setText(StartViewController.account.getUserName());
 	}
 	public void exit() {
 		if (InGameViewController.checkCount) {
