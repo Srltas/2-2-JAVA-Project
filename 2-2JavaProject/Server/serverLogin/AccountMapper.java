@@ -172,6 +172,7 @@ public class AccountMapper {
 
 		String sql = "UPDATE USERINFO SET RANKPOINT = RANKPOINT + " + score + " WHERE USER_NAME = '" + id + "'";
 
+		
 		System.out.println(sql);
 
 		try {
