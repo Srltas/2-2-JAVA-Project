@@ -159,12 +159,17 @@ class ConnectedClient extends Thread {
 					dataOutStream.writeUTF("onResultButton,");
 
 				} else if (message[0].equals("resultGame")) {
+					Server.gameRoomCount--;
+					Server.index = 0;
+					for(int i = 0; i < 4; i++) {
+						Server.playerList[i] = "";
+					}
 					dataOutStream.writeUTF("resultGame," + Server.endPlayerList[0] + "," + Server.endPlayerScoreList[0]
 							+ "," + Server.endPlayerList[1] + "," + Server.endPlayerScoreList[1] + ","
 							+ Server.endPlayerList[2] + "," + Server.endPlayerScoreList[2] + ","
 							+ Server.endPlayerList[3] + "," + Server.endPlayerScoreList[3]);
 				} else if (message[0].equals("sendMyScore")) {
-					//
+					//플레이어가 획득한 점수 계산
 					String PlayerName = message[1]; // 플레이어 이름
 					int PlayerScore = Integer.parseInt(message[2]);// 플레이어 획득 점수
 					AccountMapper mapper = new AccountMapper();
