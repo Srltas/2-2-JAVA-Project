@@ -10,6 +10,7 @@ import serverLogin.CreateAccountService;
 import serverLogin.DeniedOverlapLoginService;
 import serverLogin.IdFindService;
 import serverLogin.ChangePasswordService;
+import serverLogin.AccountMapper;
 
 class ConnectedClient extends Thread {
 	Socket socket;
@@ -164,7 +165,12 @@ class ConnectedClient extends Thread {
 				} else if(message[0].equals("sendMyScore")) {
 					//
 					String PlayerName = message[1]; //플레이어 이름
-					String PlayerScore = message[2];//플레이어 획득 점수
+					int PlayerScore = Integer.parseInt(message[2]);//플레이어 획득 점수
+					AccountMapper mapper = new AccountMapper();
+					
+					if(mapper.commitGameScore(PlayerName, PlayerScore)) {
+						System.out.println("Score change success");
+					}
 					
 				} else if (message[0].equals("chat")) { 
 					// 채팅
