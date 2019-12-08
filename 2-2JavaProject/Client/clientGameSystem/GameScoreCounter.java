@@ -49,11 +49,10 @@ public class GameScoreCounter {
 		}
 	}
 	
-	public static boolean endGameTrigger() {
+	public static void endGameTrigger() {
 		wordList.removeAll(wordList);
 		score = 0;
 		System.out.println("reset complete");
-		return true;
 	}
 	
 	public static boolean search(String word) {

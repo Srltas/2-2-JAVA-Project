@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import clientGameSystem.GameScoreCounter;
 import clientSocketConnection.Client;
 import clientSocketConnection.MessageListener;
 import javafx.fxml.FXML;
@@ -65,6 +66,7 @@ public class GameEndViewController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		setResult();
 		findMyScore();
+		GameScoreCounter.endGameTrigger();
 		setUi();
 	}
 	
