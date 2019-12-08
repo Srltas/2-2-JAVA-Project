@@ -21,41 +21,41 @@ public class API2 {
 
 	public int CallAPI(String Words) {
 		try {
-				// parsing할 url 지정(API 키 포함해서)
-				String url = "https://stdict.korean.go.kr/api/search.do?key=593D606C0EEABE730CEDA57F7A527E4A&q="
-						+ Words;
+			// parsing할 url 지정(API 키 포함해서)
+			String url = "https://stdict.korean.go.kr/api/search.do?key=593D606C0EEABE730CEDA57F7A527E4A&q=" + Words;
 
-				DocumentBuilderFactory dbFactoty = DocumentBuilderFactory.newInstance();
-				DocumentBuilder dBuilder = dbFactoty.newDocumentBuilder();
-				Document doc = dBuilder.parse(url);
+			DocumentBuilderFactory dbFactoty = DocumentBuilderFactory.newInstance();
+			DocumentBuilder dBuilder = dbFactoty.newDocumentBuilder();
+			Document doc = dBuilder.parse(url);
 
-				// 최상위 태그 출력
-				doc.getDocumentElement().normalize();
-				System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
+			// 최상위 태그 출력
+			doc.getDocumentElement().normalize();
+			System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
 
-				// tag
-				NodeList nList = doc.getElementsByTagName("item");
-				if (nList.getLength() == 0) {
-					return 0; //0 = 단어 검색 실패
-				} else {
-					return 1; //1 = 단어 검색 성공
-				}
-
-				/*
-				 * for(int temp = 0; temp < nList.getLength(); temp++){ Node nNode =
-				 * nList.item(temp);
-				 * 
-				 * Element eElement = (Element) nNode;
-				 * System.out.println("######################");
-				 * //System.out.println(eElement.getTextContent()); System.out.println("뜻  : " +
-				 * getTagValue("definition", eElement));
-				 * 
-				 * }
-				 뜻 출력*/
-
+			// tag
+			NodeList nList = doc.getElementsByTagName("item");
+			if (nList.getLength() == 0) {
+				return 0; // 0 = 단어 검색 실패
+			} else {
+				System.out.println("파싱할 리스트 수 : " + nList.getLength());
+				return 1; // 1 = 단어 검색 성공
+			}
+			/*
+			 * for (int temp = 0; temp < nList.getLength(); temp++) { Node nNode =
+			 * nList.item(temp);
+			 * 
+			 * Element eElement = (Element) nNode;
+			 * System.out.println("######################");
+			 * System.out.println(eElement.getTextContent()); System.out.println("뜻  : " +
+			 * getTagValue("definition", eElement));
+			 * 
+			 * } // for end
+			 * 
+			 * break; // while end
+			 */
 		} catch (Exception e) {
 			e.printStackTrace();
-			return 2; // 2 = 에러발생
+			return 2;
 		} // try~catch end
 	}
 }
