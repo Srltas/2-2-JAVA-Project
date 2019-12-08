@@ -170,7 +170,7 @@ public class AccountMapper {
 		Connection connection = null;
 		PreparedStatement pst = null;
 
-		String sql = "UPDATE USERINFO SET RANKPOINT = '" + score + "' WHERE USER_NAME = '" + id + "'";
+		String sql = "UPDATE USERINFO SET RANKPOINT = RANKPOINT + " + score + " WHERE USER_NAME = '" + id + "'";
 
 		System.out.println(sql);
 
