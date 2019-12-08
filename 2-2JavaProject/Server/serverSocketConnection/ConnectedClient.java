@@ -161,9 +161,13 @@ class ConnectedClient extends Thread {
 				+ Server.endPlayerList[1] + "," + Server.endPlayerScoreList[1] + "," 
 				+ Server.endPlayerList[2] + "," + Server.endPlayerScoreList[2] + "," 
 				+ Server.endPlayerList[3] + "," + Server.endPlayerScoreList[3]);
-				}
-				
-				else if (message[0].equals("chat")) { // 채팅
+				} else if(message[0].equals("sendMyScore")) {
+					//
+					String PlayerName = message[1]; //플레이어 이름
+					String PlayerScore = message[2];//플레이어 획득 점수
+					
+				} else if (message[0].equals("chat")) { 
+					// 채팅
 					System.out.println(message[1]);
 					for (ConnectedClient client : Server.clients) {
 						client.dataOutStream.writeUTF("chat," + message[1]);

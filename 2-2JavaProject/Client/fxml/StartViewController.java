@@ -36,7 +36,6 @@ public class StartViewController {
 	@FXML
 	private Button btnEixt;
 
-	String text;
 	String id;
 	String pw;
 	OutputStream out = null;
@@ -55,11 +54,7 @@ public class StartViewController {
 			lblPwStatus.setText("비밀번호를 입력하세요.");
 			lblIdStatus.setText("");
 		} else {
-
-			text = "Login," + account.getId() + "," + account.getPassword();
-
-			System.out.println(text);
-			Client.client.send(text);
+			Client.client.send("Login," + account.getId() + "," + account.getPassword());
 			Thread.sleep(2000);
 
 			logindata = MessageListener.msg.split(",");
