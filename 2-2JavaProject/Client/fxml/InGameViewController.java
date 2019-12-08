@@ -202,14 +202,22 @@ public class InGameViewController implements Initializable {
 		String word = txtWord.getText();
 		txtFieldWord.setText(""); // txtFielWord 비우기
 		
+		int i = 0;
+		
 		if (nextWord.length()>1 && nextWord.length()<6) {
 			char[] stageWordChar = word.toCharArray();
 			char[] nextWordChar = nextWord.toCharArray();
-			
+			System.out.println("this word : "+word);
+			System.out.println("this nextWord : "+nextWord);
 			if (stageWordChar[word.length()-1] == nextWordChar[0]) {
-				if(GameScoreCounter.scoreControl(nextWord) == 1) {
+				i = GameScoreCounter.scoreControl(nextWord);
+				if(i == 1) {
+					System.out.println("this word : "+word);
+					System.out.println("this nextWord : "+nextWord);
 					txtWord.setText(nextWord);
 					lblWordWarning.setText("");
+				} else {
+					System.out.println("exception catch");
 				}
 			}
 		}else {
