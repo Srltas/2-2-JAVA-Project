@@ -2,6 +2,7 @@ package clientGameSystem;
 
 import java.util.HashSet;
 import clientRequestApi.API2;
+
 public class GameScoreCounter {
 
 	static HashSet<String> wordList = new HashSet<String>();
@@ -49,13 +50,14 @@ public class GameScoreCounter {
 		}
 	}
 	
+	
+	public static boolean search(String word) {
+		return (wordList.contains(word));
+	}
+	
 	public static void endGameTrigger() {
 		wordList.removeAll(wordList);
 		score = 0;
 		System.out.println("reset complete");
-	}
-	
-	public static boolean search(String word) {
-		return (wordList.contains(word));
 	}
 }
