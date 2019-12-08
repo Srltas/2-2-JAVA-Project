@@ -29,7 +29,6 @@ public class MenuRoomViewController implements Initializable{
 	}
 	
 	public void getRankName() {
-		
 		String[] logindata = MessageListener.msg.split(",");
 		StartViewController.account.setRankPoint(Integer.parseInt(logindata[1]));
 		StartViewController.account.setUserName(logindata[2]);

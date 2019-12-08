@@ -18,7 +18,7 @@ class ConnectedClient extends Thread {
 	DataOutputStream dataOutStream;
 	InputStream inStream;
 	DataInputStream dataInStream;
-	
+
 	int playerNumber = 0;
 	String playerName;
 	LoginService login = new LoginService();
@@ -82,9 +82,9 @@ class ConnectedClient extends Thread {
 					IdFindService idFindService = new IdFindService();
 					serverLogin.Account idFindAccount = idFindService.FindId(message[1]);
 					if ((idFindAccount != null)) {
-						dataOutStream.writeUTF("findIDsuccess,"+ idFindAccount.getId());
+						dataOutStream.writeUTF("findIDsuccess," + idFindAccount.getId());
 					} else {
-						//id없음
+						// id없음
 					}
 				} else if (message[0].equals("changePW")) {
 					// 비밀번호 변경
@@ -130,7 +130,7 @@ class ConnectedClient extends Thread {
 							message[0] = null; // 다시 안들어 오는 처리
 						}
 					} else {
-						//5번째 사람부터 다른 방으로 초기화
+						// 5번째 사람부터 다른 방으로 초기화
 						playerNumber = 0;
 						Server.playerList[playerNumber] = message[1];
 						for (ConnectedClient client : Server.clients) {
@@ -138,44 +138,47 @@ class ConnectedClient extends Thread {
 								if (Server.playerList[i].equals(""))
 									continue;
 								Thread.sleep(500);
-								client.dataOutStream.writeUTF("enterGameRoom," + Integer.toString(i + 1) + "," + Server.playerList[i]);
+								client.dataOutStream.writeUTF(
+										"enterGameRoom," + Integer.toString(i + 1) + "," + Server.playerList[i]);
 							}
 						}
 						Server.gameRoomCount = 1;
 						System.out.println("[방 인원 수 : " + Server.gameRoomCount + "]");
 					}
-				} else if(message[0].equals("startGame")) {
-					int number = (int)(Math.random() * Server.wordList.length); //랜덤숫자 뽑기
-					dataOutStream.writeUTF("startWord," + Server.wordList[number]); //랜덤단어 주기
-					
-				} else if(message[0].equals("endGame")) {
-					//게임종료
+				} else if (message[0].equals("startGame")) {
+					int number = (int) (Math.random() * Server.wordList.length); // 랜덤숫자 뽑기
+					dataOutStream.writeUTF("startWord," + Server.wordList[number]); // 랜덤단어 주기
+
+				} else if (message[0].equals("endGame")) {
+					// 게임종료
 					Server.endPlayerList[Server.index] = message[1];
 					Server.endPlayerScoreList[Server.index] = Integer.parseInt(message[2]);
 					Server.index++;
 					dataOutStream.writeUTF("endGame,");
-				} else if(message[0].equals("onResultButton")) {
+				} else if (message[0].equals("onResultButton")) {
 					dataOutStream.writeUTF("onResultButton,");
-					
-				} else if(message[0].equals("resultGame")) {
-					dataOutStream.writeUTF("resultGame," + Server.endPlayerList[0] + "," + Server.endPlayerScoreList[0] + "," 
-				+ Server.endPlayerList[1] + "," + Server.endPlayerScoreList[1] + "," 
-				+ Server.endPlayerList[2] + "," + Server.endPlayerScoreList[2] + "," 
-				+ Server.endPlayerList[3] + "," + Server.endPlayerScoreList[3]);
-				} else if(message[0].equals("sendMyScore")) {
+
+				} else if (message[0].equals("resultGame")) {
+					dataOutStream.writeUTF("resultGame," + Server.endPlayerList[0] + "," + Server.endPlayerScoreList[0]
+							+ "," + Server.endPlayerList[1] + "," + Server.endPlayerScoreList[1] + ","
+							+ Server.endPlayerList[2] + "," + Server.endPlayerScoreList[2] + ","
+							+ Server.endPlayerList[3] + "," + Server.endPlayerScoreList[3]);
+				} else if (message[0].equals("sendMyScore")) {
 					//
-					String PlayerName = message[1]; //플레이어 이름
-					int PlayerScore = Integer.parseInt(message[2]);//플레이어 획득 점수
+					String PlayerName = message[1]; // 플레이어 이름
+					int PlayerScore = Integer.parseInt(message[2]);// 플레이어 획득 점수
 					AccountMapper mapper = new AccountMapper();
-					
-					if(mapper.commitGameScore(PlayerName, PlayerScore)) {
+
+					if (mapper.commitGameScore(PlayerName, PlayerScore)) {
 						System.out.println("Score change success");
-						int oldScore = account.getRankPoint();
-						account.setRankPoint(oldScore+PlayerScore);
-						
+					} else {
+						System.out.println("Score change false");
 					}
+					int oldScore = account.getRankPoint();
+					account.setRankPoint(oldScore + PlayerScore);
 					
-				} else if (message[0].equals("chat")) { 
+					dataOutStream.writeUTF("Login success," + account.getRankPoint() + "," + account.getUserName());
+				} else if (message[0].equals("chat")) {
 					// 채팅
 					System.out.println(message[1]);
 					for (ConnectedClient client : Server.clients) {
@@ -196,7 +199,7 @@ class ConnectedClient extends Thread {
 					for (ConnectedClient client : Server.clients) {
 						client.dataOutStream.writeUTF("exitGameRoom," + Integer.toString(exitPlayerNumber + 1));
 					}
-					//로그아웃
+					// 로그아웃
 					if (DeniedOverlapLoginService.remove(message[2])) {
 						System.out.println("log out success");
 					} else {
@@ -205,7 +208,7 @@ class ConnectedClient extends Thread {
 				} else if (message[0].equals("exitGame")) {
 					// 클라이언트 종료
 					System.out.println(message[1]);
-					//로그아웃
+					// 로그아웃
 					if (DeniedOverlapLoginService.remove(message[1])) {
 						System.out.println("log out success");
 					} else {
