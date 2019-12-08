@@ -38,7 +38,7 @@ class ConnectedClient extends Thread {
 
 			dataOutStream.writeUTF("Welcome to this Server");
 
-			serverLogin.Account account;
+			serverLogin.Account account = null;
 			while (true) {
 
 				String msg = dataInStream.readUTF();
@@ -170,6 +170,9 @@ class ConnectedClient extends Thread {
 					
 					if(mapper.commitGameScore(PlayerName, PlayerScore)) {
 						System.out.println("Score change success");
+						int oldScore = account.getRankPoint();
+						account.setRankPoint(oldScore+PlayerScore);
+						
 					}
 					
 				} else if (message[0].equals("chat")) { 
