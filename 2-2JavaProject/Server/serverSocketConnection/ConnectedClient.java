@@ -159,6 +159,7 @@ class ConnectedClient extends Thread {
 					dataOutStream.writeUTF("onResultButton,");
 
 				} else if (message[0].equals("resultGame")) {
+					Server.gameRoomCount--;
 					for(int i = 0; i < 4; i++) {
 						Server.playerList[i] = "";
 					}
