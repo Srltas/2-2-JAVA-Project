@@ -176,6 +176,8 @@ class ConnectedClient extends Thread {
 					}
 					int oldScore = account.getRankPoint();
 					account.setRankPoint(oldScore + PlayerScore);
+					
+					dataOutStream.writeUTF("Login success," + account.getRankPoint() + "," + account.getUserName());
 				} else if (message[0].equals("chat")) {
 					// 채팅
 					System.out.println(message[1]);
